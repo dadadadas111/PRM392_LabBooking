@@ -25,7 +25,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.android.gms.common.SignInButton;
+import com.example.prm392_labbooking.navigation.NavigationManager;
 
+@SuppressWarnings("deprecation")
 public class LoginActivity extends BaseActivity {
     // UI elements
     private EditText emailEditText, passwordEditText;
@@ -81,7 +83,7 @@ public class LoginActivity extends BaseActivity {
         for (int i = 0; i < googleSignInButton.getChildCount(); i++) {
             View v = googleSignInButton.getChildAt(i);
             if (v instanceof TextView) {
-                ((TextView) v).setText("Đăng nhập với Google");
+                ((TextView) v).setText(getString(R.string.google_sign_in));
                 break;
             }
         }
@@ -92,12 +94,12 @@ public class LoginActivity extends BaseActivity {
         String password = passwordEditText.getText().toString();
 
         if (!ValidationUtils.isValidEmail(email)) {
-            emailEditText.setError("Vui lòng nhập email hợp lệ");
+            emailEditText.setError(getString(R.string.invalid_email));
             emailEditText.requestFocus();
             return;
         }
         if (!ValidationUtils.isValidPassword(password)) {
-            passwordEditText.setError("Mật khẩu phải có ít nhất 6 ký tự");
+            passwordEditText.setError(getString(R.string.invalid_password));
             passwordEditText.requestFocus();
             return;
         }
@@ -107,13 +109,11 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void onForgotPassword() {
-        Toast.makeText(this, "Quên mật khẩu?", Toast.LENGTH_SHORT).show();
-        // TODO: Implement forgot password flow
+        NavigationManager.goToForgotPassword(this);
     }
 
     private void onRegister() {
-        Toast.makeText(this, "Chưa có tài khoản? Đăng ký", Toast.LENGTH_SHORT).show();
-        // TODO: Navigate to registration screen
+        NavigationManager.goToRegister(this);
     }
 
     private void signInWithEmailAndPassword(String email, String password) {
@@ -122,9 +122,9 @@ public class LoginActivity extends BaseActivity {
                 hideLoading();
                 loginButton.setEnabled(true);
                 if (task.isSuccessful()) {
-                    Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "Đăng nhập thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.login_failed, task.getException() != null ? task.getException().getMessage() : ""), Toast.LENGTH_SHORT).show();
                 }
             });
     }
@@ -162,9 +162,9 @@ public class LoginActivity extends BaseActivity {
             .addOnCompleteListener(this, task -> {
                 hideLoading();
                 if (task.isSuccessful()) {
-                    Toast.makeText(this, "Đăng nhập Google thành công!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.google_sign_in_success), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(this, "Đăng nhập Google thất bại!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.google_sign_in_failed), Toast.LENGTH_SHORT).show();
                 }
             });
     }

@@ -7,13 +7,13 @@ import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.presentation.base.BaseActivity;
 
-public class RegisterActivity extends BaseActivity {
+public class ForgotPasswordActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_forgot_password);
         findViewById(R.id.backToLoginButton).setOnClickListener(v -> NavigationManager.goToLogin(this));
-        // TODO: Implement registration logic
-        Toast.makeText(this, getString(R.string.register), Toast.LENGTH_SHORT).show();
+        // TODO: Implement forgot password logic
+        Toast.makeText(this, getString(R.string.forgot_password), Toast.LENGTH_SHORT).show();
     }
 }

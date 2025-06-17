@@ -20,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.prm392_labbooking.presentation.auth.RegisterActivity" android:exported="true" />
+        <activity android:name="com.example.prm392_labbooking.presentation.auth.ForgotPasswordActivity" android:exported="true" />
 
         <!-- Other activities here -->
 
