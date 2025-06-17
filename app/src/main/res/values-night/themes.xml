@@ -1,16 +1,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.PRM392_LabBooking" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <!-- Base application dark theme. -->
+    <style name="Theme.PRM392_LabBooking" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+        <!-- Background and surface -->
+        <item name="android:colorBackground">#18181b</item> <!-- Gray 900 -->
+        <item name="colorBackground">#18181b</item>
+        <item name="colorOnBackground">#f3f4f6</item>
+        <item name="colorSurface">#23272f</item> <!-- Gray 800 -->
+        <item name="colorOnSurface">#f3f4f6</item>
+        <!-- Error colors -->
+        <item name="colorError">@color/colorError</item>
+        <item name="colorOnError">@color/colorOnError</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <!-- Navigation bar color. -->
+        <item name="android:navigationBarColor">#18181b</item>
+        <!-- Customize your dark theme here. -->
     </style>
 </resources>

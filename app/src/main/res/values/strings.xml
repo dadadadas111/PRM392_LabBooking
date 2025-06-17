@@ -1,3 +1,80 @@
 <resources>
-    <string name="app_name">PRM392_LabBooking</string>
+    <!-- App Name -->
+    <string name="app_name">Đặt Chỗ Phòng LAB</string>
+
+    <!-- Authentication -->
+    <string name="login">Đăng nhập</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="register">Đăng ký</string>
+    <string name="email">Email</string>
+    <string name="password">Mật khẩu</string>
+    <string name="confirm_password">Xác nhận mật khẩu</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="login_success">Đăng nhập thành công!</string>
+    <string name="login_failed">Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.</string>
+    <string name="register_success">Đăng ký thành công!</string>
+    <string name="register_failed">Đăng ký thất bại. Vui lòng thử lại.</string>
+    <string name="invalid_email">Email không hợp lệ</string>
+    <string name="invalid_password">Mật khẩu phải có ít nhất 6 ký tự</string>
+    <string name="passwords_not_match">Mật khẩu xác nhận không khớp</string>
+
+    <!-- Product/Package List -->
+    <string name="package_list">Danh sách gói</string>
+    <string name="seat_package">Gói chỗ ngồi</string>
+    <string name="table_package">Gói bàn</string>
+    <string name="details">Chi tiết</string>
+    <string name="capacity">Sức chứa: %1$d chỗ</string>
+    <string name="select_package">Chọn gói</string>
+
+    <!-- Product Details -->
+    <string name="package_details">Chi tiết gói</string>
+    <string name="select_facilities">Chọn tiện ích bổ sung</string>
+    <string name="facility_whiteboard">Bảng trắng</string>
+    <string name="facility_tv">Tivi</string>
+    <string name="facility_network">Mạng hội nghị</string>
+    <string name="add_to_cart">Thêm vào giỏ</string>
+    <string name="added_to_cart">Đã thêm vào giỏ hàng</string>
+
+    <!-- Cart -->
+    <string name="cart">Giỏ hàng</string>
+    <string name="cart_empty">Giỏ hàng trống</string>
+    <string name="remove">Xóa</string>
+    <string name="total">Tổng cộng: %1$s</string>
+    <string name="proceed_to_checkout">Tiếp tục thanh toán</string>
+    <string name="remove_item_confirm">Bạn có chắc muốn xóa mục này?</string>
+
+    <!-- Billing/Checkout -->
+    <string name="billing">Thanh toán</string>
+    <string name="booking_summary">Tóm tắt đặt chỗ</string>
+    <string name="confirm_booking">Xác nhận đặt chỗ</string>
+    <string name="payment_info">Thông tin thanh toán</string>
+    <string name="booking_success">Đặt chỗ thành công!</string>
+    <string name="booking_failed">Đặt chỗ thất bại. Vui lòng thử lại.</string>
+    <string name="pay">Thanh toán</string>
+
+    <!-- Notifications -->
+    <string name="cart_not_empty">Bạn còn sản phẩm trong giỏ hàng!</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Hủy</string>
+
+    <!-- Map -->
+    <string name="lab_location">Vị trí phòng LAB</string>
+    <string name="show_on_map">Xem trên bản đồ</string>
+    <string name="map_loading">Đang tải bản đồ...</string>
+
+    <!-- Chat -->
+    <string name="chat">Trò chuyện</string>
+    <string name="type_message">Nhập tin nhắn...</string>
+    <string name="send">Gửi</string>
+    <string name="salesman">Nhân viên tư vấn</string>
+    <string name="user">Bạn</string>
+    <string name="chat_placeholder">Hãy bắt đầu trò chuyện với nhân viên tư vấn!</string>
+
+    <!-- General -->
+    <string name="yes">Có</string>
+    <string name="no">Không</string>
+    <string name="loading">Đang tải...</string>
+    <string name="error">Đã xảy ra lỗi</string>
+    <string name="retry">Thử lại</string>
+    <string name="close">Đóng</string>
 </resources>
