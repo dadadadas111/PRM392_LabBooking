@@ -11,7 +11,6 @@
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <!-- Background and surface -->
         <item name="android:colorBackground">#18181b</item> <!-- Gray 900 -->
-        <item name="colorBackground">#18181b</item>
         <item name="colorOnBackground">#f3f4f6</item>
         <item name="colorSurface">#23272f</item> <!-- Gray 800 -->
         <item name="colorOnSurface">#f3f4f6</item>

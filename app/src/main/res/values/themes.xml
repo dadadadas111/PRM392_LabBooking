@@ -11,7 +11,6 @@
         <item name="colorOnSecondary">@color/colorOnSecondary</item>
         <!-- Background and surface -->
         <item name="android:colorBackground">@color/colorBackground</item>
-        <item name="colorBackground">@color/colorBackground</item>
         <item name="colorOnBackground">@color/colorOnBackground</item>
         <item name="colorSurface">@color/colorSurface</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
