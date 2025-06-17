@@ -11,4 +11,5 @@ public interface AuthRepository {
     boolean isLoggedIn();
     String getCurrentUserId();
     Task<AuthResult> signInWithCredential(AuthCredential credential);
+    Task<Void> resetPassword(String email);
 }

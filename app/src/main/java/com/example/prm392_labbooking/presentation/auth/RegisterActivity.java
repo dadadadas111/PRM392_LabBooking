@@ -1,19 +1,78 @@
 package com.example.prm392_labbooking.presentation.auth;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import com.example.prm392_labbooking.R;
+import com.example.prm392_labbooking.data.firebase.FirebaseAuthService;
+import com.example.prm392_labbooking.data.repository.AuthRepositoryImpl;
+import com.example.prm392_labbooking.domain.repository.AuthRepository;
 import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.presentation.base.BaseActivity;
 
 public class RegisterActivity extends BaseActivity {
+    private EditText emailEditText, passwordEditText, confirmPasswordEditText;
+    private Button registerButton;
+    private AuthRepository authRepository;
+    private FrameLayout loadingOverlay;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         findViewById(R.id.backToLoginButton).setOnClickListener(v -> NavigationManager.goToLogin(this));
-        // TODO: Implement registration logic
-        Toast.makeText(this, getString(R.string.register), Toast.LENGTH_SHORT).show();
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
+        registerButton = findViewById(R.id.registerButton);
+        authRepository = new AuthRepositoryImpl(new FirebaseAuthService());
+        loadingOverlay = findViewById(R.id.loadingOverlay);
+        registerButton.setOnClickListener(v -> onRegister());
+    }
+
+    private void onRegister() {
+        String email = emailEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString();
+        String confirmPassword = confirmPasswordEditText.getText().toString();
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailEditText.setError(getString(R.string.invalid_email));
+            emailEditText.requestFocus();
+            return;
+        }
+        if (password.length() < 6) {
+            passwordEditText.setError(getString(R.string.invalid_password));
+            passwordEditText.requestFocus();
+            return;
+        }
+        if (!password.equals(confirmPassword)) {
+            confirmPasswordEditText.setError(getString(R.string.passwords_not_match));
+            confirmPasswordEditText.requestFocus();
+            return;
+        }
+        showLoading();
+        authRepository.register(email, password)
+            .addOnCompleteListener(task -> {
+                hideLoading();
+                if (task.isSuccessful()) {
+                    Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_SHORT).show();
+                    NavigationManager.goToLogin(this);
+                } else {
+                    Toast.makeText(this, getString(R.string.register_failed), Toast.LENGTH_SHORT).show();
+                }
+            });
+    }
+
+    @Override
+    protected void showLoading() {
+        if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    protected void hideLoading() {
+        if (loadingOverlay != null) loadingOverlay.setVisibility(View.GONE);
     }
 }

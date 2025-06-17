@@ -36,4 +36,8 @@ public class FirebaseAuthService implements AuthService {
     public Task<AuthResult> signInWithCredential(AuthCredential credential) {
         return firebaseAuth.signInWithCredential(credential);
     }
+
+    public Task<Void> resetPassword(String email) {
+        return firebaseAuth.sendPasswordResetEmail(email);
+    }
 }

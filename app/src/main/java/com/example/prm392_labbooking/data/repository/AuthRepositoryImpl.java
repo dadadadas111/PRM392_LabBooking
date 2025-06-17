@@ -42,4 +42,9 @@ public class AuthRepositoryImpl implements AuthRepository {
     public Task<AuthResult> signInWithCredential(AuthCredential credential) {
         return authService.signInWithCredential(credential);
     }
+
+    @Override
+    public Task<Void> resetPassword(String email) {
+        return authService.resetPassword(email);
+    }
 }
