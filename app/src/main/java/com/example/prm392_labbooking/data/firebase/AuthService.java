@@ -1,6 +1,7 @@
 package com.example.prm392_labbooking.data.firebase;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 
 public interface AuthService {
@@ -9,4 +10,5 @@ public interface AuthService {
     void logout();
     boolean isLoggedIn();
     String getCurrentUserId();
+    Task<AuthResult> signInWithCredential(AuthCredential credential);
 }

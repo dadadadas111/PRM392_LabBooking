@@ -1,6 +1,7 @@
 package com.example.prm392_labbooking.data.firebase;
 
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -30,5 +31,9 @@ public class FirebaseAuthService implements AuthService {
     @Override
     public String getCurrentUserId() {
         return isLoggedIn() ? firebaseAuth.getCurrentUser().getUid() : null;
+    }
+
+    public Task<AuthResult> signInWithCredential(AuthCredential credential) {
+        return firebaseAuth.signInWithCredential(credential);
     }
 }

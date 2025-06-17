@@ -8,28 +8,42 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public abstract class BaseActivity extends AppCompatActivity {
+    private FrameLayout loadingOverlay;
     private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Add a ProgressBar overlay to the root view
+        // Add a dimmed overlay with a centered ProgressBar
+        loadingOverlay = new FrameLayout(this);
+        loadingOverlay.setBackgroundColor(0x88000000); // semi-transparent black
+        loadingOverlay.setVisibility(View.GONE);
         progressBar = new ProgressBar(this, null, android.R.attr.progressBarStyleLarge);
         progressBar.setIndeterminate(true);
-        progressBar.setVisibility(View.GONE);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+        FrameLayout.LayoutParams pbParams = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.WRAP_CONTENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT
         );
-        params.gravity = android.view.Gravity.CENTER;
-        addContentView(progressBar, params);
+        pbParams.gravity = android.view.Gravity.CENTER;
+        loadingOverlay.addView(progressBar, pbParams);
+        addContentView(loadingOverlay, new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+        ));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        loadingOverlay = null;
+        progressBar = null;
     }
 
     protected void showLoading() {
-        if (progressBar != null) progressBar.setVisibility(View.VISIBLE);
+        if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
     }
 
     protected void hideLoading() {
-        if (progressBar != null) progressBar.setVisibility(View.GONE);
+        if (loadingOverlay != null) loadingOverlay.setVisibility(View.GONE);
     }
 }
