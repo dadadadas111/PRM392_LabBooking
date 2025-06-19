@@ -13,6 +13,7 @@ import com.example.prm392_labbooking.data.repository.AuthRepositoryImpl;
 import com.example.prm392_labbooking.domain.repository.AuthRepository;
 import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.presentation.base.BaseActivity;
+import com.example.prm392_labbooking.utils.ValidationUtils;
 
 public class ForgotPasswordActivity extends BaseActivity {
     private EditText emailEditText;
@@ -34,7 +35,7 @@ public class ForgotPasswordActivity extends BaseActivity {
 
     private void onResetPassword() {
         String email = emailEditText.getText().toString().trim();
-        if (email.isEmpty()) {
+        if (!ValidationUtils.isValidEmail(email)) {
             emailEditText.setError(getString(R.string.invalid_email));
             emailEditText.requestFocus();
             return;

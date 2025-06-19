@@ -123,6 +123,8 @@ public class LoginActivity extends BaseActivity {
                 loginButton.setEnabled(true);
                 if (task.isSuccessful()) {
                     Toast.makeText(this, getString(R.string.login_success), Toast.LENGTH_SHORT).show();
+                    NavigationManager.goToMain(this);
+                    finish();
                 } else {
                     Toast.makeText(this, getString(R.string.login_failed, task.getException() != null ? task.getException().getMessage() : ""), Toast.LENGTH_SHORT).show();
                 }

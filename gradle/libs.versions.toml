@@ -14,6 +14,8 @@ playServicesMaps = "19.2.0"
 recyclerview = "1.4.0"
 retrofit = "2.9.0"
 playServicesAuth = "20.6.0"
+activity = "1.10.1"
+constraintlayout = "2.2.1"
 
 [libraries]
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
@@ -32,6 +34,8 @@ play-services-maps = { module = "com.google.android.gms:play-services-maps", ver
 recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

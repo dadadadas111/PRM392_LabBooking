@@ -13,6 +13,7 @@ import com.example.prm392_labbooking.data.repository.AuthRepositoryImpl;
 import com.example.prm392_labbooking.domain.repository.AuthRepository;
 import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.presentation.base.BaseActivity;
+import com.example.prm392_labbooking.utils.ValidationUtils;
 
 public class RegisterActivity extends BaseActivity {
     private EditText emailEditText, passwordEditText, confirmPasswordEditText;
@@ -38,12 +39,12 @@ public class RegisterActivity extends BaseActivity {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString();
         String confirmPassword = confirmPasswordEditText.getText().toString();
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!ValidationUtils.isValidEmail(email)) {
             emailEditText.setError(getString(R.string.invalid_email));
             emailEditText.requestFocus();
             return;
         }
-        if (password.length() < 6) {
+        if (!ValidationUtils.isValidPassword(password)) {
             passwordEditText.setError(getString(R.string.invalid_password));
             passwordEditText.requestFocus();
             return;

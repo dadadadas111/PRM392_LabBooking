@@ -3,10 +3,19 @@ package com.example.prm392_labbooking.navigation;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import com.example.prm392_labbooking.presentation.MainActivity;
 import com.example.prm392_labbooking.presentation.auth.LoginActivity;
 import com.example.prm392_labbooking.presentation.auth.RegisterActivity;
 import com.example.prm392_labbooking.presentation.auth.ForgotPasswordActivity;
+import com.example.prm392_labbooking.presentation.home.HomeFragment;
+import com.example.prm392_labbooking.presentation.map.MapFragment;
+import com.example.prm392_labbooking.presentation.cart.CartFragment;
+import com.example.prm392_labbooking.presentation.settings.SettingsFragment;
+import com.example.prm392_labbooking.presentation.booking.BookingActivity;
+import com.example.prm392_labbooking.R;
 
 public class NavigationManager {
     public static void goToLogin(Context context) {
@@ -19,6 +28,33 @@ public class NavigationManager {
 
     public static void goToForgotPassword(Context context) {
         context.startActivity(new Intent(context, ForgotPasswordActivity.class));
+    }
+
+    public static void goToMain(Context context){
+        context.startActivity(new Intent(context, MainActivity.class));
+    }
+
+    public static void showHome(FragmentManager fm) {
+        showFragment(fm, new HomeFragment());
+    }
+    public static void showMap(FragmentManager fm) {
+        showFragment(fm, new MapFragment());
+    }
+    public static void showCart(FragmentManager fm) {
+        showFragment(fm, new CartFragment());
+    }
+    public static void showSettings(FragmentManager fm) {
+        showFragment(fm, new SettingsFragment());
+    }
+    private static void showFragment(FragmentManager fm, Fragment fragment) {
+        fm.beginTransaction()
+            .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+            .replace(R.id.container, fragment)
+            .commit();
+    }
+
+    public static void goToBooking(Context context) {
+        context.startActivity(new Intent(context, BookingActivity.class));
     }
 
     public static void goBack(Activity activity) {
