@@ -15,6 +15,7 @@ import com.example.prm392_labbooking.presentation.map.MapFragment;
 import com.example.prm392_labbooking.presentation.cart.CartFragment;
 import com.example.prm392_labbooking.presentation.settings.SettingsFragment;
 import com.example.prm392_labbooking.presentation.booking.BookingActivity;
+import com.example.prm392_labbooking.presentation.chat.ChatActivity;
 import com.example.prm392_labbooking.R;
 
 public class NavigationManager {
@@ -55,6 +56,10 @@ public class NavigationManager {
 
     public static void goToBooking(Context context) {
         context.startActivity(new Intent(context, BookingActivity.class));
+    }
+
+    public static void goToChat(Context context) {
+        context.startActivity(new Intent(context, ChatActivity.class));
     }
 
     public static void goBack(Activity activity) {

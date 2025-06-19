@@ -31,6 +31,7 @@ public class SettingsFragment extends Fragment {
 
         TextView resetPasswordBtn = view.findViewById(R.id.btn_reset_password);
         TextView logoutBtn = view.findViewById(R.id.btn_login_logout);
+        TextView chatSupportBtn = view.findViewById(R.id.btn_chat_support);
 
         resetPasswordBtn.setOnClickListener(v -> showResetPasswordDialog());
         logoutBtn.setOnClickListener(v -> {
@@ -41,6 +42,7 @@ public class SettingsFragment extends Fragment {
             Toast.makeText(getContext(), R.string.logout, Toast.LENGTH_SHORT).show();
             NavigationManager.goToLogin(requireActivity());
         });
+        chatSupportBtn.setOnClickListener(v -> NavigationManager.goToChat(requireContext()));
 
         return view;
     }

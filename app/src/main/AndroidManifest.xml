@@ -45,6 +45,9 @@
         <activity
             android:name=".presentation.auth.ForgotPasswordActivity"
             android:exported="true" />
+        <activity
+            android:name=".presentation.chat.ChatActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
