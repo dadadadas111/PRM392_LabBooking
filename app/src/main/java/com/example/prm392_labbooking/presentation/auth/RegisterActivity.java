@@ -25,13 +25,13 @@ public class RegisterActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        initLoadingOverlay();
         findViewById(R.id.backToLoginButton).setOnClickListener(v -> NavigationManager.goToLogin(this));
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText);
         registerButton = findViewById(R.id.registerButton);
         authRepository = new AuthRepositoryImpl(new FirebaseAuthService());
-        loadingOverlay = findViewById(R.id.loadingOverlay);
         registerButton.setOnClickListener(v -> onRegister());
     }
 
@@ -69,11 +69,11 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public void showLoading() {
-        if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
+        super.showLoading();
     }
 
     @Override
     public void hideLoading() {
-        if (loadingOverlay != null) loadingOverlay.setVisibility(View.GONE);
+        super.hideLoading();
     }
 }

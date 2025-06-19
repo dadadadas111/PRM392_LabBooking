@@ -34,9 +34,11 @@ public class SettingsFragment extends Fragment {
 
         resetPasswordBtn.setOnClickListener(v -> showResetPasswordDialog());
         logoutBtn.setOnClickListener(v -> {
+            BaseActivity activity = (BaseActivity) requireActivity();
+            activity.showLoading();
             authService.logout();
+            activity.hideLoading();
             Toast.makeText(getContext(), R.string.logout, Toast.LENGTH_SHORT).show();
-            // navigate to login screen
             NavigationManager.goToLogin(requireActivity());
         });
 

@@ -13,8 +13,18 @@ public class MainActivity extends AuthRequiredActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initLoadingOverlay();
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+
+//        // Test button for loading overlay
+//        findViewById(R.id.btnTestLoading).setOnClickListener(v -> {
+//            if (findViewById(R.id.loadingOverlay).getVisibility() == android.view.View.VISIBLE) {
+//                hideLoading();
+//            } else {
+//                showLoading();
+//            }
+//        });
 
         // Show HomeFragment by default
         if (savedInstanceState == null) {

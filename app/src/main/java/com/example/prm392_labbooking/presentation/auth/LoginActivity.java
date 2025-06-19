@@ -47,11 +47,11 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        initLoadingOverlay();
         initViews();
         setupGoogleSignIn();
         setListeners();
         setGoogleButtonText();
-        loadingOverlay = findViewById(R.id.loadingOverlay);
     }
 
     private void initViews() {
@@ -165,6 +165,7 @@ public class LoginActivity extends BaseActivity {
                 hideLoading();
                 if (task.isSuccessful()) {
                     Toast.makeText(this, getString(R.string.google_sign_in_success), Toast.LENGTH_SHORT).show();
+                    NavigationManager.goToMain(this);
                 } else {
                     Toast.makeText(this, getString(R.string.google_sign_in_failed), Toast.LENGTH_SHORT).show();
                 }
@@ -173,11 +174,11 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void showLoading() {
-        if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
+        super.showLoading();
     }
 
     @Override
     public void hideLoading() {
-        if (loadingOverlay != null) loadingOverlay.setVisibility(View.GONE);
+        super.hideLoading();
     }
 }
