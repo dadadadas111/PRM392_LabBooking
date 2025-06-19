@@ -27,7 +27,8 @@ public class MapUtils {
 
     public static void recenterMap(MapView mapView, double lat, double lon) {
         if (mapView != null) {
-            mapView.getController().setCenter(new org.osmdroid.util.GeoPoint(lat, lon));
+            // Animate smoothly to the new center
+            mapView.getController().animateTo(new org.osmdroid.util.GeoPoint(lat, lon));
         }
     }
 }

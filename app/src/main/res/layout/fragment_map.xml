@@ -19,22 +19,27 @@
             android:id="@+id/btnRecenter"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/round_button_selector"
             android:src="@android:drawable/ic_menu_mylocation"
-            android:contentDescription="Recenter" />
+            android:contentDescription="Recenter"
+            android:elevation="6dp"
+            android:layout_marginBottom="16dp" />
         <ImageButton
             android:id="@+id/btnOpenInGoogleMaps"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/round_button_selector"
             android:src="@android:drawable/ic_menu_directions"
-            android:contentDescription="Directions" />
+            android:contentDescription="Directions"
+            android:elevation="6dp"
+            android:layout_marginBottom="16dp" />
         <ImageButton
             android:id="@+id/btnOtherAction"
             android:layout_width="56dp"
             android:layout_height="56dp"
-            android:background="@android:color/transparent"
+            android:background="@drawable/round_button_selector"
             android:src="@android:drawable/ic_menu_info_details"
-            android:contentDescription="Other Action" />
+            android:contentDescription="Other Action"
+            android:elevation="6dp" />
     </LinearLayout>
 </FrameLayout>
