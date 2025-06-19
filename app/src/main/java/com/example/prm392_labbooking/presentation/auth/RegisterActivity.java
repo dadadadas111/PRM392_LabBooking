@@ -68,12 +68,12 @@ public class RegisterActivity extends BaseActivity {
     }
 
     @Override
-    protected void showLoading() {
+    public void showLoading() {
         if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
     }
 
     @Override
-    protected void hideLoading() {
+    public void hideLoading() {
         if (loadingOverlay != null) loadingOverlay.setVisibility(View.GONE);
     }
 }

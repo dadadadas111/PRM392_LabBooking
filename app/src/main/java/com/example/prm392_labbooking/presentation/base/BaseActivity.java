@@ -39,11 +39,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         progressBar = null;
     }
 
-    protected void showLoading() {
+    public void showLoading() {
         if (loadingOverlay != null) loadingOverlay.setVisibility(View.VISIBLE);
     }
 
-    protected void hideLoading() {
+    public void hideLoading() {
         if (loadingOverlay != null) loadingOverlay.setVisibility(View.GONE);
     }
 }
