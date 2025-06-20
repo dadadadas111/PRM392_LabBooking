@@ -38,6 +38,19 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp" />
 
+        <!-- Menu button (replaces clear button, top right) -->
+        <ImageButton
+            android:id="@+id/btn_menu"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_menu"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp" />
+
         <!-- Top navigation for chat options -->
         <LinearLayout
             android:id="@+id/chat_option_bar"
@@ -108,32 +121,48 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="8dp"
-            android:background="@color/colorSurface"
+            android:background="@android:color/transparent"
+            android:layout_marginBottom="28dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <EditText
-                android:id="@+id/et_message"
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="56dp"
                 android:layout_weight="1"
-                android:hint="@string/type_message"
-                android:background="@drawable/edit_text_bg"
-                android:padding="12dp"
-                android:textColor="@color/colorOnSurface"
-                android:textColorHint="@color/colorOnSurface"
-                android:textSize="16sp"/>
+                android:orientation="horizontal"
+                android:background="@drawable/input_bubble_bg"
+                android:gravity="center_vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="4dp">
+
+                <EditText
+                    android:id="@+id/et_message"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="@string/type_message"
+                    android:background="@android:color/transparent"
+                    android:padding="0dp"
+                    android:textColor="@color/colorOnSurface"
+                    android:textColorHint="@color/colorOnSurface"
+                    android:textSize="16sp"/>
+            </LinearLayout>
 
             <ImageButton
                 android:id="@+id/btn_send"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/send_button_bg"
                 android:src="@android:drawable/ic_menu_send"
-                android:background="@color/colorPrimary"
-                android:tint="@color/colorOnPrimary"
-                android:contentDescription="@string/send"/>
+                android:tint="@color/white"
+                android:contentDescription="@string/send"
+                android:elevation="4dp"/>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

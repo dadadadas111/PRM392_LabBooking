@@ -43,6 +43,7 @@ dependencies {
     implementation libs.firebase.auth
     implementation libs.play.services.auth
     implementation libs.firebase.database
+    implementation libs.firebase.firestore // Firestore dependency added
 
     // Retrofit for REST API
     implementation libs.retrofit

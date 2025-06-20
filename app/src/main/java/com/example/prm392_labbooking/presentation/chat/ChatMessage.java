@@ -1,8 +1,12 @@
 package com.example.prm392_labbooking.presentation.chat;
 
 public class ChatMessage {
-    private String message;
-    private boolean isUser;
+    public String message;
+    public boolean isUser;
+
+    public ChatMessage() {
+        // Required for Firestore
+    }
 
     public ChatMessage(String message, boolean isUser) {
         this.message = message;

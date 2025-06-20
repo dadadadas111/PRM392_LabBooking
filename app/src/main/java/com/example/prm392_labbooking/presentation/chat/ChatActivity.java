@@ -1,11 +1,16 @@
 package com.example.prm392_labbooking.presentation.chat;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +20,10 @@ import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.presentation.base.AuthRequiredActivity;
 import com.example.prm392_labbooking.utils.GeminiChatUtil;
 import com.example.prm392_labbooking.utils.SecretLoader;
+import com.example.prm392_labbooking.data.firebase.FirebaseAuthService;
+import com.example.prm392_labbooking.data.repository.ChatRepositoryImpl;
+import com.example.prm392_labbooking.domain.repository.ChatRepository;
+import com.example.prm392_labbooking.data.firebase.FirebaseChatServiceImpl;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,6 +42,10 @@ public class ChatActivity extends AuthRequiredActivity {
     private ChatAdapter chatAdapter;
     private List<ChatMessage> chatMessages = new ArrayList<>();
     private boolean isChatbot = true;
+    private ProgressDialog progressDialog;
+    private ChatRepository chatRepository;
+    private FirebaseAuthService authService;
+    private String userId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +61,7 @@ public class ChatActivity extends AuthRequiredActivity {
         etMessage = findViewById(R.id.et_message);
         btnSend = findViewById(R.id.btn_send);
         rvChat = findViewById(R.id.rv_chat);
+        ImageButton btnMenu = findViewById(R.id.btn_menu);
 
         // Set initial tab state
         btnChatbot.setSelected(true);
@@ -58,6 +72,20 @@ public class ChatActivity extends AuthRequiredActivity {
         chatAdapter = new ChatAdapter(chatMessages);
         rvChat.setLayoutManager(new LinearLayoutManager(this));
         rvChat.setAdapter(chatAdapter);
+
+        // Init repository and auth
+        chatRepository = new ChatRepositoryImpl(new FirebaseChatServiceImpl());
+        authService = new FirebaseAuthService();
+        userId = authService.getCurrentUserId();
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Loading chat history...");
+        progressDialog.setCancelable(false);
+
+        // Load chat history for chatbot tab on start
+        if (isChatbot) {
+            loadChatHistory();
+        }
 
         btnChatbot.setOnClickListener(v -> {
             if (!btnChatbot.isSelected()) {
@@ -78,12 +106,70 @@ public class ChatActivity extends AuthRequiredActivity {
             }
         });
         btnSend.setOnClickListener(v -> sendMessage());
+        btnMenu.setOnClickListener(v -> {
+            PopupMenu popup = new PopupMenu(this, btnMenu);
+            popup.getMenu().add(getString(R.string.menu_clear_chat));
+            popup.setOnMenuItemClickListener(item -> {
+                if (item.getTitle().equals(getString(R.string.menu_clear_chat))) {
+                    new AlertDialog.Builder(this)
+                        .setTitle(getString(R.string.dialog_clear_chat_title))
+                        .setMessage(getString(R.string.dialog_clear_chat_message))
+                        .setPositiveButton(getString(R.string.dialog_yes), (dialog, which) -> {
+                            if (isChatbot) {
+                                chatMessages.clear();
+                                chatAdapter.notifyDataSetChanged();
+                                saveChatHistory();
+                                Toast.makeText(this, getString(R.string.menu_clear_chat) + "d", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton(getString(R.string.dialog_cancel), null)
+                        .show();
+                }
+                return true;
+            });
+            popup.show();
+        });
+    }
+
+    private void loadChatHistory() {
+        if (userId == null || userId.isEmpty()) return;
+        progressDialog.show();
+        chatRepository.loadChatHistory(userId, new ChatRepository.ChatHistoryListener() {
+            @Override
+            public void onHistoryLoaded(List<ChatMessage> messages) {
+                progressDialog.dismiss();
+                chatMessages.clear();
+                chatMessages.addAll(messages);
+                chatAdapter.notifyDataSetChanged();
+                if (!chatMessages.isEmpty()) {
+                    rvChat.scrollToPosition(chatMessages.size() - 1);
+                }
+            }
+            @Override
+            public void onError(Exception e) {
+                progressDialog.dismiss();
+                Toast.makeText(ChatActivity.this, "Failed to load chat history", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void saveChatHistory() {
+        if (userId == null || userId.isEmpty()) return;
+        chatRepository.saveChatHistory(userId, chatMessages, new ChatRepository.SaveListener() {
+            @Override
+            public void onSaved() {
+                // Optionally show a small indicator or log
+            }
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(ChatActivity.this, "Failed to save chat history", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void switchToChatbot() {
         isChatbot = true;
-        chatMessages.clear();
-        chatAdapter.notifyDataSetChanged();
+        loadChatHistory();
     }
 
     private void switchToSupport() {
@@ -120,6 +206,10 @@ public class ChatActivity extends AuthRequiredActivity {
                 public void onError(String errorMsg) {
                     chatMessages.set(chatMessages.size() - 1, new ChatMessage(errorMsg, false));
                     chatAdapter.notifyItemChanged(chatMessages.size() - 1);
+                }
+                @Override
+                public void onStreamComplete() {
+                    saveChatHistory();
                 }
             });
         } else {

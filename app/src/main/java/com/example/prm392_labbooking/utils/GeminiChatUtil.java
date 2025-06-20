@@ -20,6 +20,7 @@ public class GeminiChatUtil {
     public interface GeminiStreamCallback {
         void onStreamUpdate(String text);
         void onError(String errorMsg);
+        void onStreamComplete();
     }
 
     public static void streamGeminiResponse(Context context, List<ChatMessage> chatMessages, String userMessage, GeminiStreamCallback callback) {
@@ -104,10 +105,25 @@ public class GeminiChatUtil {
                     }
                 }
                 reader.close();
+                // Notify completion
+                mainHandler.post(callback::onStreamComplete);
             } catch (Exception e) {
                 Handler mainHandler = new Handler(Looper.getMainLooper());
                 mainHandler.post(() -> callback.onError("(Gemini error)"));
+                mainHandler.post(() -> {
+                    if (callback instanceof GeminiStreamCallback) {
+                        ((GeminiStreamCallback) callback).onStreamComplete();
+                    }
+                });
+                return;
             }
+            // Always call onStreamComplete at the end of streaming
+            Handler mainHandler = new Handler(Looper.getMainLooper());
+            mainHandler.post(() -> {
+                if (callback instanceof GeminiStreamCallback) {
+                    ((GeminiStreamCallback) callback).onStreamComplete();
+                }
+            });
         }).start();
     }
 }
