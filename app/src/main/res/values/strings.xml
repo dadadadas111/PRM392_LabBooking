@@ -92,7 +92,7 @@
     <string name="support_section">Hỗ trợ</string>
     <string name="preferences_section">Tùy chọn</string>
     <string name="faq">Câu hỏi thường gặp</string>
-    <string name="chat_with_support">Nhân viên</string>
+    <string name="chat_with_support">Hỗ trợ khách hàng</string>
     <string name="preferences">Tùy chọn</string>
-    <string name="chat_with_chatbot">Chatbot</string>
+    <string name="chat_with_chatbot">Trợ lý ảo</string>
 </resources>

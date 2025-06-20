@@ -1,6 +1,5 @@
 package com.example.prm392_labbooking.presentation.chat;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,19 +36,22 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     }
 
     static class ChatViewHolder extends RecyclerView.ViewHolder {
-        private final TextView tvMessage;
+        private final TextView tvMessageLeft;
+        private final TextView tvMessageRight;
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvMessage = itemView.findViewById(R.id.tv_message);
+            tvMessageLeft = itemView.findViewById(R.id.tv_message_left);
+            tvMessageRight = itemView.findViewById(R.id.tv_message_right);
         }
         public void bind(ChatMessage message) {
-            tvMessage.setText(message.getMessage());
             if (message.isUser()) {
-                tvMessage.setBackgroundResource(R.drawable.bg_user_message);
-                tvMessage.setTextColor(Color.WHITE);
+                tvMessageLeft.setVisibility(View.GONE);
+                tvMessageRight.setVisibility(View.VISIBLE);
+                tvMessageRight.setText(message.getMessage());
             } else {
-                tvMessage.setBackgroundResource(R.drawable.bg_bot_message);
-                tvMessage.setTextColor(itemView.getContext().getColor(R.color.colorOnSurface));
+                tvMessageRight.setVisibility(View.GONE);
+                tvMessageLeft.setVisibility(View.VISIBLE);
+                tvMessageLeft.setText(message.getMessage());
             }
         }
     }
