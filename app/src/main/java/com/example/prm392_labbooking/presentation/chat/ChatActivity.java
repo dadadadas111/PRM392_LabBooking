@@ -42,16 +42,18 @@ public class ChatActivity extends AuthRequiredActivity {
     private ChatAdapter chatAdapter;
     private List<ChatMessage> chatMessages = new ArrayList<>();
     private boolean isChatbot = true;
-    private ProgressDialog progressDialog;
     private ChatRepository chatRepository;
     private FirebaseAuthService authService;
     private String userId;
+    private List<ChatMessage> cachedChatbotMessages = null;
+    private List<ChatMessage> cachedSupportMessages = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chat);
+        initLoadingOverlay();
 
         ImageButton btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> finish());
@@ -77,10 +79,6 @@ public class ChatActivity extends AuthRequiredActivity {
         chatRepository = new ChatRepositoryImpl(new FirebaseChatServiceImpl());
         authService = new FirebaseAuthService();
         userId = authService.getCurrentUserId();
-
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading chat history...");
-        progressDialog.setCancelable(false);
 
         // Load chat history for chatbot tab on start
         if (isChatbot) {
@@ -131,15 +129,45 @@ public class ChatActivity extends AuthRequiredActivity {
         });
     }
 
+    private void switchToChatbot() {
+        isChatbot = true;
+        if (cachedChatbotMessages != null) {
+            chatMessages.clear();
+            chatMessages.addAll(cachedChatbotMessages);
+            chatAdapter.notifyDataSetChanged();
+            if (!chatMessages.isEmpty()) {
+                rvChat.scrollToPosition(chatMessages.size() - 1);
+            }
+        } else {
+            loadChatHistory();
+        }
+    }
+
+    private void switchToSupport() {
+        isChatbot = false;
+        if (cachedSupportMessages != null) {
+            chatMessages.clear();
+            chatMessages.addAll(cachedSupportMessages);
+            chatAdapter.notifyDataSetChanged();
+            if (!chatMessages.isEmpty()) {
+                rvChat.scrollToPosition(chatMessages.size() - 1);
+            }
+        } else {
+            chatMessages.clear();
+            chatAdapter.notifyDataSetChanged();
+        }
+    }
+
     private void loadChatHistory() {
         if (userId == null || userId.isEmpty()) return;
-        progressDialog.show();
+        showLoading();
         chatRepository.loadChatHistory(userId, new ChatRepository.ChatHistoryListener() {
             @Override
             public void onHistoryLoaded(List<ChatMessage> messages) {
-                progressDialog.dismiss();
+                hideLoading();
                 chatMessages.clear();
                 chatMessages.addAll(messages);
+                cachedChatbotMessages = new ArrayList<>(messages);
                 chatAdapter.notifyDataSetChanged();
                 if (!chatMessages.isEmpty()) {
                     rvChat.scrollToPosition(chatMessages.size() - 1);
@@ -147,7 +175,7 @@ public class ChatActivity extends AuthRequiredActivity {
             }
             @Override
             public void onError(Exception e) {
-                progressDialog.dismiss();
+                hideLoading();
                 Toast.makeText(ChatActivity.this, "Failed to load chat history", Toast.LENGTH_SHORT).show();
             }
         });
@@ -155,6 +183,7 @@ public class ChatActivity extends AuthRequiredActivity {
 
     private void saveChatHistory() {
         if (userId == null || userId.isEmpty()) return;
+        cachedChatbotMessages = new ArrayList<>(chatMessages);
         chatRepository.saveChatHistory(userId, chatMessages, new ChatRepository.SaveListener() {
             @Override
             public void onSaved() {
@@ -165,17 +194,6 @@ public class ChatActivity extends AuthRequiredActivity {
                 Toast.makeText(ChatActivity.this, "Failed to save chat history", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    private void switchToChatbot() {
-        isChatbot = true;
-        loadChatHistory();
-    }
-
-    private void switchToSupport() {
-        isChatbot = false;
-        chatMessages.clear();
-        chatAdapter.notifyDataSetChanged();
     }
 
     private void sendMessage() {

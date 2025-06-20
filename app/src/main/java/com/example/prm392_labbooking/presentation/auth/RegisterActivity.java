@@ -19,7 +19,6 @@ public class RegisterActivity extends BaseActivity {
     private EditText emailEditText, passwordEditText, confirmPasswordEditText;
     private Button registerButton;
     private AuthRepository authRepository;
-    private FrameLayout loadingOverlay;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
