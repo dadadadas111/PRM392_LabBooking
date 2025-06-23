@@ -17,8 +17,7 @@ import com.google.android.gms.maps.MapView;
 
 public class MapFragment extends BaseFragment {
     private MapView mapView;
-    private ImageButton btnOpenInGoogleMaps, btnRecenter, btnOtherAction;
-    private AuthRepository authRepository;
+    private ImageButton btnOpenInGoogleMaps, btnRecenter, btnOtherAction, btnShowDirections;
     private static final double LAB_LAT = 10.762622;
     private static final double LAB_LON = 106.660172;
 
@@ -31,11 +30,12 @@ public class MapFragment extends BaseFragment {
         btnOpenInGoogleMaps = root.findViewById(R.id.btnOpenInGoogleMaps);
         btnRecenter = root.findViewById(R.id.btnRecenter);
         btnOtherAction = root.findViewById(R.id.btnOtherAction);
-        authRepository = new AuthRepositoryImpl(new FirebaseAuthService());
+        btnShowDirections = root.findViewById(R.id.btnShowDirections);
 
         MapUtils.setupLabMap(mapView, LAB_LAT, LAB_LON, "LAB Location");
         btnOpenInGoogleMaps.setOnClickListener(v -> MapUtils.openInGoogleMaps(requireContext(), LAB_LAT, LAB_LON, "LAB"));
         btnRecenter.setOnClickListener(v -> MapUtils.recenterMap(mapView, LAB_LAT, LAB_LON));
+        btnShowDirections.setOnClickListener(v -> MapUtils.openDirections(requireContext(), LAB_LAT, LAB_LON));
         btnOtherAction.setOnClickListener(v -> {
             // Placeholder for another map action
         });

@@ -40,4 +40,12 @@ public class MapUtils {
             }
         });
     }
+
+    public static void openDirections(Context context, double destLat, double destLon) {
+        // Use Google Maps directions from current location to lab
+        String uri = String.format("https://www.google.com/maps/dir/?api=1&destination=%f,%f&travelmode=driving", destLat, destLon);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        context.startActivity(intent);
+    }
 }
