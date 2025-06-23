@@ -13,8 +13,7 @@ import com.example.prm392_labbooking.data.firebase.FirebaseAuthService;
 import com.example.prm392_labbooking.data.repository.AuthRepositoryImpl;
 import com.example.prm392_labbooking.domain.repository.AuthRepository;
 import com.example.prm392_labbooking.utils.MapUtils;
-import org.osmdroid.config.Configuration;
-import org.osmdroid.views.MapView;
+import com.google.android.gms.maps.MapView;
 
 public class MapFragment extends BaseFragment {
     private MapView mapView;
@@ -26,9 +25,9 @@ public class MapFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Configuration.getInstance().setUserAgentValue(requireContext().getPackageName());
         View root = inflater.inflate(R.layout.fragment_map, container, false);
         mapView = root.findViewById(R.id.mapView);
+        mapView.onCreate(savedInstanceState);
         btnOpenInGoogleMaps = root.findViewById(R.id.btnOpenInGoogleMaps);
         btnRecenter = root.findViewById(R.id.btnRecenter);
         btnOtherAction = root.findViewById(R.id.btnOtherAction);
@@ -44,10 +43,26 @@ public class MapFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (mapView != null) mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        if (mapView != null) mapView.onPause();
+        super.onPause();
+    }
+
+    @Override
     public void onDestroyView() {
+        if (mapView != null) mapView.onDestroy();
         super.onDestroyView();
-        if (mapView != null) {
-            mapView.onDetach();
-        }
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        if (mapView != null) mapView.onLowMemory();
     }
 }

@@ -3,19 +3,25 @@ package com.example.prm392_labbooking.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import org.osmdroid.util.GeoPoint;
-import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.Marker;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapUtils {
     public static void setupLabMap(MapView mapView, double lat, double lon, String title) {
-        mapView.setMultiTouchControls(true);
-        mapView.getController().setZoom(20.0);
-        mapView.getController().setCenter(new GeoPoint(lat, lon));
-        Marker marker = new Marker(mapView);
-        marker.setPosition(new GeoPoint(lat, lon));
-        marker.setTitle(title);
-        mapView.getOverlays().add(marker);
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                LatLng labLocation = new LatLng(lat, lon);
+                googleMap.addMarker(new MarkerOptions().position(labLocation).title(title));
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(labLocation, 20.0f));
+                googleMap.getUiSettings().setZoomControlsEnabled(true);
+                googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+            }
+        });
     }
 
     public static void openInGoogleMaps(Context context, double lat, double lon, String label) {
@@ -26,9 +32,12 @@ public class MapUtils {
     }
 
     public static void recenterMap(MapView mapView, double lat, double lon) {
-        if (mapView != null) {
-            // Animate smoothly to the new center
-            mapView.getController().animateTo(new org.osmdroid.util.GeoPoint(lat, lon));
-        }
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                LatLng labLocation = new LatLng(lat, lon);
+                googleMap.animateCamera(CameraUpdateFactory.newLatLng(labLocation));
+            }
+        });
     }
 }
