@@ -68,6 +68,20 @@
     <string name="lab_location">Vị trí phòng LAB</string>
     <string name="show_on_map">Xem trên bản đồ</string>
     <string name="map_loading">Đang tải bản đồ...</string>
+    <string name="map_layers">Lớp bản đồ</string>
+    <string name="map_normal">Bình thường</string>
+    <string name="map_satellite">Vệ tinh</string>
+    <string name="map_terrain">Địa hình</string>
+    <string name="map_hybrid">Kết hợp</string>
+    <string name="recenter">Căn giữa</string>
+    <string name="compass">La bàn</string>
+    <string name="reset_compass">Đặt lại hướng Bắc</string>
+    <string name="open_in_google_maps">Mở trong Google Maps</string>
+    <string name="show_directions">Chỉ đường</string>
+    <string name="switched_to_normal">Đã chuyển sang chế độ Bình thường</string>
+    <string name="switched_to_satellite">Đã chuyển sang chế độ Vệ tinh</string>
+    <string name="switched_to_terrain">Đã chuyển sang chế độ Địa hình</string>
+    <string name="switched_to_hybrid">Đã chuyển sang chế độ Kết hợp</string>
 
     <!-- Chat -->
     <string name="chat">Trò chuyện</string>
