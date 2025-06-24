@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,20 +23,26 @@ import com.google.android.gms.maps.MapView;
 public class MapFragment extends BaseFragment {
     private MapView mapView;
     private ImageButton btnOpenInGoogleMaps, btnRecenter, btnMapLayers, btnShowDirections, btnCompass;
-    private static final double LAB_LAT = 10.762622;
-    private static final double LAB_LON = 106.660172;@Nullable
+    private ImageView offscreenMarker;
+    private FrameLayout mapContainer;
+    private static final double LAB_LAT = 10.762622;    private static final double LAB_LON = 106.660172;
+
+    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {        View root = inflater.inflate(R.layout.fragment_map, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_map, container, false);
+        mapContainer = (FrameLayout) root;
         mapView = root.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         btnOpenInGoogleMaps = root.findViewById(R.id.btnOpenInGoogleMaps);
         btnRecenter = root.findViewById(R.id.btnRecenter);
         btnMapLayers = root.findViewById(R.id.btnMapLayers);
-        btnShowDirections = root.findViewById(R.id.btnShowDirections);
-        btnCompass = root.findViewById(R.id.btnCompass);
+        btnShowDirections = root.findViewById(R.id.btnShowDirections);        btnCompass = root.findViewById(R.id.btnCompass);
+        offscreenMarker = root.findViewById(R.id.offscreenMarker);
 
         MapUtils.setupLabMap(mapView, LAB_LAT, LAB_LON, "LAB Location");
         MapUtils.setupCompass(btnCompass);
+        MapUtils.setupOffscreenMarker(offscreenMarker, mapContainer);
         
         btnOpenInGoogleMaps.setOnClickListener(v -> MapUtils.openInGoogleMaps(requireContext(), LAB_LAT, LAB_LON, "LAB"));
         btnRecenter.setOnClickListener(v -> MapUtils.recenterMap(mapView, LAB_LAT, LAB_LON));

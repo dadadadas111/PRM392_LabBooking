@@ -2,11 +2,22 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
-    <com.google.android.gms.maps.MapView
+      <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+      <!-- Off-screen marker indicator -->
+    <ImageView
+        android:id="@+id/offscreenMarker"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/ic_offscreen_marker"
+        android:contentDescription="@string/offscreen_marker"
+        android:elevation="8dp"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackgroundBorderless" />
       <!-- Left side button for map layers -->
     <ImageButton
         android:id="@+id/btnMapLayers"

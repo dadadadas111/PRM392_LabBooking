@@ -76,6 +76,8 @@
     <string name="recenter">Căn giữa</string>
     <string name="compass">La bàn</string>
     <string name="reset_compass">Đặt lại hướng Bắc</string>
+    <string name="offscreen_marker">Chỉ báo vị trí Lab</string>
+    <string name="lab_location_offscreen">Lab nằm ngoài màn hình</string>
     <string name="open_in_google_maps">Mở trong Google Maps</string>
     <string name="show_directions">Chỉ đường</string>
     <string name="switched_to_normal">Đã chuyển sang chế độ Bình thường</string>
