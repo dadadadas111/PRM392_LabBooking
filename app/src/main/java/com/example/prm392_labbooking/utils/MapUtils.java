@@ -13,6 +13,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.View;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,9 +23,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.VisibleRegion;
+import com.example.prm392_labbooking.services.PreloadManager;
+import com.example.prm392_labbooking.utils.PreloadUtils;
 
 @SuppressWarnings("deprecation")
 public class MapUtils {
+    private static final String TAG = "MapUtils";
     private static final String PREF_MAP_TYPE = "map_type";
     private static GoogleMap currentGoogleMap;
     private static ImageButton currentCompass;
@@ -33,9 +37,15 @@ public class MapUtils {
     private static LatLng labLocation;
     private static FrameLayout mapContainer;
       public static void setupLabMap(MapView mapView, double lat, double lon, String title) {
+        // Check preload status
+        PreloadUtils.logPreloadStatus();
+        Log.d(TAG, "Preload status: " + PreloadUtils.getReadinessDescription());
+        
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
-            public void onMapReady(GoogleMap googleMap) {                currentGoogleMap = googleMap;
+            public void onMapReady(GoogleMap googleMap) {
+                Log.d(TAG, "Map ready callback triggered");
+                currentGoogleMap = googleMap;
                 labLocation = new LatLng(lat, lon);
                 googleMap.addMarker(new MarkerOptions().position(labLocation).title(title));
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(labLocation, 18.0f));
@@ -57,6 +67,8 @@ public class MapUtils {
                 googleMap.setOnCameraIdleListener(() -> {
                     updateOffscreenMarker();
                 });
+                
+                Log.d(TAG, "Map setup completed successfully");
             }
         });
     }
@@ -211,8 +223,8 @@ public class MapUtils {
         int containerWidth = mapContainer.getWidth();
         int containerHeight = mapContainer.getHeight();
         
-        // Marker dimensions (smaller now)
-        int markerSize = 32; // dp
+        // Marker dimensions (bigger now)
+        int markerSize = 48; // dp (increased from 32dp)
         DisplayMetrics metrics = offscreenMarker.getContext().getResources().getDisplayMetrics();
         int markerSizePx = (int) (markerSize * metrics.density);
         

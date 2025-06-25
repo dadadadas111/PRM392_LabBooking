@@ -48,6 +48,13 @@
         <activity
             android:name=".presentation.chat.ChatActivity"
             android:exported="false" />
+        
+        <!-- Preload Service -->
+        <service
+            android:name=".services.PreloadService"
+            android:enabled="true"
+            android:exported="false" />
+            
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
