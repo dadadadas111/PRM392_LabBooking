@@ -115,7 +115,7 @@
     <!-- Clear Chat -->
     <string name="menu_clear_chat">Xóa lịch sử trò chuyện</string>
     <string name="dialog_clear_chat_title">Xóa Lịch Sử Trò Chuyện</string>
-    <string name="dialog_clear_chat_message">Bạn có chắc chắn muốn xóa lịch sử trò chuyện với trợ lý ảo?</string>
+    <string name="dialog_clear_chat_message">Bạn có chắc chắn muốn xóa lịch sử trò chuyện?</string>
     <string name="dialog_yes">Có</string>
     <string name="dialog_cancel">Hủy</string>
 </resources>
