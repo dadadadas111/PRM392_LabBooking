@@ -23,7 +23,7 @@
     <string name="or">hoặc</string>
     <string name="google_sign_in">Đăng nhập với Google</string>
     <string name="google_sign_in_success">Đăng nhập Google thành công!</string>
-    <string name="google_sign_in_failed">Đăng nhập Google thất bại!</string>
+    <string name="google_sign_in_failed">Đăng nhập Google thất bại: %1$s</string>
 
     <!-- Product/Package List -->
     <string name="package_list">Danh sách gói</string>
@@ -32,6 +32,7 @@
     <string name="details">Chi tiết</string>
     <string name="capacity">Sức chứa: %1$d chỗ</string>
     <string name="select_package">Chọn gói</string>
+    <string name="product_name">Tên sản phẩm</string>
 
     <!-- Product Details -->
     <string name="package_details">Chi tiết gói</string>
@@ -49,6 +50,7 @@
     <string name="total">Tổng cộng: %1$s</string>
     <string name="proceed_to_checkout">Tiếp tục thanh toán</string>
     <string name="remove_item_confirm">Bạn có chắc muốn xóa mục này?</string>
+    <string name="cart_fragment">Giỏ hàng</string>
 
     <!-- Billing/Checkout -->
     <string name="billing">Thanh toán</string>
@@ -84,6 +86,8 @@
     <string name="switched_to_satellite">Đã chuyển sang chế độ Vệ tinh</string>
     <string name="switched_to_terrain">Đã chuyển sang chế độ Địa hình</string>
     <string name="switched_to_hybrid">Đã chuyển sang chế độ Kết hợp</string>
+    <string name="no_internet_connection">Không có kết nối internet. Một số tính năng có thể không hoạt động.</string>
+    <string name="internet_connection_back">Kết nối internet đã được khôi phục.</string>
 
     <!-- Chat -->
     <string name="chat">Trò chuyện</string>
@@ -92,6 +96,11 @@
     <string name="salesman">Nhân viên tư vấn</string>
     <string name="user">Bạn</string>
     <string name="chat_placeholder">Hãy bắt đầu trò chuyện với nhân viên tư vấn!</string>
+    <string name="error_load_chat_history">Không thể tải lịch sử trò chuyện</string>
+    <string name="error_save_chat_history">Không thể lưu lịch sử trò chuyện</string>
+    <string name="error_load_support_chat">Không thể tải trò chuyện hỗ trợ</string>
+    <string name="error_save_support_chat">Không thể lưu trò chuyện hỗ trợ</string>
+    <string name="placeholder_screen">Màn hình chờ</string>
 
     <!-- General -->
     <string name="yes">Có</string>

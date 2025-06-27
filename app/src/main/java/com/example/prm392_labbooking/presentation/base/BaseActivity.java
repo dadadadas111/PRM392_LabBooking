@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.utils.NetworkUtils;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -84,7 +86,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 // Show offline bar
                 handler.removeCallbacksAndMessages(null);
                 noInternetBar.setBackgroundColor(0xFFFFD700); // Yellow
-                noInternetText.setText("No internet connection. Some features may not work.");
+                noInternetText.setText(getString(R.string.no_internet_connection));
                 noInternetText.setTextColor(0xFFD32F2F);
                 noInternetBar.setVisibility(View.VISIBLE);
                 wasOffline = true;
@@ -92,7 +94,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 if (wasOffline) {
                     // Show online bar for a few seconds
                     noInternetBar.setBackgroundColor(0xFF4CAF50); // Green
-                    noInternetText.setText("Internet connection is back.");
+                    noInternetText.setText(getString(R.string.internet_connection_back));
                     noInternetText.setTextColor(0xFFFFFFFF);
                     noInternetBar.setVisibility(View.VISIBLE);
                     if (hideOnlineBarRunnable != null) handler.removeCallbacks(hideOnlineBarRunnable);

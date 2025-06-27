@@ -228,7 +228,7 @@ public class ChatActivity extends AuthRequiredActivity {
             @Override
             public void onError(Exception e) {
                 hideLoading();
-                Toast.makeText(ChatActivity.this, "Failed to load chat history", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, getString(R.string.error_load_chat_history), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -243,7 +243,7 @@ public class ChatActivity extends AuthRequiredActivity {
             }
             @Override
             public void onError(Exception e) {
-                Toast.makeText(ChatActivity.this, "Failed to save chat history", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, getString(R.string.error_save_chat_history), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -320,7 +320,7 @@ public class ChatActivity extends AuthRequiredActivity {
             @Override
             public void onError(Exception e) {
                 hideLoading();
-                Toast.makeText(ChatActivity.this, "Failed to load support chat", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, getString(R.string.error_load_support_chat), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -333,7 +333,7 @@ public class ChatActivity extends AuthRequiredActivity {
             public void onSaved() {}
             @Override
             public void onError(Exception e) {
-                Toast.makeText(ChatActivity.this, "Failed to save support chat", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, getString(R.string.error_save_support_chat), Toast.LENGTH_SHORT).show();
             }
         });
     }

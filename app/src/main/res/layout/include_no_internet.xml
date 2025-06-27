@@ -18,7 +18,7 @@
         android:id="@+id/noInternetText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No internet connection. Some features may not work."
+        android:text="@string/no_internet_connection"
         android:textColor="#D32F2F"
         android:textStyle="bold"
         android:textSize="12sp"
