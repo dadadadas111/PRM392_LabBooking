@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/noInternetBar"
+    android:layout_width="match_parent"
+    android:layout_height="32dp"
+    android:orientation="horizontal"
+    android:background="#FFD700"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:gravity="center_vertical"
+    android:visibility="gone">
+    <ImageView
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@android:drawable/stat_notify_error"
+        android:tint="#D32F2F"/>
+    <TextView
+        android:id="@+id/noInternetText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No internet connection. Some features may not work."
+        android:textColor="#D32F2F"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:layout_marginStart="6dp"/>
+</LinearLayout>
