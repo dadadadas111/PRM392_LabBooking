@@ -34,6 +34,7 @@ public class MainActivity extends AuthRequiredActivity {
         bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull android.view.MenuItem item) {
+                if (item.isChecked()) return false; // Prevent re-clicking selected
                 int id = item.getItemId();
                 if (id == R.id.nav_home) {
                     NavigationManager.showHome(getSupportFragmentManager());

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="576"
+    android:viewportHeight="512">
+    <!-- Replicates FontAwesome's fa-cart-shopping icon -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M528.12,301.319l47.273-208A16,16 0 0 0 560,64H120l-9.4-44.5A24,24 0 0 0 87,0H24A24,24 0 0 0 24,48h45.2l70.4,332.2A56,56 0 1 0 216,464h272a56,56 0 1 0 56-56H159.2l-7.2-32h362.6a32,32 0 0 0 31.52-26.681zM504,416a24,24 0 1 1-24,24 24,24 0 0 1 24-24zm-320,0a24,24 0 1 1-24,24 24,24 0 0 1 24-24z"/>
+</vector>

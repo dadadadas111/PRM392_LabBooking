@@ -118,4 +118,10 @@
     <string name="dialog_clear_chat_message">Bạn có chắc chắn muốn xóa lịch sử trò chuyện?</string>
     <string name="dialog_yes">Có</string>
     <string name="dialog_cancel">Hủy</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_map">Bản đồ</string>
+    <string name="nav_cart">Giỏ hàng</string>
+    <string name="nav_settings">Cài đặt</string>
 </resources>
