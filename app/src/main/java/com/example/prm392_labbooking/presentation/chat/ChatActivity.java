@@ -2,6 +2,9 @@ package com.example.prm392_labbooking.presentation.chat;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -110,7 +113,14 @@ public class ChatActivity extends AuthRequiredActivity {
                 switchToSupport();
             }
         });
-        btnSend.setOnClickListener(v -> sendMessage());
+        btnSend.setOnClickListener(v -> {
+            sendMessage();
+            // Hide keyboard after sending
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(etMessage.getWindowToken(), 0);
+            }
+        });
         btnMenu.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(this, btnMenu);
             popup.getMenu().add(getString(R.string.menu_clear_chat));
@@ -141,6 +151,28 @@ public class ChatActivity extends AuthRequiredActivity {
                 return true;
             });
             popup.show();
+        });
+        etMessage.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                sendMessage();
+                // Hide keyboard after sending
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(etMessage.getWindowToken(), 0);
+                }
+                return true;
+            }
+            return false;
+        });
+        // Scroll chat to bottom and keep input visible when keyboard opens
+        etMessage.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                rvChat.postDelayed(() -> {
+                    if (!chatMessages.isEmpty()) {
+                        rvChat.scrollToPosition(chatMessages.size() - 1);
+                    }
+                }, 200);
+            }
         });
     }
 
