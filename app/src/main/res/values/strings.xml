@@ -133,4 +133,7 @@
     <string name="nav_map">Bản đồ</string>
     <string name="nav_cart">Giỏ hàng</string>
     <string name="nav_settings">Cài đặt</string>
+
+    <!-- Logout Confirmation -->
+    <string name="logout_confirm">Bạn có chắc chắn muốn đăng xuất?</string>
 </resources>
