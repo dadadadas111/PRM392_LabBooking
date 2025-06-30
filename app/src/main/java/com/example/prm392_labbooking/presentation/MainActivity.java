@@ -1,14 +1,18 @@
 package com.example.prm392_labbooking.presentation;
 
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import com.example.prm392_labbooking.navigation.NavigationManager;
+import com.example.prm392_labbooking.services.CartManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.presentation.base.AuthRequiredActivity;
 
 public class MainActivity extends AuthRequiredActivity {
+    private CartManager cartManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,7 +20,8 @@ public class MainActivity extends AuthRequiredActivity {
         initLoadingOverlay();
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-
+        cartManager = new CartManager(this);
+        checkCartAndNotify();
 //        // Test button for loading overlay
 //        findViewById(R.id.btnTestLoading).setOnClickListener(v -> {
 //            if (findViewById(R.id.loadingOverlay).getVisibility() == android.view.View.VISIBLE) {
@@ -52,5 +57,12 @@ public class MainActivity extends AuthRequiredActivity {
                 return false;
             }
         });
+
+    }
+
+    private void checkCartAndNotify() {
+        if (!cartManager.getCartItems().isEmpty()) {
+            Toast.makeText(this, "You have items in your cart!", Toast.LENGTH_LONG).show();
+        }
     }
 }
