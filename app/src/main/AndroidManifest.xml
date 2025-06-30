@@ -49,7 +49,8 @@
             android:name=".presentation.chat.ChatActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-        
+
+        <activity android:name=".presentation.product.ProductDetailsActivity" android:exported="false" />
         <!-- Preload Service -->
         <service
             android:name=".services.PreloadService"
