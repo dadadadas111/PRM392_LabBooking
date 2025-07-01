@@ -28,12 +28,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtFacilities;
+        TextView txtName, txtFacilities, txtPrice;
 
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
             txtFacilities = itemView.findViewById(R.id.txtFacilities);
+            txtPrice = itemView.findViewById(R.id.txtPrice); // Ensure this ID exists in item_product.xml
         }
     }
 
@@ -51,6 +52,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.txtName.setText(product.getName());
         holder.txtFacilities.setVisibility(View.VISIBLE);
         holder.txtFacilities.setText("Facilities: " + product.getFacilities());
+        holder.txtPrice.setText(String.format("Price: $%.2f", product.getPrice()));
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {

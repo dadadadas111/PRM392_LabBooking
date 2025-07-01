@@ -7,41 +7,51 @@
 
     <TextView
         android:id="@+id/txtProductName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Product Name"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtDuration"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Duration: 2 hours"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/txtPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
         android:layout_marginTop="8dp" />
 
     <CheckBox
         android:id="@+id/cbWhiteboard"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Whiteboard" />
+        android:text="Whiteboard (+$10)"
+        android:layout_marginTop="16dp" />
 
     <CheckBox
         android:id="@+id/cbTV"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TV" />
+        android:text="TV (+$15)"
+        android:layout_marginTop="8dp" />
 
     <CheckBox
         android:id="@+id/cbNetwork"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Network" />
+        android:text="Network (+$5)"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/btnAddToCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save to Cart"
+        android:text="Add to Cart"
         android:layout_marginTop="16dp" />
+
 </LinearLayout>
