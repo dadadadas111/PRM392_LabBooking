@@ -3,6 +3,13 @@ package com.example.prm392_labbooking.domain.model;
 import java.util.List;
 
 public class CartItem {
+    // TODO: Làm rõ xem có cần thiết roomId không
+    // Làm rõ chọn time slot như thế nào, ở màn hình nào. 
+    // Product details? fix cứng slot hay cho tùy chọn?
+    // Nếu tùy chọn thì tính tiền như thế nào?
+    // Nếu theo slot thì có cho phép slot liên tiếp không?
+    // Ví dụ : 8h-10h, 10h-12h, 14h-16h, 16h-18h, người dùng muốn 2 slot liên tiếp thì có được không?
+
     private String roomId;
     private String date;
     private String timeSlot;
