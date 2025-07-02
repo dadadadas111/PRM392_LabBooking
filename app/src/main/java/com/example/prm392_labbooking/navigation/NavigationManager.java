@@ -14,7 +14,8 @@ import com.example.prm392_labbooking.presentation.home.HomeFragment;
 import com.example.prm392_labbooking.presentation.map.MapFragment;
 import com.example.prm392_labbooking.presentation.cart.CartFragment;
 import com.example.prm392_labbooking.presentation.settings.SettingsFragment;
-import com.example.prm392_labbooking.presentation.booking.BookingActivity;
+import com.example.prm392_labbooking.presentation.billing.BillingFragment;
+import com.example.prm392_labbooking.presentation.booking.BookingActivity; // Giữ lại
 import com.example.prm392_labbooking.presentation.chat.ChatActivity;
 import com.example.prm392_labbooking.R;
 
@@ -31,27 +32,36 @@ public class NavigationManager {
         context.startActivity(new Intent(context, ForgotPasswordActivity.class));
     }
 
-    public static void goToMain(Context context){
+    public static void goToMain(Context context) {
         context.startActivity(new Intent(context, MainActivity.class));
     }
 
     public static void showHome(FragmentManager fm) {
         showFragment(fm, new HomeFragment());
     }
+
     public static void showMap(FragmentManager fm) {
         showFragment(fm, new MapFragment());
     }
+
     public static void showCart(FragmentManager fm) {
         showFragment(fm, new CartFragment());
     }
+
     public static void showSettings(FragmentManager fm) {
         showFragment(fm, new SettingsFragment());
     }
+
+    public static void showBilling(FragmentManager fm) {
+        showFragment(fm, new BillingFragment());
+    }
+
     private static void showFragment(FragmentManager fm, Fragment fragment) {
         fm.beginTransaction()
-            .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-            .replace(R.id.container, fragment)
-            .commit();
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     public static void goToBooking(Context context) {
