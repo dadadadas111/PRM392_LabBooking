@@ -3,66 +3,74 @@ package com.example.prm392_labbooking.domain.model;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prm392_labbooking.R;
-import com.example.prm392_labbooking.domain.model.Product;
 
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
+    private List<CartItem> items;
+    private OnCartActionListener listener;
 
-    public interface OnItemClickListener {
-        void onClick(Product product, int position);
+    public interface OnCartActionListener {
+        void onDeleteItem(int position);
     }
-
-    private final List<Product> cartItems;
-    private final OnItemClickListener listener;
-
-    public CartAdapter(List<Product> cartItems, OnItemClickListener listener) {
-        this.cartItems = cartItems;
+    public CartAdapter(List<CartItem> items, OnCartActionListener listener) {
+        this.items = items;
         this.listener = listener;
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtFacilities, txtPrice;
-
-        public CartViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txtName = itemView.findViewById(R.id.txtName);
-            txtFacilities = itemView.findViewById(R.id.txtFacilities);
-            txtPrice = itemView.findViewById(R.id.txtPrice); // Ensure this ID exists in item_product.xml
+        TextView txtRoom, txtTime, txtFeature,txtPriceItem;
+        ImageButton btnDeleteItem;
+        public CartViewHolder(View view) {
+            super(view);
+            txtRoom = view.findViewById(R.id.txtRoom);
+            txtTime = view.findViewById(R.id.txtTime);
+            txtFeature = view.findViewById(R.id.txtFeature);
+            txtPriceItem = view.findViewById(R.id.txtPriceItem);
+            btnDeleteItem = view.findViewById(R.id.btnDeleteItem);
         }
     }
 
     @NonNull
     @Override
     public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_product, parent, false);
-        return new CartViewHolder(view);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cart, parent, false);
+        return new CartViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        Product product = cartItems.get(position);
-        holder.txtName.setText(product.getName());
-        holder.txtFacilities.setVisibility(View.VISIBLE);
-        holder.txtFacilities.setText("Facilities: " + product.getFacilities());
-        holder.txtPrice.setText(String.format("Price: $%.2f", product.getPrice()));
+        CartItem item = items.get(position);
+        holder.txtRoom.setText("Room: " + item.getRoomId());
+        holder.txtTime.setText(item.getDate() + " | " + item.getTimeSlot());
+        holder.txtFeature.setText("Features: " + item.getFeatures());
+        holder.txtPriceItem.setText(String.format("$%.2f", item.getPrice()));
 
-        holder.itemView.setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onClick(product, position);
+        holder.btnDeleteItem.setOnClickListener(v -> {
+            if(listener != null){
+                listener.onDeleteItem(position);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return cartItems.size();
+        return items.size();
+    }
+    public void clearCart() {
+        items.clear();
+        notifyDataSetChanged();
+    }
+
+    public void removeItem(int position) {
+        items.remove(position);
+        notifyItemRemoved(position);
     }
 }

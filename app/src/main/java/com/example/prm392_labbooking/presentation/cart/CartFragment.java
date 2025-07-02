@@ -1,10 +1,12 @@
 package com.example.prm392_labbooking.presentation.cart;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,48 +16,87 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.domain.model.CartAdapter;
-import com.example.prm392_labbooking.domain.model.Product;
-import com.example.prm392_labbooking.presentation.product.ProductDetailsActivity;
+import com.example.prm392_labbooking.domain.model.CartItem;
+import com.example.prm392_labbooking.navigation.NavigationManager;
+import com.example.prm392_labbooking.services.CartManager;
 
 import java.util.List;
 
 public class CartFragment extends Fragment {
-
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerCart;
     private CartAdapter adapter;
+    private CartManager cartManager;
+    private List<CartItem> cartList;
 
+    private TextView txtSubtotal, txtTax, txtTotal;
+    private Button btnLoadSample, btnDeleteAll, btnCheckout;
+
+    @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerViewCart);
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        // Ánh xạ view
+        recyclerCart = view.findViewById(R.id.recyclerCartItems);
+        txtSubtotal = view.findViewById(R.id.txtSubtotal);
+        txtTax = view.findViewById(R.id.txtTax);
+        txtTotal = view.findViewById(R.id.txtTotal);
+        btnLoadSample = view.findViewById(R.id.btnLoadSample);
+        btnDeleteAll = view.findViewById(R.id.btnDeleteAllItem);
+        btnCheckout = view.findViewById(R.id.btnCheckout);
 
-        // Lấy danh sách sản phẩm trong giỏ hàng
-        List<Product> cartItems = CartManager.getInstance().getCart();
+        cartManager = new CartManager(requireContext());
+        cartList = cartManager.getCartItems();
 
-        // Khởi tạo adapter và truyền vào callback khi người dùng click item
-        adapter = new CartAdapter(cartItems, (product, position) -> {
-            Intent intent = new Intent(requireContext(), ProductDetailsActivity.class);
-            intent.putExtra("product_name", product.getName());
-            intent.putExtra("facilities", product.getFacilities());
-            intent.putExtra("editIndex", position); // dùng để chỉnh sửa sản phẩm
-            startActivity(intent);
+        // Adapter xử lý xoá từng item
+        adapter = new CartAdapter(cartList, position -> {
+            cartList.remove(position);
+            cartManager.saveCartItems(cartList); // Cập nhật SharedPreferences
+            adapter.notifyItemRemoved(position);
+            updateSummary();
         });
 
-        recyclerView.setAdapter(adapter);
+        recyclerCart.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerCart.setAdapter(adapter);
 
+        // Nút xoá tất cả
+        btnDeleteAll.setOnClickListener(v -> {
+            cartManager.clearCart();      // Xoá khỏi SharedPreferences
+            cartList.clear();             // Xoá khỏi RAM
+            adapter.notifyDataSetChanged();
+            updateSummary();
+        });
+
+        // Nút load sample data
+        btnLoadSample.setOnClickListener(v -> {
+            cartManager.addSampleCartItems();
+            cartList.clear();
+            cartList.addAll(cartManager.getCartItems());
+            adapter.notifyDataSetChanged();
+            updateSummary();
+        });
+
+        btnCheckout.setOnClickListener(v -> {
+            NavigationManager.showBilling(requireActivity().getSupportFragmentManager());
+        });
+
+        updateSummary();
         return view;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (adapter != null) {
-            adapter.notifyDataSetChanged(); // Làm mới danh sách khi quay lại Fragment
+    private void updateSummary() {
+        double subtotal = 0.0;
+        for (CartItem item : cartList) {
+            subtotal += item.getPrice();
         }
+
+        double taxRate = 0.08;
+        double tax = subtotal * taxRate;
+        double total = subtotal + tax;
+
+        txtSubtotal.setText(String.format("$%.2f", subtotal));
+        txtTax.setText(String.format("$%.2f", tax));
+        txtTotal.setText(String.format("$%.2f", total));
     }
 }

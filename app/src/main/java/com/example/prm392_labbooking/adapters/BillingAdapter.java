@@ -11,6 +11,7 @@ import com.example.prm392_labbooking.domain.model.CartItem;
 import java.util.List;
 
 public class BillingAdapter extends RecyclerView.Adapter<BillingAdapter.ViewHolder> {
+
     private List<CartItem> cartItems;
 
     public BillingAdapter(List<CartItem> cartItems) {
@@ -28,8 +29,9 @@ public class BillingAdapter extends RecyclerView.Adapter<BillingAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CartItem item = cartItems.get(position);
-        holder.tvPackageName.setText(item.getPackageName());
-        holder.tvPackageDetails.setText(item.getDetails());
+        // TODO for Son: Sửa lại CartItem cho đúng logic với Đông.
+//        holder.tvPackageName.setText(item.getPackageName());
+//        holder.tvPackageDetails.setText(item.getDetails());
         holder.tvPrice.setText(String.format("$%.2f", item.getPrice()));
     }
 
