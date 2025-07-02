@@ -49,7 +49,6 @@ public class MainActivity extends AuthRequiredActivity {
                 }
                 return false;
             }
-            return false;
         });
     }
 
@@ -77,5 +76,12 @@ public class MainActivity extends AuthRequiredActivity {
         values2.put("details", item2.getDetails());
         values2.put("price", item2.getPrice());
         db.insert("cart", null, values2);
+    }
+
+    public void hideBottomNavigation() {
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        if (bottomNav != null) {
+            bottomNav.setVisibility(android.view.View.GONE);
+        }
     }
 }

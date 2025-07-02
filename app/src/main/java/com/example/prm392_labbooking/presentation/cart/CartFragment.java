@@ -17,8 +17,9 @@ public class CartFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cart, container, false);
 
-        Button btnPay = view.findViewById(R.id.btn_pay);
-        btnPay.setOnClickListener(v -> NavigationManager.showBilling(getParentFragmentManager()));
+//        Button btnPay = view.findViewById(R.id.btn_pay);
+//        btnPay.setOnClickListener(v -> NavigationManager.showBilling(getParentFragmentManager()));
+        NavigationManager.showBilling(getParentFragmentManager());
 
         return view;
     }

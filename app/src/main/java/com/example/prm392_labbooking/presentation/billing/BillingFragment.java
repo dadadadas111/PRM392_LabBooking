@@ -37,6 +37,11 @@ public class BillingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_billing, container, false);
 
+        // Hide bottom navigation
+        if (getActivity() instanceof com.example.prm392_labbooking.presentation.MainActivity) {
+            ((com.example.prm392_labbooking.presentation.MainActivity) getActivity()).hideBottomNavigation();
+        }
+
         dbHelper = new DatabaseHelper(requireContext());
         getCartItemsUseCase = new GetCartItemsUseCase(dbHelper);
         saveBookingUseCase = new SaveBookingUseCase(dbHelper);

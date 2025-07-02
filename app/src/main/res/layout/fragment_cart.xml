@@ -11,4 +11,4 @@
         android:layout_height="wrap_content"
         android:text="@string/cart_fragment"
         android:textSize="24sp"/>
-</FrameLayout>
+</LinearLayout>
