@@ -231,8 +231,8 @@ public class MapUtils {
         // Enhanced collision avoidance margins
         int leftMargin = (int) (80 * metrics.density); // Space for compass and layers
         int rightMargin = (int) (80 * metrics.density); // Space for right buttons  
-        int topMargin = (int) (60 * metrics.density); // Status bar + padding
-        int bottomMargin = (int) (120 * metrics.density); // Navigation bar + bottom buttons
+        int topMargin = (int) (40 * metrics.density); // Status bar + padding
+        int bottomMargin = (int) (40 * metrics.density); // Navigation bar + bottom buttons
         
         // Calculate safe boundaries
         int safeLeft = leftMargin;

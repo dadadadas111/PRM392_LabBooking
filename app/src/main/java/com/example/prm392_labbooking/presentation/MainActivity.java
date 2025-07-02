@@ -6,6 +6,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.services.CartManager;
+import com.example.prm392_labbooking.services.PreloadManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.example.prm392_labbooking.R;
@@ -25,6 +26,7 @@ public class MainActivity extends AuthRequiredActivity {
     protected void onCreate(Bundle savedInstanceState) {
         LocaleUtils.applyLocale(this); // Apply locale before theme
         ThemeUtils.applyTheme(this); // Apply theme before setContentView
+        PreloadManager.getInstance().initialize(this); // Preload Google Maps and Firebase
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initLoadingOverlay();

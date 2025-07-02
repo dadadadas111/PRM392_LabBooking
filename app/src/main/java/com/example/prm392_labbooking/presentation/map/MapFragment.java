@@ -25,13 +25,12 @@ public class MapFragment extends BaseFragment {
     private ImageButton btnOpenInGoogleMaps, btnRecenter, btnMapLayers, btnShowDirections, btnCompass;
     private ImageView offscreenMarker;
     private FrameLayout mapContainer;
-    private static final double LAB_LAT = 10.762622;    private static final double LAB_LON = 106.660172;
-
+    private static final double LAB_LAT = 21.012487572296216;    private static final double LAB_LON = 105.52542694866874;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_map, container, false);
-        mapContainer = (FrameLayout) root;
+        mapContainer = root.findViewById(R.id.mapContainer);
         mapView = root.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         btnOpenInGoogleMaps = root.findViewById(R.id.btnOpenInGoogleMaps);
