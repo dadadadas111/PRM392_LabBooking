@@ -1,0 +1,163 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Lab Booking</string>
+
+    <!-- Authentication -->
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="login_success">Login successful!</string>
+    <string name="login_failed">Login failed: %1$s</string>
+    <string name="register_success">Registration successful!</string>
+    <string name="register_failed">Registration failed. Please try again.</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="invalid_password">Password must be at least 6 characters</string>
+    <string name="passwords_not_match">Passwords do not match</string>
+    <string name="send_reset_password_request">Send password reset request</string>
+    <string name="back_to_login">Back to login</string>
+    <string name="register_prompt">No Account? Register</string>
+    <string name="or">or</string>
+    <string name="google_sign_in">Sign in with Google</string>
+    <string name="google_sign_in_success">Google sign-in successful!</string>
+    <string name="google_sign_in_failed">Google sign-in failed: %1$s</string>
+
+    <!-- Product/Package List -->
+    <string name="package_list">Package List</string>
+    <string name="seat_package">Seat Package</string>
+    <string name="table_package">Table Package</string>
+    <string name="details">Details</string>
+    <string name="capacity">Capacity: %1$d seats</string>
+    <string name="select_package">Select package</string>
+    <string name="product_name">Product Name</string>
+
+    <!-- Product Details -->
+    <string name="package_details">Package Details</string>
+    <string name="select_facilities">Select additional facilities</string>
+    <string name="facility_whiteboard">Whiteboard</string>
+    <string name="facility_tv">TV</string>
+    <string name="facility_network">Conference Network</string>
+    <string name="add_to_cart">Add to cart</string>
+    <string name="added_to_cart">Added to cart</string>
+
+    <!-- Cart -->
+    <string name="cart">Cart</string>
+    <string name="cart_empty">Cart is empty</string>
+    <string name="remove">Remove</string>
+    <string name="proceed_to_checkout">Proceed to checkout</string>
+    <string name="remove_item_confirm">Are you sure you want to remove this item?</string>
+    <string name="cart_fragment">Cart</string>
+    <string name="cart_title">My Cart</string>
+    <string name="delete_all">DELETE ALL</string>
+    <string name="room_label">Room: Room A</string>
+    <string name="time_sample">2025-07-01 | 08:00 - 10:00</string>
+    <string name="features_sample">Features: [Whiteboard, Projector]</string>
+    <string name="price_sample">60.00$</string>
+    <string name="delete">Delete</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="tax">Tax (8%)</string>
+    <string name="total">Total</string>
+    <string name="load_sample_data">Load Sample Data</string>
+
+    <!-- Billing/Checkout -->
+    <string name="billing">Billing</string>
+    <string name="booking_summary">Booking Summary</string>
+    <string name="confirm_booking">Confirm Booking</string>
+    <string name="payment_info">Payment Information</string>
+    <string name="billing_summary">Billing Summary</string>
+    <string name="billing_total_placeholder">Total: $0</string>
+    <string name="payment_details">Payment Details</string>
+    <string name="cardholder_name">Cardholder Name</string>
+    <string name="card_number">Card Number</string>
+    <string name="expiry_date">MM/YY</string>
+    <string name="cvv">CVV</string>
+    <string name="pay">Pay</string>
+    <string name="booking_success">Booking successful!</string>
+    <string name="booking_failed">Booking failed. Please try again.</string>
+
+    <!-- Notifications -->
+    <string name="cart_not_empty">You still have items in your cart!</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Map -->
+    <string name="lab_location">Lab Location</string>
+    <string name="show_on_map">Show on map</string>
+    <string name="map_loading">Loading map...</string>
+    <string name="map_layers">Map Layers</string>
+    <string name="map_normal">Normal</string>
+    <string name="map_satellite">Satellite</string>
+    <string name="map_terrain">Terrain</string>
+    <string name="map_hybrid">Hybrid</string>
+    <string name="recenter">Recenter</string>
+    <string name="compass">Compass</string>
+    <string name="reset_compass">Reset North</string>
+    <string name="offscreen_marker">Lab Location Indicator</string>
+    <string name="lab_location_offscreen">Lab is off-screen</string>
+    <string name="open_in_google_maps">Open in Google Maps</string>
+    <string name="show_directions">Show Directions</string>
+    <string name="switched_to_normal">Switched to Normal mode</string>
+    <string name="switched_to_satellite">Switched to Satellite mode</string>
+    <string name="switched_to_terrain">Switched to Terrain mode</string>
+    <string name="switched_to_hybrid">Switched to Hybrid mode</string>
+    <string name="no_internet_connection">No internet connection. Some features may not work.</string>
+    <string name="internet_connection_back">Internet connection restored.</string>
+
+    <!-- Chat -->
+    <string name="chat">Chat</string>
+    <string name="type_message">Type a message...</string>
+    <string name="send">Send</string>
+    <string name="salesman">Salesperson</string>
+    <string name="user">You</string>
+    <string name="chat_placeholder">Start chatting with our support!</string>
+    <string name="error_load_chat_history">Unable to load chat history</string>
+    <string name="error_save_chat_history">Unable to save chat history</string>
+    <string name="error_load_support_chat">Unable to load support chat</string>
+    <string name="error_save_support_chat">Unable to save support chat</string>
+    <string name="placeholder_screen">Placeholder screen</string>
+
+    <!-- General -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="loading">Loading...</string>
+    <string name="error">An error occurred</string>
+    <string name="retry">Retry</string>
+    <string name="close">Close</string>
+    <string name="reset_password_email_sent">Password reset email sent! Please check your inbox.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="account_section">Account</string>
+    <string name="support_section">Support</string>
+    <string name="preferences_section">Preferences</string>
+    <string name="faq">FAQ</string>
+    <string name="chat_with_support">Customer Support</string>
+    <string name="preferences">Preferences</string>
+    <string name="chat_with_chatbot">Virtual Assistant</string>
+    <string name="theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
+    <!-- Clear Chat -->
+    <string name="menu_clear_chat">Clear chat history</string>
+    <string name="dialog_clear_chat_title">Clear Chat History</string>
+    <string name="dialog_clear_chat_message">Are you sure you want to clear chat history?</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_cancel">Cancel</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_map">Map</string>
+    <string name="nav_cart">Cart</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Logout Confirmation -->
+    <string name="logout_confirm">Are you sure you want to logout?</string>
+
+    <!-- Language -->
+    <string name="language">Language</string>
+</resources>

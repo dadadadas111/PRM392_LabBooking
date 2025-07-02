@@ -24,7 +24,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.android.gms.common.SignInButton;
 import com.example.prm392_labbooking.navigation.NavigationManager;
 
 @SuppressWarnings("deprecation")
@@ -33,7 +32,7 @@ public class LoginActivity extends BaseActivity {
     private EditText emailEditText, passwordEditText;
     private Button loginButton;
     private TextView forgotPasswordText, registerText;
-    private SignInButton googleSignInButton;
+    private Button googleSignInButton;
     private FrameLayout loadingOverlay;
 
     // Logic fields
@@ -80,13 +79,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void setGoogleButtonText() {
-        for (int i = 0; i < googleSignInButton.getChildCount(); i++) {
-            View v = googleSignInButton.getChildAt(i);
-            if (v instanceof TextView) {
-                ((TextView) v).setText(getString(R.string.google_sign_in));
-                break;
-            }
-        }
+        // googleSignInButton.setText(getString(R.string.google_sign_in));
     }
 
     private void attemptLogin() {

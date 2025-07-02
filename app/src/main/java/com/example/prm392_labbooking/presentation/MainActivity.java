@@ -14,6 +14,7 @@ import com.example.prm392_labbooking.domain.model.CartItem;
 import android.database.sqlite.SQLiteDatabase;
 import android.content.ContentValues;
 import com.example.prm392_labbooking.presentation.base.AuthRequiredActivity;
+import com.example.prm392_labbooking.utils.LocaleUtils;
 import com.example.prm392_labbooking.utils.ThemeUtils;
 
 public class MainActivity extends AuthRequiredActivity {
@@ -22,6 +23,7 @@ public class MainActivity extends AuthRequiredActivity {
     private CartManager cartManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        LocaleUtils.applyLocale(this); // Apply locale before theme
         ThemeUtils.applyTheme(this); // Apply theme before setContentView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

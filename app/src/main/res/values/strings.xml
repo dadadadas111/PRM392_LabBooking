@@ -158,4 +158,7 @@
 
     <!-- Logout Confirmation -->
     <string name="logout_confirm">Bạn có chắc chắn muốn đăng xuất?</string>
+
+    <!-- Language -->
+    <string name="language">Ngôn ngữ</string>
 </resources>

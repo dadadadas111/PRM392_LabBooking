@@ -22,6 +22,7 @@ import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.data.firebase.FirebaseAuthService;
 import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.presentation.base.BaseActivity;
+import com.example.prm392_labbooking.utils.LocaleUtils;
 import com.example.prm392_labbooking.utils.ThemeUtils;
 
 public class SettingsFragment extends Fragment {
@@ -36,6 +37,7 @@ public class SettingsFragment extends Fragment {
         TextView logoutBtn = view.findViewById(R.id.btn_login_logout);
         TextView chatSupportBtn = view.findViewById(R.id.btn_chat_support);
         Spinner themeSpinner = view.findViewById(R.id.spinner_theme);
+        Spinner languageSpinner = view.findViewById(R.id.spinner_language);
 
         resetPasswordBtn.setOnClickListener(v -> showResetPasswordDialog());
         logoutBtn.setOnClickListener(v -> {
@@ -66,6 +68,23 @@ public class SettingsFragment extends Fragment {
                 }
             }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+
+        // Language selection logic
+        String savedLang = LocaleUtils.getSavedLanguage(requireContext());
+        int langPos = savedLang.equals("en") ? 1 : 0;
+        languageSpinner.setSelection(langPos);
+        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+                String langCode = position == 1 ? "en" : "vi";
+                if (!LocaleUtils.getSavedLanguage(requireContext()).equals(langCode)) {
+                    LocaleUtils.setLocale(requireContext(), langCode);
+                    requireActivity().recreate();
+                }
+            }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
