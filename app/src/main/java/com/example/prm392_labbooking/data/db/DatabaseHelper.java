@@ -50,9 +50,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(TABLE_CART, null, null, null, null, null, null);
         while (cursor.moveToNext()) {
             CartItem item = new CartItem();
-            item.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
-            item.setPackageName(cursor.getString(cursor.getColumnIndexOrThrow("package_name")));
-            item.setDetails(cursor.getString(cursor.getColumnIndexOrThrow("details")));
+            // TODO for Son: Sửa lại CartItem cho đúng logic với Đông.
+//            item.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+//            item.setPackageName(cursor.getString(cursor.getColumnIndexOrThrow("package_name")));
+//            item.setDetails(cursor.getString(cursor.getColumnIndexOrThrow("details")));
             item.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow("price")));
             items.add(item);
         }
@@ -66,8 +67,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         try {
             for (CartItem item : items) {
                 ContentValues values = new ContentValues();
-                values.put("package_name", item.getPackageName());
-                values.put("details", item.getDetails());
+                // TODO for Son: Sửa lại CartItem cho đúng logic với Đông.
+//                values.put("package_name", item.getPackageName());
+//                values.put("details", item.getDetails());
                 values.put("price", item.getPrice());
                 values.put("timestamp", System.currentTimeMillis() + "");
                 db.insert(TABLE_BOOKINGS, null, values);

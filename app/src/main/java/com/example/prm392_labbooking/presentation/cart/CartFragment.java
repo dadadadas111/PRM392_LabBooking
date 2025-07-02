@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.domain.model.CartAdapter;
 import com.example.prm392_labbooking.domain.model.CartItem;
+import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.services.CartManager;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class CartFragment extends Fragment {
     private List<CartItem> cartList;
 
     private TextView txtSubtotal, txtTax, txtTotal;
-    private Button btnLoadSample, btnDeleteAll;
+    private Button btnLoadSample, btnDeleteAll, btnCheckout;
 
     @SuppressLint("MissingInflatedId")
     @Nullable
@@ -43,6 +44,7 @@ public class CartFragment extends Fragment {
         txtTotal = view.findViewById(R.id.txtTotal);
         btnLoadSample = view.findViewById(R.id.btnLoadSample);
         btnDeleteAll = view.findViewById(R.id.btnDeleteAllItem);
+        btnCheckout = view.findViewById(R.id.btnCheckout);
 
         cartManager = new CartManager(requireContext());
         cartList = cartManager.getCartItems();
@@ -73,6 +75,10 @@ public class CartFragment extends Fragment {
             cartList.addAll(cartManager.getCartItems());
             adapter.notifyDataSetChanged();
             updateSummary();
+        });
+
+        btnCheckout.setOnClickListener(v -> {
+            NavigationManager.showBilling(requireActivity().getSupportFragmentManager());
         });
 
         updateSummary();

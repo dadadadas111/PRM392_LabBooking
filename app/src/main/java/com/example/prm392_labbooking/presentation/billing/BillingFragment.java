@@ -115,4 +115,13 @@ public class BillingFragment extends Fragment {
             Toast.makeText(requireContext(), "Booking failed. Please try again.", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Show bottom navigation when leaving BillingFragment
+        if (getActivity() instanceof com.example.prm392_labbooking.presentation.MainActivity) {
+            ((com.example.prm392_labbooking.presentation.MainActivity) getActivity()).showBottomNavigation();
+        }
+    }
 }

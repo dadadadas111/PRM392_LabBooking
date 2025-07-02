@@ -75,26 +75,30 @@ public class MainActivity extends AuthRequiredActivity {
 
     private void initializeSampleData() {
         CartItem item1 = new CartItem();
-        item1.setPackageName("Seat Package (4 seats)");
-        item1.setDetails("With whiteboard");
+        // TODO for Son: Sửa lại CartItem cho đúng logic với Đông.
+//        item1.setPackageName("Seat Package (4 seats)");
+//        item1.setDetails("With whiteboard");
         item1.setPrice(50.0);
 
         CartItem item2 = new CartItem();
-        item2.setPackageName("Table Package (6 seats)");
-        item2.setDetails("With TV and network");
+        // TODO for Son: Sửa lại CartItem cho đúng logic với Đông.
+//        item2.setPackageName("Table Package (6 seats)");
+//        item2.setDetails("With TV and network");
         item2.setPrice(75.0);
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         db.delete("cart", null, null); // Xóa dữ liệu cũ nếu có
         ContentValues values1 = new ContentValues();
-        values1.put("package_name", item1.getPackageName());
-        values1.put("details", item1.getDetails());
+        // TODO for Son: Sửa lại CartItem cho đúng logic với Đông.
+//        values1.put("package_name", item1.getPackageName());
+//        values1.put("details", item1.getDetails());
         values1.put("price", item1.getPrice());
         db.insert("cart", null, values1);
 
         ContentValues values2 = new ContentValues();
-        values2.put("package_name", item2.getPackageName());
-        values2.put("details", item2.getDetails());
+        // TODO for Son: Sửa lại CartItem cho đúng logic với Đông.
+//        values2.put("package_name", item2.getPackageName());
+//        values2.put("details", item2.getDetails());
         values2.put("price", item2.getPrice());
         db.insert("cart", null, values2);
     }
@@ -103,6 +107,13 @@ public class MainActivity extends AuthRequiredActivity {
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         if (bottomNav != null) {
             bottomNav.setVisibility(android.view.View.GONE);
+        }
+    }
+
+    public void showBottomNavigation() {
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        if (bottomNav != null) {
+            bottomNav.setVisibility(android.view.View.VISIBLE);
         }
     }
 }
