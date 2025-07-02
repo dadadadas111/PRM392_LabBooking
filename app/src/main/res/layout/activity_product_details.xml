@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/txtProductName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/txtDuration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/txtPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="8dp" />
+
+    <CheckBox
+        android:id="@+id/cbWhiteboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Whiteboard (+$10)"
+        android:layout_marginTop="16dp" />
+
+    <CheckBox
+        android:id="@+id/cbTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TV (+$15)"
+        android:layout_marginTop="8dp" />
+
+    <CheckBox
+        android:id="@+id/cbNetwork"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Network (+$5)"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btnAddToCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add to Cart"
+        android:layout_marginTop="16dp" />
+
+</LinearLayout>
