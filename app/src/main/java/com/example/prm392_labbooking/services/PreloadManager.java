@@ -7,6 +7,8 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.example.prm392_labbooking.utils.MapPreloader;
+
 public class PreloadManager {
     private static final String TAG = "PreloadManager";
     private static PreloadManager instance;
@@ -42,6 +44,7 @@ public class PreloadManager {
     
     public void initialize(Context context) {
         this.context = context.getApplicationContext();
+        MapPreloader.preload(this.context); // Preload Google MapView in background
         startPreloadService();
     }
     

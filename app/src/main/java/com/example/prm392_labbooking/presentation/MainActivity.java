@@ -26,7 +26,7 @@ public class MainActivity extends AuthRequiredActivity {
     protected void onCreate(Bundle savedInstanceState) {
         LocaleUtils.applyLocale(this); // Apply locale before theme
         ThemeUtils.applyTheme(this); // Apply theme before setContentView
-        PreloadManager.getInstance().initialize(this); // Preload Google Maps and Firebase
+        PreloadManager.getInstance().initialize(this); // Preload Google Maps, Firebase, and MapView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initLoadingOverlay();
