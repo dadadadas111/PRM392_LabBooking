@@ -2,10 +2,47 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <org.osmdroid.views.MapView
+      <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+      <!-- Off-screen marker indicator -->
+    <ImageView
+        android:id="@+id/offscreenMarker"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_offscreen_marker"
+        android:contentDescription="@string/offscreen_marker"
+        android:elevation="8dp"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackgroundBorderless" />
+      <!-- Left side button for map layers -->
+    <ImageButton
+        android:id="@+id/btnMapLayers"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/round_button_selector"
+        android:src="@drawable/ic_map_layers"
+        android:contentDescription="@string/map_layers"
+        android:elevation="6dp"
+        android:layout_gravity="start|center_vertical"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="80dp" />
+    
+    <!-- Compass button below layers button -->
+    <ImageButton
+        android:id="@+id/btnCompass"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/compass_background"
+        android:contentDescription="@string/compass"
+        android:elevation="6dp"
+        android:layout_gravity="start|center_vertical"
+        android:layout_marginStart="16dp" />
+    
+    <!-- Right side action buttons -->
     <LinearLayout
         android:id="@+id/map_action_buttons"
         android:layout_width="wrap_content"
@@ -15,31 +52,36 @@
         android:layout_gravity="end|center_vertical"
         android:layout_marginEnd="16dp"
         android:background="@android:color/transparent">
+        
         <ImageButton
             android:id="@+id/btnRecenter"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:background="@drawable/round_button_selector"
             android:src="@android:drawable/ic_menu_mylocation"
-            android:contentDescription="Recenter"
+            android:contentDescription="@string/recenter"
             android:elevation="6dp"
             android:layout_marginBottom="16dp" />
+        
         <ImageButton
             android:id="@+id/btnOpenInGoogleMaps"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:background="@drawable/round_button_selector"
-            android:src="@android:drawable/ic_menu_directions"
-            android:contentDescription="Directions"
+            android:src="@drawable/ic_google_logo"
+            android:contentDescription="@string/open_in_google_maps"
             android:elevation="6dp"
             android:layout_marginBottom="16dp" />
+        
         <ImageButton
-            android:id="@+id/btnOtherAction"
+            android:id="@+id/btnShowDirections"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:background="@drawable/round_button_selector"
-            android:src="@android:drawable/ic_menu_info_details"
-            android:contentDescription="Other Action"
+            android:src="@android:drawable/ic_menu_directions"
+            android:contentDescription="@string/show_directions"
             android:elevation="6dp" />
+            
     </LinearLayout>
+    
 </FrameLayout>

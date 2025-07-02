@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">    <!-- Background circle -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF" />
+            <stroke 
+                android:width="2dp" 
+                android:color="#E0E0E0" />
+        </shape>
+    </item>
+    <!-- Compass needle -->
+    <item android:gravity="center">
+        <vector
+            android:width="32dp"
+            android:height="32dp"
+            android:viewportWidth="24"
+            android:viewportHeight="24">            <!-- North arrow (red) -->
+            <path
+                android:fillColor="#FF5722"
+                android:pathData="M12,2 L9,11 L15,11 Z"/>
+            <!-- South arrow (gray) -->
+            <path
+                android:fillColor="#757575"
+                android:pathData="M12,22 L9,13 L15,13 Z"/>            <!-- Center circle -->
+            <path
+                android:fillColor="#000000"
+                android:pathData="M12,12m-1,0a1,1 0,1,1 2,0a1,1 0,1,1 -2,0"/>
+        </vector>
+    </item>
+</layer-list>

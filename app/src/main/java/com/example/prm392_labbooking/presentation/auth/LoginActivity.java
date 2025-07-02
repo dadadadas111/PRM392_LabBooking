@@ -152,7 +152,7 @@ public class LoginActivity extends BaseActivity {
                     firebaseAuthWithGoogle(account.getIdToken());
                 }
             } catch (ApiException e) {
-                Toast.makeText(this, "Google sign in failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.google_sign_in_failed, e.getMessage()), Toast.LENGTH_SHORT).show();
             }
         }
     }

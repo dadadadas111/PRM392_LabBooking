@@ -35,12 +35,19 @@ public class SettingsFragment extends Fragment {
 
         resetPasswordBtn.setOnClickListener(v -> showResetPasswordDialog());
         logoutBtn.setOnClickListener(v -> {
-            BaseActivity activity = (BaseActivity) requireActivity();
-            activity.showLoading();
-            authService.logout();
-            activity.hideLoading();
-            Toast.makeText(getContext(), R.string.logout, Toast.LENGTH_SHORT).show();
-            NavigationManager.goToLogin(requireActivity());
+            new AlertDialog.Builder(requireContext())
+                    .setTitle(R.string.logout)
+                    .setMessage(R.string.logout_confirm)
+                    .setPositiveButton(R.string.ok, (dialog, which) -> {
+                        BaseActivity activity = (BaseActivity) requireActivity();
+                        activity.showLoading();
+                        authService.logout();
+                        activity.hideLoading();
+                        Toast.makeText(getContext(), R.string.logout, Toast.LENGTH_SHORT).show();
+                        NavigationManager.goToLogin(requireActivity());
+                    })
+                    .setNegativeButton(R.string.cancel, null)
+                    .show();
         });
         chatSupportBtn.setOnClickListener(v -> NavigationManager.goToChat(requireContext()));
 

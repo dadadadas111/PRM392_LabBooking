@@ -29,21 +29,25 @@ public class MainActivity extends AuthRequiredActivity {
         if (savedInstanceState == null) {
             NavigationManager.showHome(getSupportFragmentManager());
         }
-
-        bottomNav.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.nav_home) {
-                NavigationManager.showHome(getSupportFragmentManager());
-                return true;
-            } else if (id == R.id.nav_map) {
-                NavigationManager.showMap(getSupportFragmentManager());
-                return true;
-            } else if (id == R.id.nav_cart) {
-                NavigationManager.showCart(getSupportFragmentManager());
-                return true;
-            } else if (id == R.id.nav_settings) {
-                NavigationManager.showSettings(getSupportFragmentManager());
-                return true;
+        bottomNav.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull android.view.MenuItem item) {
+                if (item.isChecked()) return false; // Prevent re-clicking selected
+                int id = item.getItemId();
+                if (id == R.id.nav_home) {
+                    NavigationManager.showHome(getSupportFragmentManager());
+                    return true;
+                } else if (id == R.id.nav_map) {
+                    NavigationManager.showMap(getSupportFragmentManager());
+                    return true;
+                } else if (id == R.id.nav_cart) {
+                    NavigationManager.showCart(getSupportFragmentManager());
+                    return true;
+                } else if (id == R.id.nav_settings) {
+                    NavigationManager.showSettings(getSupportFragmentManager());
+                    return true;
+                }
+                return false;
             }
             return false;
         });

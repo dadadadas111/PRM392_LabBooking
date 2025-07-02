@@ -1,11 +1,10 @@
 package com.example.prm392_labbooking.presentation.chat;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
@@ -13,24 +12,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.prm392_labbooking.R;
-import com.example.prm392_labbooking.presentation.base.AuthRequiredActivity;
-import com.example.prm392_labbooking.utils.GeminiChatUtil;
-import com.example.prm392_labbooking.utils.SecretLoader;
 import com.example.prm392_labbooking.data.firebase.FirebaseAuthService;
+import com.example.prm392_labbooking.data.firebase.FirebaseChatServiceImpl;
 import com.example.prm392_labbooking.data.repository.ChatRepositoryImpl;
 import com.example.prm392_labbooking.domain.repository.ChatRepository;
-import com.example.prm392_labbooking.data.firebase.FirebaseChatServiceImpl;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.example.prm392_labbooking.presentation.base.AuthRequiredActivity;
+import com.example.prm392_labbooking.services.MyMqttService;
+import com.example.prm392_labbooking.utils.GeminiChatUtil;
+
+import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +42,10 @@ public class ChatActivity extends AuthRequiredActivity {
     private String userId;
     private List<ChatMessage> cachedChatbotMessages = null;
     private List<ChatMessage> cachedSupportMessages = null;
+    private MyMqttService mqttService;
+    private final List<ChatMessage> supportMessages = new ArrayList<>();
+    private String supportRequestTopic;
+    private String supportResponseTopic;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +53,13 @@ public class ChatActivity extends AuthRequiredActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chat);
         initLoadingOverlay();
+
+        mqttService = new MyMqttService();
+        new Thread(() -> mqttService.initialize()).start(); // Connect in background
+        authService = new FirebaseAuthService();
+        userId = authService.getCurrentUserId();
+        supportRequestTopic = "support_chat/" + userId;
+        supportResponseTopic = "support_response/" + userId;
 
         ImageButton btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> finish());
@@ -79,10 +85,14 @@ public class ChatActivity extends AuthRequiredActivity {
         chatRepository = new ChatRepositoryImpl(new FirebaseChatServiceImpl());
         authService = new FirebaseAuthService();
         userId = authService.getCurrentUserId();
+        supportRequestTopic = "support_chat/" + userId;
+        supportResponseTopic = "support_response/" + userId;
 
         // Load chat history for chatbot tab on start
         if (isChatbot) {
             loadChatHistory();
+        } else {
+            loadSupportHistory();
         }
 
         btnChatbot.setOnClickListener(v -> {
@@ -103,7 +113,14 @@ public class ChatActivity extends AuthRequiredActivity {
                 switchToSupport();
             }
         });
-        btnSend.setOnClickListener(v -> sendMessage());
+        btnSend.setOnClickListener(v -> {
+            sendMessage();
+            // Hide keyboard after sending
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(etMessage.getWindowToken(), 0);
+            }
+        });
         btnMenu.setOnClickListener(v -> {
             PopupMenu popup = new PopupMenu(this, btnMenu);
             popup.getMenu().add(getString(R.string.menu_clear_chat));
@@ -115,8 +132,16 @@ public class ChatActivity extends AuthRequiredActivity {
                         .setPositiveButton(getString(R.string.dialog_yes), (dialog, which) -> {
                             if (isChatbot) {
                                 chatMessages.clear();
+                                cachedChatbotMessages = null;
                                 chatAdapter.notifyDataSetChanged();
                                 saveChatHistory();
+                                Toast.makeText(this, getString(R.string.menu_clear_chat) + "d", Toast.LENGTH_SHORT).show();
+                            } else {
+                                supportMessages.clear();
+                                cachedSupportMessages = null;
+                                chatMessages.clear();
+                                chatAdapter.notifyDataSetChanged();
+                                saveSupportHistory();
                                 Toast.makeText(this, getString(R.string.menu_clear_chat) + "d", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -126,6 +151,28 @@ public class ChatActivity extends AuthRequiredActivity {
                 return true;
             });
             popup.show();
+        });
+        etMessage.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEND) {
+                sendMessage();
+                // Hide keyboard after sending
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(etMessage.getWindowToken(), 0);
+                }
+                return true;
+            }
+            return false;
+        });
+        // Scroll chat to bottom and keep input visible when keyboard opens
+        etMessage.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                rvChat.postDelayed(() -> {
+                    if (!chatMessages.isEmpty()) {
+                        rvChat.scrollToPosition(chatMessages.size() - 1);
+                    }
+                }, 200);
+            }
         });
     }
 
@@ -145,6 +192,7 @@ public class ChatActivity extends AuthRequiredActivity {
 
     private void switchToSupport() {
         isChatbot = false;
+        subscribeSupportResponseTopic();
         if (cachedSupportMessages != null) {
             chatMessages.clear();
             chatMessages.addAll(cachedSupportMessages);
@@ -153,9 +201,45 @@ public class ChatActivity extends AuthRequiredActivity {
                 rvChat.scrollToPosition(chatMessages.size() - 1);
             }
         } else {
-            chatMessages.clear();
-            chatAdapter.notifyDataSetChanged();
+            loadSupportHistory();
         }
+    }
+
+    private void subscribeSupportResponseTopic() {
+        try {
+            if (!mqttService.isConnected()) {
+                new Thread(() -> {
+                    mqttService.initialize();
+                    subscribeOnUiThread();
+                }).start();
+            } else {
+                subscribeOnUiThread();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void subscribeOnUiThread() {
+        runOnUiThread(() -> {
+            try {
+                mqttService.subscribe(supportResponseTopic, (topic, message) -> {
+                    String msg = new String(message.getPayload());
+                    runOnUiThread(() -> {
+                        ChatMessage chatMsg = new ChatMessage(msg, false);
+                        supportMessages.add(chatMsg);
+                        if (!isChatbot) {
+                            chatMessages.add(chatMsg);
+                            chatAdapter.notifyItemInserted(chatMessages.size() - 1);
+                            rvChat.scrollToPosition(chatMessages.size() - 1);
+                        }
+                        saveSupportHistory();
+                    });
+                });
+            } catch (MqttException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     private void loadChatHistory() {
@@ -176,7 +260,7 @@ public class ChatActivity extends AuthRequiredActivity {
             @Override
             public void onError(Exception e) {
                 hideLoading();
-                Toast.makeText(ChatActivity.this, "Failed to load chat history", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, getString(R.string.error_load_chat_history), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -191,7 +275,7 @@ public class ChatActivity extends AuthRequiredActivity {
             }
             @Override
             public void onError(Exception e) {
-                Toast.makeText(ChatActivity.this, "Failed to save chat history", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ChatActivity.this, getString(R.string.error_save_chat_history), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -199,11 +283,11 @@ public class ChatActivity extends AuthRequiredActivity {
     private void sendMessage() {
         String message = etMessage.getText().toString().trim();
         if (message.isEmpty()) return;
-        chatMessages.add(new ChatMessage(message, true));
-        chatAdapter.notifyItemInserted(chatMessages.size() - 1);
-        rvChat.scrollToPosition(chatMessages.size() - 1);
-        etMessage.setText("");
         if (isChatbot) {
+            chatMessages.add(new ChatMessage(message, true));
+            chatAdapter.notifyItemInserted(chatMessages.size() - 1);
+            rvChat.scrollToPosition(chatMessages.size() - 1);
+            etMessage.setText("");
             chatMessages.add(new ChatMessage("...", false));
             chatAdapter.notifyItemInserted(chatMessages.size() - 1);
             rvChat.scrollToPosition(chatMessages.size() - 1);
@@ -231,9 +315,58 @@ public class ChatActivity extends AuthRequiredActivity {
                 }
             });
         } else {
-            chatMessages.add(new ChatMessage("(Support will reply soon)", false));
+            ChatMessage chatMsg = new ChatMessage(message, true);
+            supportMessages.add(chatMsg);
+            chatMessages.add(chatMsg);
             chatAdapter.notifyItemInserted(chatMessages.size() - 1);
             rvChat.scrollToPosition(chatMessages.size() - 1);
+            etMessage.setText("");
+            try {
+                mqttService.publish(supportRequestTopic, message);
+            } catch (MqttException e) {
+                e.printStackTrace();
+            }
+            saveSupportHistory();
         }
+    }
+
+    private void loadSupportHistory() {
+        if (userId == null || userId.isEmpty()) return;
+        showLoading();
+        chatRepository.loadChatHistory(userId + "_support", new ChatRepository.ChatHistoryListener() {
+            @Override
+            public void onHistoryLoaded(List<ChatMessage> messages) {
+                hideLoading();
+                supportMessages.clear();
+                supportMessages.addAll(messages);
+                cachedSupportMessages = new ArrayList<>(messages);
+                if (!isChatbot) {
+                    chatMessages.clear();
+                    chatMessages.addAll(messages);
+                    chatAdapter.notifyDataSetChanged();
+                    if (!chatMessages.isEmpty()) {
+                        rvChat.scrollToPosition(chatMessages.size() - 1);
+                    }
+                }
+            }
+            @Override
+            public void onError(Exception e) {
+                hideLoading();
+                Toast.makeText(ChatActivity.this, getString(R.string.error_load_support_chat), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void saveSupportHistory() {
+        if (userId == null || userId.isEmpty()) return;
+        cachedSupportMessages = new ArrayList<>(supportMessages);
+        chatRepository.saveChatHistory(userId + "_support", supportMessages, new ChatRepository.SaveListener() {
+            @Override
+            public void onSaved() {}
+            @Override
+            public void onError(Exception e) {
+                Toast.makeText(ChatActivity.this, getString(R.string.error_save_support_chat), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

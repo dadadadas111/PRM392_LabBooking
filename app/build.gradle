@@ -14,6 +14,17 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Load Google Maps API key from maps.properties
+        def mapsPropertiesFile = rootProject.file("app/maps.properties")
+        if (mapsPropertiesFile.exists()) {
+            Properties mapsProperties = new Properties()
+            mapsProperties.load(new FileInputStream(mapsPropertiesFile))
+            def mapsApiKey = mapsProperties["MAPS_API_KEY"]
+            if (mapsApiKey != null) {
+                resValue "string", "google_maps_key", mapsApiKey
+            }
+        }
     }
 
     buildTypes {
@@ -59,8 +70,8 @@ dependencies {
     // Google Maps
     implementation libs.play.services.maps
 
-    // OSMDroid for map functionality
-    implementation 'org.osmdroid:osmdroid-android:6.1.16'
+    // MQTT dependency
+    implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5'
 }
 
 apply plugin: 'com.google.gms.google-services'

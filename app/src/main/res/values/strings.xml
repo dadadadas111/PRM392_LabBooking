@@ -23,7 +23,7 @@
     <string name="or">hoặc</string>
     <string name="google_sign_in">Đăng nhập với Google</string>
     <string name="google_sign_in_success">Đăng nhập Google thành công!</string>
-    <string name="google_sign_in_failed">Đăng nhập Google thất bại!</string>
+    <string name="google_sign_in_failed">Đăng nhập Google thất bại: %1$s</string>
 
     <!-- Product/Package List -->
     <string name="package_list">Danh sách gói</string>
@@ -32,6 +32,7 @@
     <string name="details">Chi tiết</string>
     <string name="capacity">Sức chứa: %1$d chỗ</string>
     <string name="select_package">Chọn gói</string>
+    <string name="product_name">Tên sản phẩm</string>
 
     <!-- Product Details -->
     <string name="package_details">Chi tiết gói</string>
@@ -49,6 +50,7 @@
     <string name="total">Tổng cộng: %1$s</string>
     <string name="proceed_to_checkout">Tiếp tục thanh toán</string>
     <string name="remove_item_confirm">Bạn có chắc muốn xóa mục này?</string>
+    <string name="cart_fragment">Giỏ hàng</string>
 
     <!-- Billing/Checkout -->
     <string name="billing">Thanh toán</string>
@@ -68,6 +70,24 @@
     <string name="lab_location">Vị trí phòng LAB</string>
     <string name="show_on_map">Xem trên bản đồ</string>
     <string name="map_loading">Đang tải bản đồ...</string>
+    <string name="map_layers">Lớp bản đồ</string>
+    <string name="map_normal">Bình thường</string>
+    <string name="map_satellite">Vệ tinh</string>
+    <string name="map_terrain">Địa hình</string>
+    <string name="map_hybrid">Kết hợp</string>
+    <string name="recenter">Căn giữa</string>
+    <string name="compass">La bàn</string>
+    <string name="reset_compass">Đặt lại hướng Bắc</string>
+    <string name="offscreen_marker">Chỉ báo vị trí Lab</string>
+    <string name="lab_location_offscreen">Lab nằm ngoài màn hình</string>
+    <string name="open_in_google_maps">Mở trong Google Maps</string>
+    <string name="show_directions">Chỉ đường</string>
+    <string name="switched_to_normal">Đã chuyển sang chế độ Bình thường</string>
+    <string name="switched_to_satellite">Đã chuyển sang chế độ Vệ tinh</string>
+    <string name="switched_to_terrain">Đã chuyển sang chế độ Địa hình</string>
+    <string name="switched_to_hybrid">Đã chuyển sang chế độ Kết hợp</string>
+    <string name="no_internet_connection">Không có kết nối internet. Một số tính năng có thể không hoạt động.</string>
+    <string name="internet_connection_back">Kết nối internet đã được khôi phục.</string>
 
     <!-- Chat -->
     <string name="chat">Trò chuyện</string>
@@ -76,6 +96,11 @@
     <string name="salesman">Nhân viên tư vấn</string>
     <string name="user">Bạn</string>
     <string name="chat_placeholder">Hãy bắt đầu trò chuyện với nhân viên tư vấn!</string>
+    <string name="error_load_chat_history">Không thể tải lịch sử trò chuyện</string>
+    <string name="error_save_chat_history">Không thể lưu lịch sử trò chuyện</string>
+    <string name="error_load_support_chat">Không thể tải trò chuyện hỗ trợ</string>
+    <string name="error_save_support_chat">Không thể lưu trò chuyện hỗ trợ</string>
+    <string name="placeholder_screen">Màn hình chờ</string>
 
     <!-- General -->
     <string name="yes">Có</string>
@@ -99,7 +124,16 @@
     <!-- Clear Chat -->
     <string name="menu_clear_chat">Xóa lịch sử trò chuyện</string>
     <string name="dialog_clear_chat_title">Xóa Lịch Sử Trò Chuyện</string>
-    <string name="dialog_clear_chat_message">Bạn có chắc chắn muốn xóa lịch sử trò chuyện với trợ lý ảo?</string>
+    <string name="dialog_clear_chat_message">Bạn có chắc chắn muốn xóa lịch sử trò chuyện?</string>
     <string name="dialog_yes">Có</string>
     <string name="dialog_cancel">Hủy</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_home">Trang chủ</string>
+    <string name="nav_map">Bản đồ</string>
+    <string name="nav_cart">Giỏ hàng</string>
+    <string name="nav_settings">Cài đặt</string>
+
+    <!-- Logout Confirmation -->
+    <string name="logout_confirm">Bạn có chắc chắn muốn đăng xuất?</string>
 </resources>
