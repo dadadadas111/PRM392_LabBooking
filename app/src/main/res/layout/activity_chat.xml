@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/colorBackground"
     android:fitsSystemWindows="true">
 
     <include
@@ -37,7 +37,7 @@
             android:text="@string/chat"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/colorOnBackground"
             android:gravity="center" />
         <ImageButton
             android:id="@+id/btn_menu"
@@ -149,7 +149,7 @@
             android:layout_marginStart="8dp"
             android:background="@drawable/send_button_bg"
             android:src="@android:drawable/ic_menu_send"
-            android:tint="@color/white"
+            android:tint="@color/colorOnPrimary"
             android:contentDescription="@string/send"
             android:elevation="4dp"/>
     </LinearLayout>

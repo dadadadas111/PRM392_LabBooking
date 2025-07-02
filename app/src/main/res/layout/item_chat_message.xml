@@ -24,7 +24,7 @@
         android:padding="12dp"
         android:textSize="16sp"
         android:background="@drawable/bg_user_message"
-        android:textColor="@color/white"
+        android:textColor="@color/colorOnPrimary"
         android:layout_gravity="end"
         android:visibility="gone"/>
 </FrameLayout>

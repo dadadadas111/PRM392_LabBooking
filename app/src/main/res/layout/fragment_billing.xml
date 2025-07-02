@@ -3,12 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorBackground"
     android:padding="16dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Booking Summary"
+        android:text="@string/billing_summary"
+        android:textColor="@color/colorOnBackground"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
@@ -24,7 +26,8 @@
         android:id="@+id/tv_total_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total: $0"
+        android:text="@string/billing_total_placeholder"
+        android:textColor="@color/colorOnBackground"
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"/>
@@ -32,7 +35,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Payment Details"
+        android:text="@string/payment_details"
+        android:textColor="@color/colorOnBackground"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
@@ -42,19 +46,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:hint="Cardholder Name"
+        android:hint="@string/cardholder_name"
         android:inputType="textPersonName"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/colorOnSurface"
+        android:textColorHint="@color/colorOnSurface" />
 
     <EditText
         android:id="@+id/et_card_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:hint="Card Number"
+        android:hint="@string/card_number"
         android:inputType="number"
         android:maxLength="16"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:textColor="@color/colorOnSurface"
+        android:textColorHint="@color/colorOnSurface" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,10 +76,12 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
-            android:hint="MM/YY"
+            android:hint="@string/expiry_date"
             android:inputType="date"
             android:maxLength="5"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColor="@color/colorOnSurface"
+            android:textColorHint="@color/colorOnSurface" />
 
         <EditText
             android:id="@+id/et_cvv"
@@ -79,10 +89,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
-            android:hint="CVV"
+            android:hint="@string/cvv"
             android:inputType="number"
             android:maxLength="3"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColor="@color/colorOnSurface"
+            android:textColorHint="@color/colorOnSurface" />
 
     </LinearLayout>
 
@@ -90,7 +102,10 @@
         android:id="@+id/btn_confirm_booking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirm Booking"
-        android:layout_marginTop="16dp"/>
+        android:text="@string/confirm_booking"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/colorOnPrimary"
+        android:textStyle="bold"/>
 
 </LinearLayout>

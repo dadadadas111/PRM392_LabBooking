@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">    <!-- Background circle -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">    <!-- Background circle (no border) -->
     <item>
         <shape android:shape="oval">
-            <solid android:color="#FFFFFF" />
-            <stroke 
-                android:width="2dp" 
-                android:color="#E0E0E0" />
+            <solid android:color="@color/colorSurface" />
         </shape>
     </item>
     <!-- Compass needle -->
@@ -23,7 +20,7 @@
                 android:fillColor="#757575"
                 android:pathData="M12,22 L9,13 L15,13 Z"/>            <!-- Center circle -->
             <path
-                android:fillColor="#000000"
+                android:fillColor="@color/colorOnSurface"
                 android:pathData="M12,12m-1,0a1,1 0,1,1 2,0a1,1 0,1,1 -2,0"/>
         </vector>
     </item>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary brand colors (dark theme overrides) -->
+    <color name="colorPrimary">#90b4f8</color> <!-- Lighter blue for dark bg -->
+    <color name="colorPrimaryVariant">#2563eb</color>
+    <color name="colorOnPrimary">#1a1a1a</color>
+
+    <!-- Secondary brand colors -->
+    <color name="colorSecondary">#34d399</color>
+    <color name="colorSecondaryVariant">#10b981</color>
+    <color name="colorOnSecondary">#1a1a1a</color>
+
+    <!-- Background and surface -->
+    <color name="colorBackground">#181A20</color>
+    <color name="colorOnBackground">#F3F4F6</color>
+    <color name="colorSurface">#23262F</color>
+    <color name="colorOnSurface">#F3F4F6</color>
+
+    <!-- Error colors -->
+    <color name="colorError">#CF6679</color>
+    <color name="colorOnError">#1a1a1a</color>
+
+    <!-- Neutral colors -->
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+
+    <!-- Accent and warning colors -->
+    <color name="colorAccentPurple">#BB86FC</color>
+    <color name="colorWarning">#FFD700</color>
+
+    <!-- Miscellaneous colors -->
+    <color name="colorDivider">#333333</color>
+    <color name="overlayBackground">#88000000</color>
+</resources>

@@ -47,19 +47,37 @@
     <string name="cart">Giỏ hàng</string>
     <string name="cart_empty">Giỏ hàng trống</string>
     <string name="remove">Xóa</string>
-    <string name="total">Tổng cộng: %1$s</string>
+<!--    <string name="total">Tổng cộng: %1$s</string>-->
     <string name="proceed_to_checkout">Tiếp tục thanh toán</string>
     <string name="remove_item_confirm">Bạn có chắc muốn xóa mục này?</string>
     <string name="cart_fragment">Giỏ hàng</string>
+    <string name="cart_title">Giỏ Hàng Của Tôi</string>
+    <string name="delete_all">XÓA TẤT CẢ</string>
+    <string name="room_label">Phòng: Phòng A</string>
+    <string name="time_sample">2025-07-01 | 08:00 - 10:00</string>
+    <string name="features_sample">Tính năng: [Bảng trắng, Máy chiếu]</string>
+    <string name="price_sample">60.00$</string>
+    <string name="delete">Xóa</string>
+    <string name="subtotal">Tạm tính</string>
+    <string name="tax">Thuế (8%)</string>
+    <string name="total">Tổng cộng</string>
+    <string name="load_sample_data">Tải Dữ Liệu Mẫu</string>
 
     <!-- Billing/Checkout -->
     <string name="billing">Thanh toán</string>
     <string name="booking_summary">Tóm tắt đặt chỗ</string>
     <string name="confirm_booking">Xác nhận đặt chỗ</string>
     <string name="payment_info">Thông tin thanh toán</string>
+    <string name="billing_summary">Tóm tắt thanh toán</string>
+    <string name="billing_total_placeholder">Tổng cộng: $0</string>
+    <string name="payment_details">Chi tiết thanh toán</string>
+    <string name="cardholder_name">Tên chủ thẻ</string>
+    <string name="card_number">Số thẻ</string>
+    <string name="expiry_date">MM/YY</string>
+    <string name="cvv">CVV</string>
+    <string name="pay">Thanh toán</string>
     <string name="booking_success">Đặt chỗ thành công!</string>
     <string name="booking_failed">Đặt chỗ thất bại. Vui lòng thử lại.</string>
-    <string name="pay">Thanh toán</string>
 
     <!-- Notifications -->
     <string name="cart_not_empty">Bạn còn sản phẩm trong giỏ hàng!</string>
@@ -120,6 +138,10 @@
     <string name="chat_with_support">Hỗ trợ khách hàng</string>
     <string name="preferences">Tùy chọn</string>
     <string name="chat_with_chatbot">Trợ lý ảo</string>
+    <string name="theme">Giao diện</string>
+    <string name="theme_system">Hệ thống</string>
+    <string name="theme_light">Sáng</string>
+    <string name="theme_dark">Tối</string>
 
     <!-- Clear Chat -->
     <string name="menu_clear_chat">Xóa lịch sử trò chuyện</string>

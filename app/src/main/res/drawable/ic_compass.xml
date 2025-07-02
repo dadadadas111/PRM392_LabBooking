@@ -5,31 +5,26 @@
     android:viewportWidth="24"
     android:viewportHeight="24"
     android:tint="?attr/colorOnSurface">
-    <!-- Compass circle -->
-    <path
-        android:fillColor="@android:color/transparent"
-        android:strokeColor="@android:color/white"
-        android:strokeWidth="1.5"
-        android:pathData="M12,2 A10,10 0 1,1 12,22 A10,10 0 1,1 12,2 Z"/>
     <!-- North arrow (red) -->
     <path
         android:fillColor="#FF5722"
         android:pathData="M12,4 L10.5,8 L13.5,8 Z"/>
-    <!-- South arrow (white) -->
+    <!-- South arrow (theme-aware) -->
     <path
-        android:fillColor="@android:color/white"
+        android:fillColor="@color/colorOnSurface"
         android:pathData="M12,20 L10.5,16 L13.5,16 Z"/>
     <!-- East-West line -->
     <path
-        android:strokeColor="@android:color/white"
+        android:strokeColor="@color/colorOnSurface"
         android:strokeWidth="1"
         android:pathData="M4,12 L20,12"/>
     <!-- North-South line -->
     <path
-        android:strokeColor="@android:color/white"
+        android:strokeColor="@color/colorOnSurface"
         android:strokeWidth="1"
-        android:pathData="M12,4 L12,20"/>    <!-- Center dot -->
+        android:pathData="M12,4 L12,20"/>
+    <!-- Center dot -->
     <path
-        android:fillColor="@android:color/white"
+        android:fillColor="@color/colorOnSurface"
         android:pathData="M12,12m-1.5,0a1.5,1.5 0,1,1 3,0a1.5,1.5 0,1,1 -3,0"/>
 </vector>

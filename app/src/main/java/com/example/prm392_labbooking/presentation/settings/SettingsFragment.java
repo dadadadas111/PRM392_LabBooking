@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.data.firebase.FirebaseAuthService;
 import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.presentation.base.BaseActivity;
+import com.example.prm392_labbooking.utils.ThemeUtils;
 
 public class SettingsFragment extends Fragment {
     private FirebaseAuthService authService = new FirebaseAuthService();
@@ -32,6 +35,7 @@ public class SettingsFragment extends Fragment {
         TextView resetPasswordBtn = view.findViewById(R.id.btn_reset_password);
         TextView logoutBtn = view.findViewById(R.id.btn_login_logout);
         TextView chatSupportBtn = view.findViewById(R.id.btn_chat_support);
+        Spinner themeSpinner = view.findViewById(R.id.spinner_theme);
 
         resetPasswordBtn.setOnClickListener(v -> showResetPasswordDialog());
         logoutBtn.setOnClickListener(v -> {
@@ -50,6 +54,21 @@ public class SettingsFragment extends Fragment {
                     .show();
         });
         chatSupportBtn.setOnClickListener(v -> NavigationManager.goToChat(requireContext()));
+
+        int savedTheme = ThemeUtils.getSavedTheme(requireContext());
+        themeSpinner.setSelection(savedTheme);
+        themeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position != savedTheme) {
+                    ThemeUtils.saveTheme(requireContext(), position);
+                    ThemeUtils.setTheme(position);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
 
         return view;
     }

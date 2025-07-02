@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="32dp"
     android:orientation="horizontal"
-    android:background="#FFD700"
+    android:background="@color/colorWarning"
     android:paddingStart="8dp"
     android:paddingEnd="8dp"
     android:gravity="center_vertical"
@@ -13,13 +13,13 @@
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:src="@android:drawable/stat_notify_error"
-        android:tint="#D32F2F"/>
+        android:tint="@color/colorError"/>
     <TextView
         android:id="@+id/noInternetText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_internet_connection"
-        android:textColor="#D32F2F"
+        android:textColor="@color/colorError"
         android:textStyle="bold"
         android:textSize="12sp"
         android:layout_marginStart="6dp"/>

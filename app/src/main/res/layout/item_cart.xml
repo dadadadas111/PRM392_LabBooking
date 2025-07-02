@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#2A2A2A"
+    android:background="@color/colorSurface"
     android:orientation="horizontal"
     android:padding="12dp"
     android:layout_marginBottom="8dp">
@@ -19,8 +19,8 @@
             android:id="@+id/txtRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Room: Room A"
-            android:textColor="#FFFFFF"
+            android:text="@string/room_label"
+            android:textColor="@color/colorOnBackground"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -28,24 +28,24 @@
             android:id="@+id/txtTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2025-07-01 | 08:00 - 10:00"
-            android:textColor="#CCCCCC"
+            android:text="@string/time_sample"
+            android:textColor="@color/colorOnSurface"
             android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txtFeature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Features: [Whiteboard, Projector]"
-            android:textColor="#AAAAAA"
+            android:text="@string/features_sample"
+            android:textColor="@color/colorOnSurface"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/txtPriceItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="$60.00"
-            android:textColor="#A08CFF"
+            android:text="@string/price_sample"
+            android:textColor="@color/colorAccentPurple"
             android:textSize="16sp"
             android:textStyle="bold"
             android:layout_marginTop="4dp" />
@@ -59,6 +59,6 @@
         android:layout_gravity="center_vertical"
         android:src="@android:drawable/ic_menu_delete"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Delete"
-        app:tint="#FF6666" />
+        android:contentDescription="@string/delete"
+        app:tint="@color/colorError" />
 </LinearLayout>

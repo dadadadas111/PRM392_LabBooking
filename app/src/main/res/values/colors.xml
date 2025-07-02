@@ -23,4 +23,12 @@
     <!-- Neutral colors -->
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+
+    <!-- Accent and warning colors -->
+    <color name="colorAccentPurple">#A08CFF</color>
+    <color name="colorWarning">#FFD700</color>
+
+    <!-- Miscellaneous colors -->
+    <color name="colorDivider">#444444</color>
+    <color name="overlayBackground">#88000000</color>
 </resources>
