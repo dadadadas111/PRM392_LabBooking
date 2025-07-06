@@ -10,12 +10,18 @@ public class CartItem {
     // Nếu theo slot thì có cho phép slot liên tiếp không?
     // Ví dụ : 8h-10h, 10h-12h, 14h-16h, 16h-18h, người dùng muốn 2 slot liên tiếp thì có được không?
 
-    private String roomId;
+    private String roomId; // delete
     private String date;
-    private String timeSlot;
+    private String timeSlot; // delete
     private int quantity;
-    private double price;
-    private List<String> features;
+    private double price; // = gia product * so slot + tong gia facility
+    private List<String> features; // delete
+
+    // new
+    private Product product;
+    private List<Facility> _facilities;
+    private List<Slot> slots;
+
     public CartItem() {
     }
 

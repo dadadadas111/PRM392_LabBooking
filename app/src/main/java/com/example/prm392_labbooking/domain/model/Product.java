@@ -1,9 +1,16 @@
 package com.example.prm392_labbooking.domain.model;
 
+import java.util.List;
+
 public class Product {
     private String name;
-    private String facilities;
+    private String facilities; // delete later
     private double price; // Added price field
+
+    // new fields
+    private List<String> images;
+    private List<Facility> _facilities;
+    private int number;
 
     public Product(String name) {
         this.name = name;
