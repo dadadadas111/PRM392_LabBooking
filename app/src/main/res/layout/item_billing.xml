@@ -6,22 +6,37 @@
     android:padding="8dp">
 
     <TextView
-        android:id="@+id/tv_package_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_room_id"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="bold"/>
+        android:textSize="16sp"/>
 
     <TextView
-        android:id="@+id/tv_package_details"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_date"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:textColor="#666"/>
+
+    <TextView
+        android:id="@+id/tv_time_slot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#666"/>
+
+    <TextView
+        android:id="@+id/tv_features"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#666"/>
 
     <TextView
         android:id="@+id/tv_price"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:textStyle="bold"/>
 
 </LinearLayout>

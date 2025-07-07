@@ -19,7 +19,9 @@ import com.example.prm392_labbooking.domain.model.CartAdapter;
 import com.example.prm392_labbooking.domain.model.CartItem;
 import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.services.CartManager;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartFragment extends Fragment {
@@ -77,8 +79,13 @@ public class CartFragment extends Fragment {
             updateSummary();
         });
 
+        // Chuyển danh sách product thành JSON và đẩy sang Billing
         btnCheckout.setOnClickListener(v -> {
-            NavigationManager.showBilling(requireActivity().getSupportFragmentManager());
+            Bundle bundle = new Bundle();
+            Gson gson = new Gson();
+            String cartItemsJson = gson.toJson(cartList);
+            bundle.putString("cartItemsJson", cartItemsJson);
+            NavigationManager.showBilling(requireActivity().getSupportFragmentManager(), bundle);
         });
 
         updateSummary();
