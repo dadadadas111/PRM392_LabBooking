@@ -3,6 +3,7 @@ package com.example.prm392_labbooking.domain.model;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,11 +28,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName;
+        TextView txtName,txtPrice,txtNumber;
+        ImageView imgProduct;
 
         public ProductViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
+            txtPrice = itemView.findViewById(R.id.txtPrice);
+            txtNumber = itemView.findViewById(R.id.txtNumber);
+            imgProduct = itemView.findViewById(R.id.imgProduct);
         }
     }
 
@@ -47,8 +52,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.txtName.setText(product.getName());
-
-        holder.itemView.setOnClickListener(v -> {
+        holder.txtPrice.setText("Price: "+String.valueOf(product.getPrice()));
+        holder.txtNumber.setText("Quantity: " + product.getNumber());
+        holder.imgProduct.setImageResource(product.getImageResId());holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onProductClick(product, position);
             }

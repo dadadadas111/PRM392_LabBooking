@@ -5,6 +5,13 @@
     android:orientation="vertical"
     android:padding="8dp">
 
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="12dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_foreground" />
     <TextView
         android:id="@+id/txtName"
         android:layout_width="wrap_content"
@@ -13,17 +20,15 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/txtFacilities"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="@color/colorOnSurface" />
-
-    <TextView
         android:id="@+id/txtPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
         android:textColor="@color/colorOnSurface" />
+    <TextView
+        android:id="@+id/txtNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp" />
 
 </LinearLayout>
