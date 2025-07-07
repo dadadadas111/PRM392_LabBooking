@@ -37,15 +37,15 @@ public class HomeFragment extends Fragment {
 
         // Danh sách sản phẩm
         productList = new ArrayList<>();
-        productList.add(new Product("One Sheet"));
-        productList.add(new Product("Tow Sheet"));
-        productList.add(new Product("Three Sheet"));
-        productList.add(new Product("Four Sheet"));
-        productList.add(new Product("Five Sheet"));
-        productList.add(new Product("Six Sheet"));
-        productList.add(new Product("Table 4-Sheet"));
-        productList.add(new Product("Table 6-Sheet"));
-        productList.add(new Product("Table 12-Sheet"));
+        productList.add(new Product("One Sheet",40,5,R.drawable.seat1));
+        productList.add(new Product("Tow Sheet",50,6,R.drawable.seat2));
+        productList.add(new Product("Three Sheet",60,7,R.drawable.seat3));
+        productList.add(new Product("Four Sheet",70,8,R.drawable.seat4));
+        productList.add(new Product("Five Sheet",80,9,R.drawable.seat5));
+        productList.add(new Product("Six Sheet",90,10,R.drawable.seat6));
+        productList.add(new Product("Table 4-Sheet",100,11,R.drawable.seat7));
+        productList.add(new Product("Table 6-Sheet",110,12,R.drawable.seat8));
+        productList.add(new Product("Table 12-Sheet",120,13,R.drawable.seat9));
 
         // Adapter có truyền listener để xử lý khi click
         adapter = new ProductAdapter(productList, (product, position) -> {

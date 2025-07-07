@@ -12,11 +12,27 @@ public class Product {
     private List<Facility> _facilities;
     private int number;
 
+    private int imageResId;
     public Product(String name) {
         this.name = name;
         this.price = 50.0; // Default base price
     }
+    public Product(String name, double price, int number,int imageResId) {
+        this.name = name;
+        this.price = price;
+        this.number = number; // Default base price
+        this.imageResId = imageResId;
+    }
+    public int getNumber() {
+        return number;
+    }
 
+    public void setNumber(int number) {
+        this.number = number;
+    }
+    public int getImageResId() {
+        return imageResId;
+    }
     public String getName() {
         return name;
     }
