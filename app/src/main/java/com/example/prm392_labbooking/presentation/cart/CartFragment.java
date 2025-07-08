@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,8 +30,8 @@ public class CartFragment extends Fragment {
     private List<CartItem> cartList;
 
     private TextView txtSubtotal, txtTax, txtTotal;
-    private Button btnLoadSample, btnDeleteAll, btnCheckout;
-
+    private Button btnLoadSample, btnCheckout;
+    private ImageButton btnDeleteAll;
     @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
@@ -42,7 +43,7 @@ public class CartFragment extends Fragment {
         txtSubtotal = view.findViewById(R.id.txtSubtotal);
         txtTax = view.findViewById(R.id.txtTax);
         txtTotal = view.findViewById(R.id.txtTotal);
-        btnLoadSample = view.findViewById(R.id.btnLoadSample);
+//        btnLoadSample = view.findViewById(R.id.btnLoadSample);
         btnDeleteAll = view.findViewById(R.id.btnDeleteAllItem);
         btnCheckout = view.findViewById(R.id.btnCheckout);
 
@@ -69,13 +70,13 @@ public class CartFragment extends Fragment {
         });
 
         // Nút load sample data
-        btnLoadSample.setOnClickListener(v -> {
-            cartManager.addSampleCartItems();
-            cartList.clear();
-            cartList.addAll(cartManager.getCartItems());
-            adapter.notifyDataSetChanged();
-            updateSummary();
-        });
+//        btnLoadSample.setOnClickListener(v -> {
+//            cartManager.addSampleCartItems();
+//            cartList.clear();
+//            cartList.addAll(cartManager.getCartItems());
+//            adapter.notifyDataSetChanged();
+//            updateSummary();
+//        });
 
         btnCheckout.setOnClickListener(v -> {
             NavigationManager.showBilling(requireActivity().getSupportFragmentManager());

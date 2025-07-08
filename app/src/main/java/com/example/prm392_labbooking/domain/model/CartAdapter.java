@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.prm392_labbooking.R;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     private List<CartItem> items;
@@ -20,21 +25,26 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public interface OnCartActionListener {
         void onDeleteItem(int position);
     }
+
     public CartAdapter(List<CartItem> items, OnCartActionListener listener) {
         this.items = items;
         this.listener = listener;
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
-        TextView txtRoom, txtTime, txtFeature,txtPriceItem;
-        ImageButton btnDeleteItem;
+        ImageView imgProduct;
+        TextView txtProductName, txtProductPrice, txtFacilities, txtSlots,txtDate;
+        ImageButton btnRemoveItem;
+
         public CartViewHolder(View view) {
             super(view);
-            txtRoom = view.findViewById(R.id.txtRoom);
-            txtTime = view.findViewById(R.id.txtTime);
-            txtFeature = view.findViewById(R.id.txtFeature);
-            txtPriceItem = view.findViewById(R.id.txtPriceItem);
-            btnDeleteItem = view.findViewById(R.id.btnDeleteItem);
+            imgProduct = view.findViewById(R.id.imgProduct);
+            txtProductName = view.findViewById(R.id.txtProductName);
+            txtProductPrice = view.findViewById(R.id.txtProductPrice);
+            txtFacilities = view.findViewById(R.id.txtFacilities);
+            txtSlots = view.findViewById(R.id.txtSlots);
+            txtDate = view.findViewById(R.id.txtDate);
+            btnRemoveItem = view.findViewById(R.id.btnRemoveItem);
         }
     }
 
@@ -48,13 +58,49 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         CartItem item = items.get(position);
-        holder.txtRoom.setText("Room: " + item.getRoomId());
-        holder.txtTime.setText(item.getDate() + " | " + item.getTimeSlot());
-        holder.txtFeature.setText("Features: " + item.getFeatures());
-        holder.txtPriceItem.setText(String.format("$%.2f", item.getPrice()));
 
-        holder.btnDeleteItem.setOnClickListener(v -> {
-            if(listener != null){
+        // Hiển thị tên và giá sản phẩm
+        holder.txtProductName.setText(item.getProduct().getName());
+        holder.txtProductPrice.setText(String.format("$%.2f", item.getPrice()));
+
+        // Nếu bạn có ảnh sản phẩm thực tế, xử lý tại đây
+        // holder.imgProduct.setImageResource(...) hoặc dùng Glide/Picasso nếu ảnh URL
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String formattedDate = sdf.format(item.getDate());
+        holder.txtDate.setText(formattedDate);
+
+
+        // Hiển thị tiện ích (Facility enum)
+        StringBuilder facilitiesBuilder = new StringBuilder();
+        for (Facility f : item.getFacilities()) {
+            facilitiesBuilder.append(f.name()).append(", ");
+        }
+        String facilities = facilitiesBuilder.length() > 0
+                ? facilitiesBuilder.substring(0, facilitiesBuilder.length() - 2)
+                : "";
+        holder.txtFacilities.setText(facilities);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        StringBuilder slotBuilder = new StringBuilder();
+
+        for (Slot s : item.getSlots()) {
+            slotBuilder.append(s.getStart().format(formatter))
+                    .append(" - ")
+                    .append(s.getEnd().format(formatter))
+                    .append(", ");
+        }
+
+
+        String slots = slotBuilder.length() > 0
+                ? slotBuilder.substring(0, slotBuilder.length() - 2)
+                : "";
+
+        holder.txtSlots.setText(slots);
+
+        // Nút xóa
+        holder.btnRemoveItem.setOnClickListener(v -> {
+            if (listener != null) {
                 listener.onDeleteItem(position);
             }
         });
@@ -64,13 +110,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public int getItemCount() {
         return items.size();
     }
+
     public void clearCart() {
         items.clear();
         notifyDataSetChanged();
     }
 
     public void removeItem(int position) {
-        items.remove(position);
-        notifyItemRemoved(position);
+        if (position >= 0 && position < items.size()) {
+            items.remove(position);
+            notifyItemRemoved(position);
+        }
     }
 }

@@ -37,6 +37,15 @@ public enum Slot {
         return end;
     }
 
+    public String getFormattedTime() {
+        return start + " - " + end;
+    }
+
+    @Override
+    public String toString() {
+        return getFormattedTime();
+    }
+
     public static void printAllSlots() {
         for (Slot slot : Slot.values()) {
             System.out.println(slot.name() + ": " + slot.getStart() + " - " + slot.getEnd());
