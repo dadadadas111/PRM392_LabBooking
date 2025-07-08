@@ -2,6 +2,9 @@ package com.example.prm392_labbooking.services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 
 import com.example.prm392_labbooking.domain.model.CartItem;
 import com.example.prm392_labbooking.domain.model.Facility;
@@ -40,11 +43,53 @@ public class CartManager {
         return gson.fromJson(json, type);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public List<CartItem> sampleCartItems() {
+        List<CartItem> sampleItems = new ArrayList<>();
+
+        Product roomA = new Product("Room A", 100000, 100000, 0);
+        Product roomB = new Product("Room B", 150000, 150000, 0);
+        Product roomC = new Product("Room C", 150000, 150000, 0);
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+            sampleItems.add(new CartItem(
+                    roomA,
+                    Arrays.asList(Facility.WHITE_BOARD, Facility.MICROPHONE),
+                    Arrays.asList(Slot.SLOT_08_09, Slot.SLOT_14_15),
+                    sdf.parse("2025-07-01"),
+                    calculateTotalPrice(roomA, Arrays.asList(Facility.WHITE_BOARD, Facility.MICROPHONE), Arrays.asList(Slot.SLOT_08_09, Slot.SLOT_14_15))
+            ));
+
+            sampleItems.add(new CartItem(
+                    roomB,
+                    Arrays.asList(Facility.TV),
+                    Arrays.asList(Slot.SLOT_13_14),
+                    sdf.parse("2025-07-01"),
+                    calculateTotalPrice(roomB, Arrays.asList(Facility.TV), Arrays.asList(Slot.SLOT_13_14))
+            ));
+
+            sampleItems.add(new CartItem(
+                    roomC,
+                    Arrays.asList(Facility.MICROPHONE),
+                    Arrays.asList(Slot.SLOT_11_12, Slot.SLOT_12_13),
+                    sdf.parse("2025-07-02"),
+                    calculateTotalPrice(roomC, Arrays.asList(Facility.MICROPHONE), Arrays.asList(Slot.SLOT_11_12, Slot.SLOT_12_13))
+            ));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return sampleItems;
+    }
+
     public void saveCartItems(List<CartItem> items) {
         String json = gson.toJson(items);
         prefs.edit().putString(CART_KEY, json).apply();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void addItem(CartItem newItem) {
         List<CartItem> items = getCartItems();
 
@@ -82,6 +127,7 @@ public class CartManager {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void addSampleCartItems() {
         List<CartItem> sampleItems = new ArrayList<>();
 
@@ -142,6 +188,7 @@ public class CartManager {
         return (basePrice + facilityPrice) * slotCount;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private boolean isSameDay(Date d1, Date d2) {
         LocalDate localDate1 = d1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate localDate2 = d2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

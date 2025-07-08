@@ -46,6 +46,7 @@
     <!-- Cart -->
     <string name="cart">Cart</string>
     <string name="cart_empty">Cart is empty</string>
+    <string name="cart_empty_message">Your cart is empty!</string>
     <string name="remove">Remove</string>
     <string name="proceed_to_checkout">Proceed to checkout</string>
     <string name="remove_item_confirm">Are you sure you want to remove this item?</string>

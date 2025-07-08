@@ -62,6 +62,7 @@
     <string name="tax">Thuế (8%)</string>
     <string name="total">Tổng cộng</string>
     <string name="load_sample_data">Tải Dữ Liệu Mẫu</string>
+    <string name="cart_empty_message">Giỏ hàng của bạn đang trống!</string>
 
     <!-- Billing/Checkout -->
     <string name="billing">Thanh toán</string>
