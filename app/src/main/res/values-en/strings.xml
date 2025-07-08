@@ -37,9 +37,10 @@
     <!-- Product Details -->
     <string name="package_details">Package Details</string>
     <string name="select_facilities">Select additional facilities</string>
-    <string name="facility_whiteboard">Whiteboard</string>
+    <string name="facility_white_board">White Board</string>
     <string name="facility_tv">TV</string>
-    <string name="facility_network">Conference Network</string>
+    <string name="facility_microphone">Microphone</string>
+    <string name="facility_network">Network</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="added_to_cart">Added to cart</string>
 
@@ -65,6 +66,7 @@
 
     <!-- Billing/Checkout -->
     <string name="billing">Billing</string>
+    <string name="billing_title">Billing</string>
     <string name="booking_summary">Booking Summary</string>
     <string name="confirm_booking">Confirm Booking</string>
     <string name="payment_info">Payment Information</string>
@@ -78,6 +80,12 @@
     <string name="pay">Pay</string>
     <string name="booking_success">Booking successful!</string>
     <string name="booking_failed">Booking failed. Please try again.</string>
+    <string name="total_label">Total: $%1$.2f</string>
+    <string name="error_cardholder_name">Enter a valid name</string>
+    <string name="error_card_number">Enter a 16-digit card number</string>
+    <string name="error_expiry_date">Enter valid MM/YY dates from this month to the future</string>
+    <string name="error_cvv">Enter a 3-digit CVV</string>
+    <string name="booking_confirmed">Booking confirmed successfully!</string>
 
     <!-- Notifications -->
     <string name="cart_not_empty">You still have items in your cart!</string>
@@ -161,4 +169,12 @@
 
     <!-- Language -->
     <string name="language">Language</string>
+
+    <!-- Facilities, Date, and Slots Labels -->
+    <string name="facilities_label">Facilities:</string>
+    <string name="date_label">Date:</string>
+    <string name="slots_label">Slots</string>
+
+    <!-- Back Button -->
+    <string name="back">Back</string>
 </resources>

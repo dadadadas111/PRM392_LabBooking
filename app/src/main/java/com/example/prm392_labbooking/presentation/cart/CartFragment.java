@@ -52,8 +52,8 @@ public class CartFragment extends Fragment {
         btnCheckout = view.findViewById(R.id.btnCheckout);
 
         cartManager = new CartManager(requireContext());
-        cartList = cartManager.getCartItems();
-//        cartList = cartManager.sampleCartItems();
+//        cartList = cartManager.getCartItems();
+        cartList = cartManager.sampleCartItems();
         // Adapter xử lý xoá từng item
         adapter = new CartAdapter(cartList, position -> {
             cartList.remove(position);

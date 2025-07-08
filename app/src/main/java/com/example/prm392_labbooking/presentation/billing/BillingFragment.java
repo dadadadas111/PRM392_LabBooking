@@ -21,6 +21,7 @@ import com.example.prm392_labbooking.domain.model.BillingAdapter;
 import com.example.prm392_labbooking.data.db.DatabaseHelper;
 import com.example.prm392_labbooking.domain.model.CartItem;
 import com.example.prm392_labbooking.domain.usecase.booking.SaveBookingUseCase;
+import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.presentation.cart.CartFragment;
 import com.example.prm392_labbooking.services.CartManager;
 import com.example.prm392_labbooking.utils.ValidationUtils;
@@ -54,6 +55,7 @@ public class BillingFragment extends Fragment {
         calculateTotalPrice();
 
         btnConfirmBooking.setOnClickListener(v -> confirmBooking());
+        btnBack.setOnClickListener(v -> navigateToCart());
         return view;
     }
 
@@ -68,12 +70,8 @@ public class BillingFragment extends Fragment {
         btnBack = view.findViewById(R.id.btn_back);
     }
 
-    private void setupBackButton() {
-        btnBack.setOnClickListener(v -> {
-            if (getParentFragmentManager().getBackStackEntryCount() > 0) {
-                getParentFragmentManager().popBackStack();
-            }
-        });
+    private void navigateToCart() {
+        NavigationManager.showCart(requireActivity().getSupportFragmentManager());
     }
 
     private void loadCartItems() {
@@ -103,7 +101,7 @@ public class BillingFragment extends Fragment {
         for (CartItem item : cartItems) {
             totalPrice += item.getPrice();
         }
-        tvTotalPrice.setText(String.format("Total: $%.2f", totalPrice));
+        tvTotalPrice.setText(getString(R.string.total_label, totalPrice));
     }
 
     private void confirmBooking() {
@@ -113,19 +111,19 @@ public class BillingFragment extends Fragment {
         String cvv = etCvv.getText().toString().trim();
 
         if (!ValidationUtils.isValidCardholderName(name)) {
-            etCardholderName.setError("Enter a valid name");
+            etCardholderName.setError(getString(R.string.error_cardholder_name));
             return;
         }
         if (!ValidationUtils.isValidCardNumber(cardNumber)) {
-            etCardNumber.setError("Enter a 16-digit card number");
+            etCardNumber.setError(getString(R.string.error_card_number));
             return;
         }
         if (!ValidationUtils.isValidExpiryDate(expiry)) {
-            etExpiryDate.setError("Enter valid MM/YY dates from this month to the future");
+            etExpiryDate.setError(getString(R.string.error_expiry_date));
             return;
         }
         if (!ValidationUtils.isValidCvv(cvv)) {
-            etCvv.setError("Enter a 3-digit CVV");
+            etCvv.setError(getString(R.string.error_cvv));
             return;
         }
 
@@ -133,12 +131,12 @@ public class BillingFragment extends Fragment {
         if (success) {
             CartManager cartManager = new CartManager(requireContext());
             cartManager.clearCart(); // Xóa giỏ hàng từ SharedPreferences
-            Toast.makeText(requireContext(), "Booking confirmed successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.booking_confirmed), Toast.LENGTH_SHORT).show();
             if (getParentFragmentManager().getBackStackEntryCount() > 0) {
                 getParentFragmentManager().popBackStack();
             }
         } else {
-            Toast.makeText(requireContext(), "Booking failed. Please try again.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), getString(R.string.booking_failed), Toast.LENGTH_SHORT).show();
         }
     }
 

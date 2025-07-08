@@ -1,15 +1,20 @@
 package com.example.prm392_labbooking.domain.model;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.prm392_labbooking.R;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 
 public class BillingAdapter extends RecyclerView.Adapter<BillingAdapter.BillingViewHolder> {
     private final List<CartItem> items;
@@ -38,15 +43,56 @@ public class BillingAdapter extends RecyclerView.Adapter<BillingAdapter.BillingV
         return new BillingViewHolder(v);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     public void onBindViewHolder(@NonNull BillingViewHolder holder, int position) {
         CartItem item = items.get(position);
-        holder.tvRoomId.setText("Room: " + (item.getRoomId() != null ? item.getRoomId() : "N/A"));
-        holder.tvDate.setText("Date: " + (item.getDate() != null ? item.getDate() : "N/A"));
-        holder.tvTimeSlot.setText("Time: " + (item.getTimeSlot() != null ? item.getTimeSlot() : "N/A"));
-        holder.tvFeatures.setText("Features: " + (item.getFeatures() != null ? String.join(", ", item.getFeatures()) : "None"));
-        holder.tvPrice.setText(String.format("Price: $%.2f", item.getPrice() * (item.getQuantity() != 0 ? item.getQuantity() : 1)));
+        holder.tvRoomId.setText(item.getProduct().getName());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String formattedDate = sdf.format(item.getDate());
+        holder.tvDate.setText(formattedDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+        StringBuilder slotBuilder = new StringBuilder();
+
+        for (Slot s : item.getSlots()) {
+            slotBuilder.append(s.getStart().format(formatter))
+                    .append(" - ")
+                    .append(s.getEnd().format(formatter))
+                    .append(", ");
+        }
+
+
+        String slots = slotBuilder.length() > 0
+                ? slotBuilder.substring(0, slotBuilder.length() - 2)
+                : "";
+        holder.tvTimeSlot.setText(slots);
+        StringBuilder facilitiesBuilder = new StringBuilder();
+        for (Facility f : item.getFacilities()) {
+            int resId = 0;
+            switch (f) {
+                case WHITE_BOARD:
+                    resId = R.string.facility_white_board;
+                    break;
+                case TV:
+                    resId = R.string.facility_tv;
+                    break;
+                case MICROPHONE:
+                    resId = R.string.facility_microphone;
+                    break;
+                case NETWORK:
+                    resId = R.string.facility_network;
+                    break;
+            }
+            if (resId != 0) {
+                facilitiesBuilder.append(holder.itemView.getContext().getString(resId)).append(", ");
+            }
+        }
+        String facilities = facilitiesBuilder.length() > 0
+                ? facilitiesBuilder.substring(0, facilitiesBuilder.length() - 2)
+                : "";
+        holder.tvFeatures.setText(facilities);
+        holder.tvPrice.setText(String.format("Price: $%.2f", item.getPrice()));
     }
 
     @Override
