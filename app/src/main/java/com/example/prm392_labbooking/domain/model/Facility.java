@@ -3,6 +3,7 @@ package com.example.prm392_labbooking.domain.model;
 public enum Facility {
     WHITE_BOARD("WHITE_BOARD", 10.0),
     TV("TV", 15.0),
+    MICROPHONE("MICROPHONE", 8.0),
     NETWORK("NETWORK", 5.0);
 
     private final String code;

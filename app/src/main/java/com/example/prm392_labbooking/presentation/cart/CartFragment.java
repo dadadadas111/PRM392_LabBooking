@@ -1,15 +1,18 @@
 package com.example.prm392_labbooking.presentation.cart;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,8 +32,9 @@ public class CartFragment extends Fragment {
     private List<CartItem> cartList;
 
     private TextView txtSubtotal, txtTax, txtTotal;
-    private Button btnLoadSample, btnDeleteAll, btnCheckout;
+    private Button btnLoadSample, btnCheckout;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
@@ -42,13 +46,12 @@ public class CartFragment extends Fragment {
         txtSubtotal = view.findViewById(R.id.txtSubtotal);
         txtTax = view.findViewById(R.id.txtTax);
         txtTotal = view.findViewById(R.id.txtTotal);
-        btnLoadSample = view.findViewById(R.id.btnLoadSample);
-        btnDeleteAll = view.findViewById(R.id.btnDeleteAllItem);
+//        btnLoadSample = view.findViewById(R.id.btnLoadSample);
         btnCheckout = view.findViewById(R.id.btnCheckout);
 
         cartManager = new CartManager(requireContext());
         cartList = cartManager.getCartItems();
-
+//        cartList = cartManager.sampleCartItems();
         // Adapter xử lý xoá từng item
         adapter = new CartAdapter(cartList, position -> {
             cartList.remove(position);
@@ -57,25 +60,23 @@ public class CartFragment extends Fragment {
             updateSummary();
         });
 
+        if (cartList.isEmpty()){
+            btnCheckout.setEnabled(false);
+            btnCheckout.setAlpha(0.5f); // visually indicate disabled
+            android.widget.Toast.makeText(requireContext(), getString(R.string.cart_empty_message), android.widget.Toast.LENGTH_SHORT).show();
+        }
+
         recyclerCart.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerCart.setAdapter(adapter);
 
-        // Nút xoá tất cả
-        btnDeleteAll.setOnClickListener(v -> {
-            cartManager.clearCart();      // Xoá khỏi SharedPreferences
-            cartList.clear();             // Xoá khỏi RAM
-            adapter.notifyDataSetChanged();
-            updateSummary();
-        });
-
         // Nút load sample data
-        btnLoadSample.setOnClickListener(v -> {
-            cartManager.addSampleCartItems();
-            cartList.clear();
-            cartList.addAll(cartManager.getCartItems());
-            adapter.notifyDataSetChanged();
-            updateSummary();
-        });
+//        btnLoadSample.setOnClickListener(v -> {
+//            cartManager.addSampleCartItems();
+//            cartList.clear();
+//            cartList.addAll(cartManager.getCartItems());
+//            adapter.notifyDataSetChanged();
+//            updateSummary();
+//        });
 
         btnCheckout.setOnClickListener(v -> {
             NavigationManager.showBilling(requireActivity().getSupportFragmentManager());

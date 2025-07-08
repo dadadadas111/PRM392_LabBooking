@@ -25,7 +25,7 @@
     <color name="white">#ffffff</color>
 
     <!-- Accent and warning colors -->
-    <color name="colorAccentPurple">#A08CFF</color>
+    <color name="colorAccentPurple">#BB86FC</color>
     <color name="colorWarning">#FFD700</color>
 
     <!-- Miscellaneous colors -->
