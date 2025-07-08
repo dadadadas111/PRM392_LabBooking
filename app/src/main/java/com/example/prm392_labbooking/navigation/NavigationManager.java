@@ -3,6 +3,8 @@ package com.example.prm392_labbooking.navigation;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -28,7 +30,7 @@ public class NavigationManager {
         context.startActivity(new Intent(context, RegisterActivity.class));
     }
 
-    public static void goToForgotPassword(Context context) {
+    public static void goToForgotPassword(Context context)   {
         context.startActivity(new Intent(context, ForgotPasswordActivity.class));
     }
 
@@ -52,8 +54,18 @@ public class NavigationManager {
         showFragment(fm, new SettingsFragment());
     }
 
+    public static void showBilling(FragmentManager fm, Bundle args) {
+        BillingFragment fragment = new BillingFragment();
+        if (args != null) fragment.setArguments(args);
+        fm.beginTransaction()
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     public static void showBilling(FragmentManager fm) {
-        showFragment(fm, new BillingFragment());
+        showBilling(fm, null);
     }
 
     private static void showFragment(FragmentManager fm, Fragment fragment) {

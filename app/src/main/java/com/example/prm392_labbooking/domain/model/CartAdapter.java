@@ -77,7 +77,24 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         // Hiển thị tiện ích (Facility enum)
         StringBuilder facilitiesBuilder = new StringBuilder();
         for (Facility f : item.getFacilities()) {
-            facilitiesBuilder.append(f.name()).append(", ");
+            int resId = 0;
+            switch (f) {
+                case WHITE_BOARD:
+                    resId = R.string.facility_white_board;
+                    break;
+                case TV:
+                    resId = R.string.facility_tv;
+                    break;
+                case MICROPHONE:
+                    resId = R.string.facility_microphone;
+                    break;
+                case NETWORK:
+                    resId = R.string.facility_network;
+                    break;
+            }
+            if (resId != 0) {
+                facilitiesBuilder.append(holder.itemView.getContext().getString(resId)).append(", ");
+            }
         }
         String facilities = facilitiesBuilder.length() > 0
                 ? facilitiesBuilder.substring(0, facilitiesBuilder.length() - 2)

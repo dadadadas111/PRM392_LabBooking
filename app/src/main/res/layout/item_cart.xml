@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Tiện ích:"
+            android:text="@string/facilities_label"
             android:textStyle="bold"
             android:textSize="14sp" />
 
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Ngày:"
+            android:text="@string/date_label"
             android:textStyle="bold"
             android:textSize="14sp" />
 
@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Khung giờ"
+            android:text="@string/slots_label"
             android:textStyle="bold"
             android:textSize="14sp" />
 
