@@ -10,55 +10,106 @@
 
     <!-- Bên trái: Thông tin phòng -->
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
+        <!-- Dòng chứa ảnh, tên, giá, và nút xóa -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/imgProduct"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_foreground"
+                android:layout_marginEnd="12dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtProductName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_name"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtProductPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0.00"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorAccentPurple" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/btnRemoveItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_delete"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/remove"
+                app:tint="@color/colorError"/>
+        </LinearLayout>
+
+        <!-- Facilities -->
         <TextView
-            android:id="@+id/txtRoom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/room_label"
-            android:textColor="@color/colorOnBackground"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/txtTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/time_sample"
-            android:textColor="@color/colorOnSurface"
+            android:layout_marginTop="8dp"
+            android:text="Tiện ích:"
+            android:textStyle="bold"
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/txtFeature"
+            android:id="@+id/txtFacilities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/facility_network"
+            android:textColor="@color/colorOnSurface" />
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/features_sample"
-            android:textColor="@color/colorOnSurface"
-            android:textSize="12sp" />
+            android:layout_marginTop="8dp"
+            android:text="Ngày:"
+            android:textStyle="bold"
+            android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/txtPriceItem"
+            android:id="@+id/txtDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/time_sample"
+            android:textColor="@color/colorOnSurface" />
+        <!-- Slots -->
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/price_sample"
-            android:textColor="@color/colorAccentPurple"
-            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:text="Khung giờ"
             android:textStyle="bold"
-            android:layout_marginTop="4dp" />
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/txtSlots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/time_sample"
+            android:textColor="@color/colorOnSurface" />
+
+
     </LinearLayout>
 
-    <!-- Bên phải: Nút xoá căn giữa -->
-    <androidx.appcompat.widget.AppCompatImageButton
-        android:id="@+id/btnDeleteItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:src="@android:drawable/ic_menu_delete"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="@string/delete"
-        app:tint="@color/colorError" />
+
 </LinearLayout>

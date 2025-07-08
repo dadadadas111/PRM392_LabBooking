@@ -29,13 +29,14 @@ public class MainActivity extends AuthRequiredActivity {
         PreloadManager.getInstance().initialize(this); // Preload Google Maps, Firebase, and MapView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initLoadingOverlay();
-
+//        initLoadingOverlay();
+//
         dbHelper = new DatabaseHelper(this);
         initializeSampleData();
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         cartManager = new CartManager(this);
+//        cartManager.clearCart();
         checkCartAndNotify();
 //        // Test button for loading overlay
 //        findViewById(R.id.btnTestLoading).setOnClickListener(v -> {
