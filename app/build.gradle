@@ -70,6 +70,7 @@ dependencies {
 
     // Google Maps
     implementation libs.play.services.maps
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     // MQTT dependency
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5'

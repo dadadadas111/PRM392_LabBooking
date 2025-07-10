@@ -204,4 +204,11 @@
     <string name="hero_btn_left_3">Learn More</string>
     <string name="hero_btn_right_3">Upgrade</string>
     <string name="see_more">See more</string>
+
+    <!-- Location -->
+    <string name="location_not_found">Could not get your location</string>
+    <string name="location_permission_required">Location permission required</string>
+
+    <!-- Map Actions Toggle -->
+    <string name="toggle_map_actions">Show/hide map actions</string>
 </resources>

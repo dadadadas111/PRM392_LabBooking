@@ -1,9 +1,14 @@
 package com.example.prm392_labbooking.presentation;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.services.CartManager;
 import com.example.prm392_labbooking.services.PreloadManager;
@@ -18,7 +23,10 @@ import com.example.prm392_labbooking.presentation.base.AuthRequiredActivity;
 import com.example.prm392_labbooking.utils.LocaleUtils;
 import com.example.prm392_labbooking.utils.ThemeUtils;
 
+import java.util.List;
+
 public class MainActivity extends AuthRequiredActivity {
+    private static final int PERMISSION_REQUEST_CODE = 1001;
     private DatabaseHelper dbHelper;
 
     private CartManager cartManager;
@@ -72,6 +80,36 @@ public class MainActivity extends AuthRequiredActivity {
                 return false;
             }
         });
+
+        requestNecessaryPermissions();
+    }
+
+    private void requestNecessaryPermissions() {
+        String[] permissions = {
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+        };
+        List<String> permissionsToRequest = new java.util.ArrayList<>();
+        for (String perm : permissions) {
+            if (ContextCompat.checkSelfPermission(this, perm) != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(perm);
+            }
+        }
+        if (!permissionsToRequest.isEmpty()) {
+            ActivityCompat.requestPermissions(this, permissionsToRequest.toArray(new String[0]), PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "Permission denied: " + permissions[i], Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     private void checkCartAndNotify() {

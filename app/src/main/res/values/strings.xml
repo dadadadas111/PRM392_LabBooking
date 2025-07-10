@@ -204,4 +204,7 @@
     <string name="hero_btn_left_3">Tìm hiểu thêm</string>
     <string name="hero_btn_right_3">Nâng cấp</string>
     <string name="see_more">Xem thêm</string>
+    <string name="location_not_found">Could not get your location</string>
+    <string name="location_permission_required">Location permission required</string>
+    <string name="toggle_map_actions">Show/hide map actions</string>
 </resources>
