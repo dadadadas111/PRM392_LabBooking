@@ -117,4 +117,15 @@ public class SettingsFragment extends Fragment {
                 .setNegativeButton(R.string.cancel, null)
                 .show();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() != null) {
+            android.view.View nav = getActivity().findViewById(R.id.bottom_navigation);
+            if (nav instanceof com.google.android.material.bottomnavigation.BottomNavigationView) {
+                ((com.google.android.material.bottomnavigation.BottomNavigationView) nav).setSelectedItemId(R.id.nav_settings);
+            }
+        }
+    }
 }

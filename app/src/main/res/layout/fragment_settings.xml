@@ -23,7 +23,8 @@
             android:textSize="24sp"
             android:gravity="center"
             android:paddingTop="8dp"
-            android:paddingBottom="16dp" />
+            android:paddingBottom="16dp"
+            android:textColor="@color/colorOnBackground" />
 
         <!-- Account Section -->
         <TextView
@@ -33,7 +34,8 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:paddingTop="8dp"
-            android:paddingBottom="4dp" />
+            android:paddingBottom="4dp"
+            android:textColor="@color/colorOnBackground" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -79,7 +81,8 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:paddingTop="16dp"
-            android:paddingBottom="4dp" />
+            android:paddingBottom="4dp"
+            android:textColor="@color/colorOnBackground" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -125,7 +128,8 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:paddingTop="16dp"
-            android:paddingBottom="4dp" />
+            android:paddingBottom="4dp"
+            android:textColor="@color/colorOnBackground" />
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -164,7 +168,8 @@
                     android:layout_weight="1"
                     android:text="@string/language"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOnBackground" />
                 <Spinner
                     android:id="@+id/spinner_language"
                     android:layout_width="wrap_content"
@@ -192,7 +197,8 @@
                     android:layout_weight="1"
                     android:text="@string/theme"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/colorOnBackground" />
                 <Spinner
                     android:id="@+id/spinner_theme"
                     android:layout_width="wrap_content"
