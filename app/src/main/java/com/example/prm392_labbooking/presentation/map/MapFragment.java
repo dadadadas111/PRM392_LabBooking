@@ -25,6 +25,7 @@ public class MapFragment extends BaseFragment {
     private ImageButton btnOpenInGoogleMaps, btnRecenter, btnMapLayers, btnShowDirections, btnCompass;
     private ImageView offscreenMarker;
     private FrameLayout mapContainer;
+    private static final String LAB_NAME = "Đại học FPT Hà Nội";
     private static final double LAB_LAT = 21.012487572296216;    private static final double LAB_LON = 105.52542694866874;
     @Nullable
     @Override
@@ -39,13 +40,13 @@ public class MapFragment extends BaseFragment {
         btnShowDirections = root.findViewById(R.id.btnShowDirections);        btnCompass = root.findViewById(R.id.btnCompass);
         offscreenMarker = root.findViewById(R.id.offscreenMarker);
 
-        MapUtils.setupLabMap(mapView, LAB_LAT, LAB_LON, "LAB Location");
+        MapUtils.setupLabMap(mapView, LAB_LAT, LAB_LON, LAB_NAME);
         MapUtils.setupCompass(btnCompass);
         MapUtils.setupOffscreenMarker(offscreenMarker, mapContainer);
         
-        btnOpenInGoogleMaps.setOnClickListener(v -> MapUtils.openInGoogleMaps(requireContext(), LAB_LAT, LAB_LON, "LAB"));
+        btnOpenInGoogleMaps.setOnClickListener(v -> MapUtils.openInGoogleMaps(requireContext(), LAB_NAME));
         btnRecenter.setOnClickListener(v -> MapUtils.recenterMap(mapView, LAB_LAT, LAB_LON));
-        btnShowDirections.setOnClickListener(v -> MapUtils.openDirections(requireContext(), LAB_LAT, LAB_LON));
+        btnShowDirections.setOnClickListener(v -> MapUtils.openDirections(requireContext(), LAB_NAME));
         btnMapLayers.setOnClickListener(v -> showMapLayersDialog());
         btnCompass.setOnClickListener(v -> {
             MapUtils.resetMapBearing();

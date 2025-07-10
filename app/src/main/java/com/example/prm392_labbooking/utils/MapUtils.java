@@ -80,6 +80,14 @@ public class MapUtils {
         context.startActivity(intent);
     }
 
+    public static void openInGoogleMaps(Context context, String placeName) {
+        // Use geo:0,0?q=placeName for best Google Maps search
+        String uri = "geo:0,0?q=" + Uri.encode(placeName);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        context.startActivity(intent);
+    }
+
     public static void recenterMap(MapView mapView, double lat, double lon) {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -91,6 +99,14 @@ public class MapUtils {
     }    public static void openDirections(Context context, double destLat, double destLon) {
         // Use Google Maps directions from current location to lab
         String uri = String.format("https://www.google.com/maps/dir/?api=1&destination=%f,%f&travelmode=driving", destLat, destLon);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setPackage("com.google.android.apps.maps");
+        context.startActivity(intent);
+    }
+    
+    public static void openDirections(Context context, String placeName) {
+        // Use Google Maps directions with place name
+        String uri = "https://www.google.com/maps/dir/?api=1&destination=" + Uri.encode(placeName) + "&travelmode=driving";
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         intent.setPackage("com.google.android.apps.maps");
         context.startActivity(intent);
