@@ -7,7 +7,7 @@
         <item name="android:textColor">@color/colorOnBackground</item>
     </style>
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:statusBarColor">@color/colorBackground</item>
+        <!-- <item name="android:statusBarColor">@color/colorBackground</item> -->
         <!-- Remove windowLightStatusBar to use default (light text on dark bg). If you want dark text, set to true. -->
         <!-- <item name="android:windowLightStatusBar">true</item> -->
     </style>

@@ -17,7 +17,6 @@ import com.example.prm392_labbooking.presentation.map.MapFragment;
 import com.example.prm392_labbooking.presentation.cart.CartFragment;
 import com.example.prm392_labbooking.presentation.settings.SettingsFragment;
 import com.example.prm392_labbooking.presentation.billing.BillingFragment;
-import com.example.prm392_labbooking.presentation.booking.BookingActivity; // Giữ lại
 import com.example.prm392_labbooking.presentation.chat.ChatActivity;
 import com.example.prm392_labbooking.R;
 
@@ -74,10 +73,6 @@ public class NavigationManager {
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
                 .commit();
-    }
-
-    public static void goToBooking(Context context) {
-        context.startActivity(new Intent(context, BookingActivity.class));
     }
 
     public static void goToChat(Context context) {
