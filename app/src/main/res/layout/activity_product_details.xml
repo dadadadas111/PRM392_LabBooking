@@ -1,57 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#FAFAFA">
 
+    <!-- Back Button -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_arrow_back"
+        android:contentDescription="Back"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:tint="?attr/colorControlNormal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Product Name -->
     <TextView
         android:id="@+id/txtProductName"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:text="Product Name"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#222222"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toEndOf="@id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Date Selection -->
+    <TextView
+        android:id="@+id/labelDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Date:"
+        android:textSize="16sp"
+        android:textColor="#555555"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtProductName" />
 
     <TextView
-        android:id="@+id/txtDuration"
-        android:layout_width="match_parent"
+        android:id="@+id/txtDate"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="Choose a date"
         android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:padding="12dp"
+        android:background="@drawable/bg_field_selector"
+        android:clickable="true"
+        android:focusable="true"
+        android:textColor="#000000"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelDate" />
 
+    <!-- Slots Selection -->
     <TextView
-        android:id="@+id/txtPrice"
-        android:layout_width="match_parent"
+        android:id="@+id/labelSlots"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Select Time Slots:"
         android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:textColor="#555555"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtDate" />
+
+    <Button
+        android:id="@+id/btnSelectSlots"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Choose Time Slots"
+        android:textAllCaps="false"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelSlots" />
+
+    <!-- Selected Slots Display -->
+    <TextView
+        android:id="@+id/txtSelectedSlots"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="No slots selected"
+        android:textSize="15sp"
+        android:textColor="#444444"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSelectSlots" />
+
+    <!-- Facilities Section -->
+    <TextView
+        android:id="@+id/labelFacilities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Facilities:"
+        android:textSize="16sp"
+        android:textColor="#555555"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtSelectedSlots" />
 
     <CheckBox
         android:id="@+id/cbWhiteboard"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Whiteboard (+$10)"
-        android:layout_marginTop="16dp" />
+        android:text="Whiteboard"
+        android:layout_marginTop="8dp"
+        android:textColor="#333333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelFacilities" />
 
     <CheckBox
         android:id="@+id/cbTV"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TV (+$15)"
-        android:layout_marginTop="8dp" />
+        android:text="TV"
+        android:layout_marginTop="8dp"
+        android:textColor="#333333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbWhiteboard" />
+
+    <CheckBox
+        android:id="@+id/cbMicrophone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Microphone"
+        android:layout_marginTop="8dp"
+        android:textColor="#333333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbTV" />
 
     <CheckBox
         android:id="@+id/cbNetwork"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Network (+$5)"
-        android:layout_marginTop="8dp" />
+        android:text="Network"
+        android:layout_marginTop="8dp"
+        android:textColor="#333333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbMicrophone" />
 
+    <!-- Price -->
+    <TextView
+        android:id="@+id/txtPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price: $0.00"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cbNetwork" />
+
+    <!-- Add to Cart Button -->
     <Button
         android:id="@+id/btnAddToCart"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Add to Cart"
-        android:layout_marginTop="16dp" />
+        android:textAllCaps="false"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#2196F3"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtPrice" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
