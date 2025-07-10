@@ -1,11 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewProducts"
+    android:background="@color/colorBackground"
+    android:fillViewport="true">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="70dp"/>
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Hero Carousel Section -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/heroViewPager"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:clipToPadding="false"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:overScrollMode="never" />
+
+            <ImageButton
+                android:id="@+id/hero_btn_prev"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginStart="0dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_chevron_left"
+                android:tint="@color/white" />
+
+            <ImageButton
+                android:id="@+id/hero_btn_next"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|end"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_chevron_right"
+                android:tint="@color/white"
+                android:layout_marginEnd="0dp" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/home_welcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_welcome"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/colorOnBackground"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:id="@+id/home_tip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/home_tip"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:textColor="@color/colorSecondary"
+            android:paddingBottom="16dp" />
+
+        <TextView
+            android:id="@+id/home_cart_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="15sp"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:paddingBottom="12dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/list_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/product_list_title"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/colorPrimary"
+                android:gravity="start" />
+
+            <ImageButton
+                android:id="@+id/btnToggleView"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/ic_view_list"
+                android:contentDescription="@string/toggle_view"
+                android:tint="@color/colorPrimary" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewProducts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:clipToPadding="false"/>
+    </LinearLayout>
+</ScrollView>

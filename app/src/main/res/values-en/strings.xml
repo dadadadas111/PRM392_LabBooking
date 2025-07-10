@@ -33,6 +33,7 @@
     <string name="capacity">Capacity: %1$d seats</string>
     <string name="select_package">Select package</string>
     <string name="product_name">Product Name</string>
+    <string name="product_list_title">Available Packages</string>
 
     <!-- Product Details -->
     <string name="package_details">Package Details</string>
@@ -63,6 +64,10 @@
     <string name="tax">Tax (8%)</string>
     <string name="total">Total</string>
     <string name="load_sample_data">Load Sample Data</string>
+    <string name="browse_packages">Browse Packages</string>
+    <string name="chat_support">Support</string>
+    <string name="settings">Settings</string>
+    <string name="cart_summary">You have %1$d items in your cart!</string>
 
     <!-- Billing/Checkout -->
     <string name="billing">Billing</string>
@@ -177,4 +182,26 @@
 
     <!-- Back Button -->
     <string name="back">Back</string>
+
+    <!-- Home Title -->
+    <string name="home_title">Home</string>
+    <string name="home_welcome">Welcome to Lab Booking!</string>
+    <string name="home_tip">Tip: Start by booking a lab or checking your cart.</string>
+    <string name="book_lab">Book a Lab</string>
+    <string name="view_cart">View Cart</string>
+
+    <!-- Hero Carousel -->
+    <string name="hero_title">🔥 Save up to 30% on all bookings</string>
+    <string name="hero_subtitle">Book your lab now and enjoy exclusive discounts.</string>
+    <string name="hero_btn_left">See Deals</string>
+    <string name="hero_btn_right">Book Now</string>
+    <string name="hero_title_2">🎉 New Labs Open!</string>
+    <string name="hero_subtitle_2">Check out our latest locations and book your spot today.</string>
+    <string name="hero_btn_left_2">Explore Labs</string>
+    <string name="hero_btn_right_2">Find Nearest</string>
+    <string name="hero_title_3">⭐ Premium Experience</string>
+    <string name="hero_subtitle_3">Upgrade to premium for exclusive benefits and faster booking.</string>
+    <string name="hero_btn_left_3">Learn More</string>
+    <string name="hero_btn_right_3">Upgrade</string>
+    <string name="see_more">See more</string>
 </resources>

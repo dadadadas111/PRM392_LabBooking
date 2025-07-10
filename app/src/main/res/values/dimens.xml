@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="bottom_nav_height">64dp</dimen>
+    <dimen name="product_grid_spacing">8dp</dimen>
+    <dimen name="product_grid_spacing_small">4dp</dimen>
+</resources>

@@ -14,6 +14,9 @@ import com.example.prm392_labbooking.R;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+    public static final int VIEW_TYPE_GRID = 0;
+    public static final int VIEW_TYPE_LIST = 1;
+    private int viewType = VIEW_TYPE_GRID;
 
     public interface OnProductClickListener {
         void onProductClick(Product product, int position);
@@ -28,7 +31,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName,txtPrice,txtNumber;
+        TextView txtName, txtPrice, txtNumber;
         ImageView imgProduct;
 
         public ProductViewHolder(@NonNull View itemView) {
@@ -40,11 +43,21 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
     }
 
+    public void setViewType(int viewType) {
+        this.viewType = viewType;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return viewType;
+    }
+
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_product, parent, false);
+        int layout = (viewType == VIEW_TYPE_LIST) ? R.layout.item_product_list : R.layout.item_product;
+        View view = LayoutInflater.from(parent.getContext()).inflate(layout, parent, false);
         return new ProductViewHolder(view);
     }
 
@@ -52,9 +65,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.txtName.setText(product.getName());
-        holder.txtPrice.setText("Price: "+String.valueOf(product.getPrice()));
+        holder.txtPrice.setText("Price: " + String.valueOf(product.getPrice()));
         holder.txtNumber.setText("Quantity: " + product.getNumber());
-        holder.imgProduct.setImageResource(product.getImageResId());holder.itemView.setOnClickListener(v -> {
+        holder.imgProduct.setImageResource(product.getImageResId());
+        holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onProductClick(product, position);
             }

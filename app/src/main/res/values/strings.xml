@@ -33,6 +33,7 @@
     <string name="capacity">Sức chứa: %1$d chỗ</string>
     <string name="select_package">Chọn gói</string>
     <string name="product_name">Tên sản phẩm</string>
+    <string name="product_list_title">Danh sách gói</string>
 
     <!-- Product Details -->
     <string name="package_details">Chi tiết gói</string>
@@ -64,6 +65,7 @@
     <string name="total">Tổng cộng</string>
     <string name="load_sample_data">Tải Dữ Liệu Mẫu</string>
     <string name="cart_empty_message">Giỏ hàng của bạn đang trống!</string>
+    <string name="cart_summary">Bạn có %1$d sản phẩm trong giỏ hàng!</string>
 
     <!-- Billing/Checkout -->
     <string name="billing">Thanh toán</string>
@@ -176,4 +178,30 @@
     <string name="date_label">Ngày:</string>
     <string name="slots_label">Khung giờ</string>
     <string name="back">Quay lại</string>
+
+    <!-- Home Title -->
+    <string name="home_title">Trang chủ</string>
+    <string name="home_welcome">Chào mừng bạn đến với Đặt Chỗ Phòng LAB!</string>
+    <string name="home_tip">Mẹo: Bắt đầu bằng cách đặt phòng lab hoặc kiểm tra giỏ hàng của bạn.</string>
+    <string name="book_lab">Đặt Phòng Lab</string>
+    <string name="view_cart">Xem Giỏ Hàng</string>
+    <string name="browse_packages">Xem Gói</string>
+    <string name="chat_support">Hỗ trợ</string>
+    <string name="settings">Cài đặt</string>
+    <string name="toggle_view">Toggle view</string>
+
+    <!-- Hero Section -->
+    <string name="hero_title">🔥 Giảm giá đến 30% cho mọi gói đặt chỗ</string>
+    <string name="hero_subtitle">Đặt phòng lab ngay để nhận ưu đãi độc quyền. Chỉ trong hôm nay</string>
+    <string name="hero_btn_left">Xem ưu đãi</string>
+    <string name="hero_btn_right">Đặt ngay</string>
+    <string name="hero_title_2">🎉 Phòng lab mới khai trương!</string>
+    <string name="hero_subtitle_2">Khám phá các địa điểm mới nhất và đặt chỗ ngay hôm nay.</string>
+    <string name="hero_btn_left_2">Khám phá</string>
+    <string name="hero_btn_right_2">Tìm gần bạn</string>
+    <string name="hero_title_3">⭐ Trải nghiệm nhanh và cao cấp</string>
+    <string name="hero_subtitle_3">Nâng cấp tài khoản để nhận nhiều quyền lợi và đặt chỗ nhanh hơn.</string>
+    <string name="hero_btn_left_3">Tìm hiểu thêm</string>
+    <string name="hero_btn_right_3">Nâng cấp</string>
+    <string name="see_more">Xem thêm</string>
 </resources>
