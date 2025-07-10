@@ -1,6 +1,6 @@
 <resources>
     <!-- App Name -->
-    <string name="app_name">Lab Booking</string>
+    <string name="app_name">LabConnect</string>
 
     <!-- Authentication -->
     <string name="login">Login</string>
@@ -185,7 +185,7 @@
 
     <!-- Home Title -->
     <string name="home_title">Home</string>
-    <string name="home_welcome">Welcome to Lab Booking!</string>
+    <string name="home_welcome">Welcome to LabConnect!</string>
     <string name="home_tip">Tip: Start by booking a lab or checking your cart.</string>
     <string name="book_lab">Book a Lab</string>
     <string name="view_cart">View Cart</string>

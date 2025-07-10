@@ -1,6 +1,6 @@
 <resources>
     <!-- App Name -->
-    <string name="app_name">Đặt Chỗ Phòng LAB</string>
+    <string name="app_name">LabConnect</string>
 
     <!-- Authentication -->
     <string name="login">Đăng nhập</string>
@@ -181,7 +181,7 @@
 
     <!-- Home Title -->
     <string name="home_title">Trang chủ</string>
-    <string name="home_welcome">Chào mừng bạn đến với Đặt Chỗ Phòng LAB!</string>
+    <string name="home_welcome">Chào mừng bạn đến với LabConnect!</string>
     <string name="home_tip">Mẹo: Bắt đầu bằng cách đặt phòng lab hoặc kiểm tra giỏ hàng của bạn.</string>
     <string name="book_lab">Đặt Phòng Lab</string>
     <string name="view_cart">Xem Giỏ Hàng</string>
