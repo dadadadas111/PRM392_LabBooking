@@ -34,25 +34,26 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     private void hideSystemUI() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            getWindow().setDecorFitsSystemWindows(false);
-            final android.view.WindowInsetsController insetsController = getWindow().getInsetsController();
-            if (insetsController != null) {
-                insetsController.hide(android.view.WindowInsets.Type.navigationBars() | android.view.WindowInsets.Type.statusBars());
-                insetsController.setSystemBarsBehavior(
-                    android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-                );
-            }
-        } else {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            );
-        }
+        // REMOVE immersive mode and navigation bar hiding logic to restore system navigation bar
+        // if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        //     getWindow().setDecorFitsSystemWindows(false);
+        //     final android.view.WindowInsetsController insetsController = getWindow().getInsetsController();
+        //     if (insetsController != null) {
+        //         insetsController.hide(android.view.WindowInsets.Type.navigationBars() | android.view.WindowInsets.Type.statusBars());
+        //         insetsController.setSystemBarsBehavior(
+        //             android.view.WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        //         );
+        //     }
+        // } else {
+        //     View decorView = getWindow().getDecorView();
+        //     decorView.setSystemUiVisibility(
+        //         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        //         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+        //         | View.SYSTEM_UI_FLAG_FULLSCREEN
+        //         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+        //         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        //     );
+        // }
     }
 
     protected void initLoadingOverlay() {

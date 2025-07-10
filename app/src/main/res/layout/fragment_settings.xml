@@ -18,13 +18,12 @@
             android:id="@+id/settings_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/settings_title"
-            android:textStyle="bold"
-            android:textSize="24sp"
             android:gravity="center"
-            android:paddingTop="8dp"
-            android:paddingBottom="16dp"
-            android:textColor="@color/colorOnBackground" />
+            android:paddingBottom="0dp"
+            android:text="@string/settings_title"
+            android:textColor="@color/colorOnBackground"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <!-- Account Section -->
         <TextView
