@@ -93,6 +93,17 @@ public class CartFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() != null) {
+            android.view.View nav = getActivity().findViewById(R.id.bottom_navigation);
+            if (nav instanceof com.google.android.material.bottomnavigation.BottomNavigationView) {
+                ((com.google.android.material.bottomnavigation.BottomNavigationView) nav).setSelectedItemId(R.id.nav_cart);
+            }
+        }
+    }
+
     private void updateSummary() {
         double subtotal = 0.0;
         for (CartItem item : cartList) {
