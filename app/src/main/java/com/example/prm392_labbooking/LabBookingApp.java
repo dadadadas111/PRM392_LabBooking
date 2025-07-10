@@ -9,9 +9,6 @@ public class LabBookingApp extends Application {
     public void onCreate() {
         super.onCreate();
         FirebaseApp.initializeApp(this);
-        
-        // Initialize preloading services
-        PreloadManager.getInstance().initialize(this);
     }
     
     @Override
