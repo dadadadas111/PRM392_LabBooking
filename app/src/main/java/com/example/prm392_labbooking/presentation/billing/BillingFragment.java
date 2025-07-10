@@ -22,6 +22,7 @@ import com.example.prm392_labbooking.data.db.DatabaseHelper;
 import com.example.prm392_labbooking.domain.model.CartItem;
 import com.example.prm392_labbooking.domain.usecase.booking.SaveBookingUseCase;
 import com.example.prm392_labbooking.navigation.NavigationManager;
+import com.example.prm392_labbooking.presentation.MainActivity;
 import com.example.prm392_labbooking.presentation.cart.CartFragment;
 import com.example.prm392_labbooking.services.CartManager;
 import com.example.prm392_labbooking.utils.ValidationUtils;
@@ -45,6 +46,8 @@ public class BillingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_billing, container, false);
+
+        ((MainActivity) requireActivity()).hideBottomNavigation();
 
         DatabaseHelper dbHelper = new DatabaseHelper(requireContext());
         saveBookingUseCase = new SaveBookingUseCase(dbHelper);
