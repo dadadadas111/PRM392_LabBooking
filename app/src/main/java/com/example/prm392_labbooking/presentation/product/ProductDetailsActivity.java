@@ -77,6 +77,42 @@ public class ProductDetailsActivity extends AppCompatActivity {
         // Initialize product with full info
         product = new Product(productName, productPrice, productNumber, productImageResId);
 
+        // Backward compatible: booking info
+        String bookingDateStr = intent.getStringExtra("booking_date");
+        String bookingSlotsStr = intent.getStringExtra("booking_slots");
+        String bookingFacilitiesStr = intent.getStringExtra("booking_facilities");
+        if (bookingDateStr != null) {
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                selectedDate = sdf.parse(bookingDateStr);
+                txtDate.setText(sdf.format(selectedDate));
+            } catch (Exception e) { selectedDate = null; }
+        }
+        if (bookingSlotsStr != null && !bookingSlotsStr.isEmpty()) {
+            selectedSlots = new ArrayList<>();
+            String[] slotParts = bookingSlotsStr.split(",");
+            for (String part : slotParts) {
+                try {
+                    int ordinal = Integer.parseInt(part);
+                    selectedSlots.add(Slot.values()[ordinal]);
+                } catch (Exception ignored) {}
+            }
+        }
+        if (bookingFacilitiesStr != null && !bookingFacilitiesStr.isEmpty()) {
+            selectedFacilities = new ArrayList<>();
+            String[] facilityParts = bookingFacilitiesStr.split(",");
+            for (String part : facilityParts) {
+                try {
+                    selectedFacilities.add(Facility.valueOf(part));
+                } catch (Exception ignored) {}
+            }
+            // Set checkboxes
+            cbWhiteboard.setChecked(selectedFacilities.contains(Facility.WHITE_BOARD));
+            cbTV.setChecked(selectedFacilities.contains(Facility.TV));
+            cbMicrophone.setChecked(selectedFacilities.contains(Facility.MICROPHONE));
+            cbNetwork.setChecked(selectedFacilities.contains(Facility.NETWORK));
+        }
+
         // Display product name
         txtProductName.setText(productName);
         // Optionally display image, price, etc. if you have UI elements

@@ -34,7 +34,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public static class CartViewHolder extends RecyclerView.ViewHolder {
         ImageView imgProduct;
         TextView txtProductName, txtProductPrice, txtFacilities, txtSlots, txtDate, txtCartError, txtRemainingTime;
-        ImageButton btnRemoveItem;
+        ImageButton btnRemoveItem, btnEditItem;
 
         public CartViewHolder(View view) {
             super(view);
@@ -47,6 +47,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             btnRemoveItem = view.findViewById(R.id.btnRemoveItem);
             txtCartError = view.findViewById(R.id.txtCartError);
             txtRemainingTime = view.findViewById(R.id.txtRemainingTime);
+            btnEditItem = view.findViewById(R.id.btnEditItem);
         }
     }
 
@@ -129,6 +130,34 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             if (listener != null) {
                 listener.onDeleteItem(position);
             }
+        });
+        // Edit button
+        holder.btnEditItem.setOnClickListener(v -> {
+            android.content.Context context = holder.itemView.getContext();
+            android.content.Intent intent = new android.content.Intent(context, com.example.prm392_labbooking.presentation.product.ProductDetailsActivity.class);
+            intent.putExtra("product_name", item.getProduct().getName());
+            intent.putExtra("product_price", item.getProduct().getPrice());
+            intent.putExtra("product_number", item.getProduct().getNumber());
+            intent.putExtra("product_imageResId", item.getProduct().getImageResId());
+            intent.putExtra("editIndex", position);
+            // Booking info
+            SimpleDateFormat bookingSdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            intent.putExtra("booking_date", bookingSdf.format(item.getDate()));
+            // Serialize slots as comma-separated ordinals
+            StringBuilder slotOrdinals = new StringBuilder();
+            for (Slot s : item.getSlots()) {
+                slotOrdinals.append(s.ordinal()).append(",");
+            }
+            if (slotOrdinals.length() > 0) slotOrdinals.setLength(slotOrdinals.length() - 1);
+            intent.putExtra("booking_slots", slotOrdinals.toString());
+            // Serialize facilities as comma-separated names
+            StringBuilder facilityNames = new StringBuilder();
+            for (Facility f : item.getFacilities()) {
+                facilityNames.append(f.name()).append(",");
+            }
+            if (facilityNames.length() > 0) facilityNames.setLength(facilityNames.length() - 1);
+            intent.putExtra("booking_facilities", facilityNames.toString());
+            context.startActivity(intent);
         });
     }
 

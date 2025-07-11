@@ -61,6 +61,16 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="@string/remove"
                 app:tint="@color/colorError"/>
+
+            <ImageButton
+                android:id="@+id/btnEditItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_edit"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/edit"
+                app:tint="@color/colorPrimary"
+                android:layout_marginStart="8dp" />
         </LinearLayout>
 
         <!-- Facilities -->
