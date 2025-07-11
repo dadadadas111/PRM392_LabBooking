@@ -225,4 +225,7 @@
     <string name="day">days</string>
     <string name="hour">hours</string>
     <string name="min">minutes</string>
+
+    <!-- Edit Button -->
+    <string name="edit">Edit</string>
 </resources>
