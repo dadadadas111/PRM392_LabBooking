@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.prm392_labbooking.R;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 
@@ -103,18 +102,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.txtFacilities.setText(facilities);
 
         // Display slots
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        StringBuilder slotBuilder = new StringBuilder();
-        for (Slot s : item.getSlots()) {
-            slotBuilder.append(s.getStart().format(formatter))
-                    .append(" - ")
-                    .append(s.getEnd().format(formatter))
-                    .append(", ");
-        }
-        String slots = slotBuilder.length() > 0
-                ? slotBuilder.substring(0, slotBuilder.length() - 2)
-                : "";
-        holder.txtSlots.setText(slots);
+        String mergedSlots = com.example.prm392_labbooking.utils.ValidationUtils.getMergedSlotDisplay(item.getSlots());
+        holder.txtSlots.setText(mergedSlots);
 
         // Error and remaining time logic
         boolean expired = !com.example.prm392_labbooking.utils.ValidationUtils.isValidBookingTime(item.getDate(), item.getSlots());
