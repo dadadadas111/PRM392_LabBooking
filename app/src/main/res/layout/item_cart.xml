@@ -108,6 +108,25 @@
             android:text="@string/time_sample"
             android:textColor="@color/colorOnSurface" />
 
+        <TextView
+            android:id="@+id/txtCartError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/colorError"
+            android:textSize="13sp"
+            android:visibility="gone"
+            android:layout_marginTop="4dp" />
+
+        <TextView
+            android:id="@+id/txtRemainingTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/colorAccentPurple"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp" />
+
 
     </LinearLayout>
 

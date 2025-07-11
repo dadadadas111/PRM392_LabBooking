@@ -20,6 +20,7 @@ import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.domain.model.CartAdapter;
 import com.example.prm392_labbooking.domain.model.CartItem;
 import com.example.prm392_labbooking.navigation.NavigationManager;
+import com.example.prm392_labbooking.utils.ValidationUtils;
 import com.google.gson.Gson;
 
 import java.util.List;
@@ -103,8 +104,15 @@ public class CartFragment extends Fragment {
 
     private void updateSummary() {
         double subtotal = 0.0;
+        boolean hasExpired = false;
         for (CartItem item : cartList) {
             subtotal += item.getPrice();
+            if (!ValidationUtils.isValidBookingTime(item.getDate(), item.getSlots())) {
+                item.setError(getString(R.string.cart_item_expired));
+                hasExpired = true;
+            } else {
+                item.setError("");
+            }
         }
 
         double taxRate = 0.08;
@@ -116,12 +124,13 @@ public class CartFragment extends Fragment {
         txtTotal.setText(String.format("$%.2f", total));
 
         // Update checkout button state
-        if (cartList.isEmpty()) {
+        if (cartList.isEmpty() || hasExpired) {
             btnCheckout.setEnabled(false);
             btnCheckout.setAlpha(0.5f);
         } else {
             btnCheckout.setEnabled(true);
             btnCheckout.setAlpha(1.0f);
         }
+        adapter.notifyDataSetChanged();
     }
 }

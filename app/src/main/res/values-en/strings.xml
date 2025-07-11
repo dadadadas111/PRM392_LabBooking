@@ -73,6 +73,7 @@
     <string name="chat_support">Support</string>
     <string name="settings">Settings</string>
     <string name="cart_summary">You have %1$d items in your cart!</string>
+    <string name="cart_item_expired">This booking has expired</string>
 
     <!-- Billing/Checkout -->
     <string name="billing">Billing</string>

@@ -72,6 +72,7 @@
     <string name="load_sample_data">Tải Dữ Liệu Mẫu</string>
     <string name="cart_empty_message">Giỏ hàng của bạn đang trống!</string>
     <string name="cart_summary">Bạn có %1$d sản phẩm trong giỏ hàng!</string>
+    <string name="cart_item_expired">Đặt chỗ này đã hết hạn</string>
 
     <!-- Billing/Checkout -->
     <string name="billing">Thanh toán</string>

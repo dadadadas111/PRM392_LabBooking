@@ -34,7 +34,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
         ImageView imgProduct;
-        TextView txtProductName, txtProductPrice, txtFacilities, txtSlots, txtDate;
+        TextView txtProductName, txtProductPrice, txtFacilities, txtSlots, txtDate, txtCartError, txtRemainingTime;
         ImageButton btnRemoveItem;
 
         public CartViewHolder(View view) {
@@ -46,6 +46,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             txtSlots = view.findViewById(R.id.txtSlots);
             txtDate = view.findViewById(R.id.txtDate);
             btnRemoveItem = view.findViewById(R.id.btnRemoveItem);
+            txtCartError = view.findViewById(R.id.txtCartError);
+            txtRemainingTime = view.findViewById(R.id.txtRemainingTime);
         }
     }
 
@@ -113,6 +115,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 ? slotBuilder.substring(0, slotBuilder.length() - 2)
                 : "";
         holder.txtSlots.setText(slots);
+
+        // Error and remaining time logic
+        boolean expired = !com.example.prm392_labbooking.utils.ValidationUtils.isValidBookingTime(item.getDate(), item.getSlots());
+        if (expired) {
+            holder.txtCartError.setText(holder.itemView.getContext().getString(R.string.cart_item_expired));
+            holder.txtCartError.setVisibility(View.VISIBLE);
+        } else {
+            holder.txtCartError.setText("");
+            holder.txtCartError.setVisibility(View.GONE);
+        }
+        long remaining = com.example.prm392_labbooking.utils.ValidationUtils.getRemainingTimeUntilBooking(item.getDate(), item.getSlots());
+        String remainingLabel = com.example.prm392_labbooking.utils.ValidationUtils.getLabelRelativeRemainingTime(holder.itemView.getContext(), remaining);
+        holder.txtRemainingTime.setText(holder.itemView.getContext().getString(R.string.remaining_time) + ": " + remainingLabel);
+        holder.txtRemainingTime.setVisibility(View.VISIBLE);
 
         // Delete button
         holder.btnRemoveItem.setOnClickListener(v -> {
