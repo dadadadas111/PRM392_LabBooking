@@ -69,13 +69,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
         // Get data from Intent
         Intent intent = getIntent();
         String productName = intent.getStringExtra("product_name");
+        double productPrice = intent.getDoubleExtra("product_price", 0.0);
+        int productNumber = intent.getIntExtra("product_number", 0);
+        int productImageResId = intent.getIntExtra("product_imageResId", R.drawable.ic_launcher_foreground);
         editIndex = intent.getIntExtra("editIndex", -1);
 
-        // Initialize product
-        product = new Product(productName);
+        // Initialize product with full info
+        product = new Product(productName, productPrice, productNumber, productImageResId);
 
         // Display product name
         txtProductName.setText(productName);
+        // Optionally display image, price, etc. if you have UI elements
+        // e.g. imgProduct.setImageResource(productImageResId);
+        // txtPrice.setText(getString(R.string.total_label, productPrice));
 
         // Setup date picker
         txtDate.setOnClickListener(v -> showDatePickerDialog());

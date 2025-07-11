@@ -66,8 +66,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         holder.txtProductName.setText(item.getProduct().getName());
         holder.txtProductPrice.setText(String.format("$%.2f", item.getPrice()));
 
-        // Image placeholder (since images were removed)
-
+        // Display product image
+        holder.imgProduct.setImageResource(item.getProduct().getImageResId());
 
         // Display date
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -96,9 +96,14 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 facilitiesBuilder.append(holder.itemView.getContext().getString(resId)).append(", ");
             }
         }
-        String facilities = facilitiesBuilder.length() > 0
+        String facilities;
+        if (item.getFacilities() == null || item.getFacilities().isEmpty()) {
+            facilities = holder.itemView.getContext().getString(R.string.none);
+        } else {
+            facilities = facilitiesBuilder.length() > 0
                 ? facilitiesBuilder.substring(0, facilitiesBuilder.length() - 2)
-                : "";
+                : holder.itemView.getContext().getString(R.string.none);
+        }
         holder.txtFacilities.setText(facilities);
 
         // Display slots

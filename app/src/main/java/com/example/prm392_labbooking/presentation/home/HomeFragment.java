@@ -141,6 +141,10 @@ public class HomeFragment extends Fragment {
         adapter = new ProductAdapter(productList, (product, position) -> {
             Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
             intent.putExtra("product_name", product.getName());
+            intent.putExtra("product_price", product.getPrice());
+            intent.putExtra("product_number", product.getNumber());
+            intent.putExtra("product_imageResId", product.getImageResId());
+            // You can also use Parcelable for full object, but for now pass all fields
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);
