@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Product {
     private String name;
-    private String facilities; // delete later
     private double price; // Added price field
 
     // new fields
@@ -39,14 +38,6 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getFacilities() {
-        return facilities;
-    }
-
-    public void setFacilities(String facilities) {
-        this.facilities = facilities;
     }
 
     public double getPrice() {

@@ -11,6 +11,7 @@ public class CartItem {
     private Product product;
     private List<Facility> _facilities;
     private List<Slot> slots;
+    private String error;
 
     public CartItem() {
     }
@@ -66,5 +67,13 @@ public class CartItem {
 
     public void setSlots(List<Slot> slots) {
         this.slots = slots;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

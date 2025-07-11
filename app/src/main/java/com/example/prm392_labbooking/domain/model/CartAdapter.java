@@ -15,27 +15,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.prm392_labbooking.R;
 
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
-    private List<CartItem> items;
-    private OnCartActionListener listener;
+    private final List<CartItem> cartList;
+    private final OnCartActionListener listener;
 
     public interface OnCartActionListener {
         void onDeleteItem(int position);
     }
 
-    public CartAdapter(List<CartItem> items, OnCartActionListener listener) {
-        this.items = items;
+    public CartAdapter(List<CartItem> cartList, OnCartActionListener listener) {
+        this.cartList = cartList;
         this.listener = listener;
     }
 
     public static class CartViewHolder extends RecyclerView.ViewHolder {
         ImageView imgProduct;
-        TextView txtProductName, txtProductPrice, txtFacilities, txtSlots,txtDate;
+        TextView txtProductName, txtProductPrice, txtFacilities, txtSlots, txtDate, txtCartError, txtRemainingTime;
         ImageButton btnRemoveItem;
 
         public CartViewHolder(View view) {
@@ -47,6 +45,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             txtSlots = view.findViewById(R.id.txtSlots);
             txtDate = view.findViewById(R.id.txtDate);
             btnRemoveItem = view.findViewById(R.id.btnRemoveItem);
+            txtCartError = view.findViewById(R.id.txtCartError);
+            txtRemainingTime = view.findViewById(R.id.txtRemainingTime);
         }
     }
 
@@ -60,21 +60,21 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        CartItem item = items.get(position);
+        CartItem item = cartList.get(position);
 
-        // Hiển thị tên và giá sản phẩm
+        // Display product name and price
         holder.txtProductName.setText(item.getProduct().getName());
         holder.txtProductPrice.setText(String.format("$%.2f", item.getPrice()));
 
-        // Nếu bạn có ảnh sản phẩm thực tế, xử lý tại đây
-        // holder.imgProduct.setImageResource(...) hoặc dùng Glide/Picasso nếu ảnh URL
+        // Display product image
+        holder.imgProduct.setImageResource(item.getProduct().getImageResId());
 
+        // Display date
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String formattedDate = sdf.format(item.getDate());
         holder.txtDate.setText(formattedDate);
 
-
-        // Hiển thị tiện ích (Facility enum)
+        // Display facilities
         StringBuilder facilitiesBuilder = new StringBuilder();
         for (Facility f : item.getFacilities()) {
             int resId = 0;
@@ -96,29 +96,35 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 facilitiesBuilder.append(holder.itemView.getContext().getString(resId)).append(", ");
             }
         }
-        String facilities = facilitiesBuilder.length() > 0
+        String facilities;
+        if (item.getFacilities() == null || item.getFacilities().isEmpty()) {
+            facilities = holder.itemView.getContext().getString(R.string.none);
+        } else {
+            facilities = facilitiesBuilder.length() > 0
                 ? facilitiesBuilder.substring(0, facilitiesBuilder.length() - 2)
-                : "";
+                : holder.itemView.getContext().getString(R.string.none);
+        }
         holder.txtFacilities.setText(facilities);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        StringBuilder slotBuilder = new StringBuilder();
+        // Display slots
+        String mergedSlots = com.example.prm392_labbooking.utils.ValidationUtils.getMergedSlotDisplay(item.getSlots());
+        holder.txtSlots.setText(mergedSlots);
 
-        for (Slot s : item.getSlots()) {
-            slotBuilder.append(s.getStart().format(formatter))
-                    .append(" - ")
-                    .append(s.getEnd().format(formatter))
-                    .append(", ");
+        // Error and remaining time logic
+        boolean expired = !com.example.prm392_labbooking.utils.ValidationUtils.isValidBookingTime(item.getDate(), item.getSlots());
+        if (expired) {
+            holder.txtCartError.setText(holder.itemView.getContext().getString(R.string.cart_item_expired));
+            holder.txtCartError.setVisibility(View.VISIBLE);
+        } else {
+            holder.txtCartError.setText("");
+            holder.txtCartError.setVisibility(View.GONE);
         }
+        long remaining = com.example.prm392_labbooking.utils.ValidationUtils.getRemainingTimeUntilBooking(item.getDate(), item.getSlots());
+        String remainingLabel = com.example.prm392_labbooking.utils.ValidationUtils.getLabelRelativeRemainingTime(holder.itemView.getContext(), remaining);
+        holder.txtRemainingTime.setText(holder.itemView.getContext().getString(R.string.remaining_time) + ": " + remainingLabel);
+        holder.txtRemainingTime.setVisibility(View.VISIBLE);
 
-
-        String slots = slotBuilder.length() > 0
-                ? slotBuilder.substring(0, slotBuilder.length() - 2)
-                : "";
-
-        holder.txtSlots.setText(slots);
-
-        // Nút xóa
+        // Delete button
         holder.btnRemoveItem.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onDeleteItem(position);
@@ -128,18 +134,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return cartList.size();
     }
 
     public void clearCart() {
-        items.clear();
+        cartList.clear();
         notifyDataSetChanged();
-    }
-
-    public void removeItem(int position) {
-        if (position >= 0 && position < items.size()) {
-            items.remove(position);
-            notifyItemRemoved(position);
-        }
     }
 }

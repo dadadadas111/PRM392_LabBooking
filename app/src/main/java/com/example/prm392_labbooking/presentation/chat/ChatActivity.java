@@ -135,14 +135,14 @@ public class ChatActivity extends AuthRequiredActivity {
                                 cachedChatbotMessages = null;
                                 chatAdapter.notifyDataSetChanged();
                                 saveChatHistory();
-                                Toast.makeText(this, getString(R.string.menu_clear_chat) + "d", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, getString(R.string.menu_clear_chat), Toast.LENGTH_SHORT).show();
                             } else {
                                 supportMessages.clear();
                                 cachedSupportMessages = null;
                                 chatMessages.clear();
                                 chatAdapter.notifyDataSetChanged();
                                 saveSupportHistory();
-                                Toast.makeText(this, getString(R.string.menu_clear_chat) + "d", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, getString(R.string.menu_clear_chat), Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton(getString(R.string.dialog_cancel), null)

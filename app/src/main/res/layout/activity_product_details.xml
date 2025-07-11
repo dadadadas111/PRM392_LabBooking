@@ -1,57 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/colorBackground"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/txtProductName"
+    <!-- Top Bar -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:orientation="horizontal"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:gravity="center_vertical">
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="@color/colorPrimary" />
+        <TextView
+            android:id="@+id/txtProductName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/product_name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorOnBackground"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Date Selection -->
+    <TextView
+        android:id="@+id/labelDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/date_label"
+        android:textColor="@color/colorOnBackground"
+        android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/txtDuration"
+        android:id="@+id/txtDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:background="@drawable/bg_bot_message"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="12dp"
+        android:text="@string/choose_date"
+        android:textColor="@color/colorOnSurface"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
 
+    <!-- Timeslot List -->
+    <TextView
+        android:id="@+id/labelSlots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/slots_label"
+        android:textColor="@color/colorOnBackground"
+        android:textSize="16sp" />
+    <Button
+        android:id="@+id/btnSelectSlots"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_time_slots"
+        android:textAllCaps="false"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/colorSecondary"
+        android:textColor="@color/colorOnPrimary" />
+    <LinearLayout
+        android:id="@+id/timeslotList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Facilities Table -->
+    <TextView
+        android:id="@+id/labelFacilities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/facilities_label"
+        android:textColor="@color/colorOnBackground"
+        android:textSize="16sp" />
+    <TableLayout
+        android:id="@+id/facilitiesTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1,2"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+        <TableRow>
+            <TextView android:text="" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <TextView android:text="@string/facility_name" android:textStyle="bold" android:textColor="@color/colorOnBackground" />
+            <TextView android:text="@string/facility_price" android:textStyle="bold" android:textColor="@color/colorOnBackground" />
+        </TableRow>
+        <TableRow>
+            <CheckBox android:id="@+id/cbWhiteboard" android:buttonTint="@color/colorPrimary" />
+
+            <TextView
+                android:text="@string/facility_white_board"
+                android:textColor="@color/colorOnBackground" />
+            <TextView android:id="@+id/priceWhiteboard" android:text="10$" android:textColor="@color/colorPrimary" />
+        </TableRow>
+        <TableRow>
+            <CheckBox android:id="@+id/cbTV" android:buttonTint="@color/colorPrimary" />
+
+            <TextView
+                android:text="@string/facility_tv"
+                android:textColor="@color/colorOnBackground" />
+            <TextView android:id="@+id/priceTV" android:text="15$" android:textColor="@color/colorPrimary" />
+        </TableRow>
+        <TableRow>
+            <CheckBox android:id="@+id/cbMicrophone" android:buttonTint="@color/colorPrimary" />
+
+            <TextView
+                android:text="@string/facility_microphone"
+                android:textColor="@color/colorOnBackground" />
+
+            <TextView
+                android:id="@+id/priceMicrophone"
+                android:text="8$"
+                android:textColor="@color/colorPrimary" />
+        </TableRow>
+        <TableRow>
+            <CheckBox android:id="@+id/cbNetwork" android:buttonTint="@color/colorPrimary" />
+
+            <TextView
+                android:text="@string/facility_network"
+                android:textColor="@color/colorOnBackground" />
+
+            <TextView
+                android:id="@+id/priceNetwork"
+                android:text="5$"
+                android:textColor="@color/colorPrimary" />
+        </TableRow>
+    </TableLayout>
+
+    <!-- Price -->
     <TextView
         android:id="@+id/txtPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/total_label"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-    <CheckBox
-        android:id="@+id/cbWhiteboard"
+    <!-- Remaining Time -->
+    <TextView
+        android:id="@+id/txtRemainingTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Whiteboard (+$10)"
-        android:layout_marginTop="16dp" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text=""
+        android:textColor="@color/colorWarning"
+        android:textSize="15sp" />
 
-    <CheckBox
-        android:id="@+id/cbTV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TV (+$15)"
-        android:layout_marginTop="8dp" />
-
-    <CheckBox
-        android:id="@+id/cbNetwork"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Network (+$5)"
-        android:layout_marginTop="8dp" />
-
+    <!-- Add to Cart Button -->
     <Button
         android:id="@+id/btnAddToCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add to Cart"
-        android:layout_marginTop="16dp" />
+        android:text="@string/add_to_cart"
+        android:textAllCaps="false"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@color/colorOnPrimary"
+        android:enabled="false" />
+
+    <!-- Error Message -->
+    <TextView
+        android:id="@+id/txtErrorMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/colorError"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone" />
 
 </LinearLayout>
