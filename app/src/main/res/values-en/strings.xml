@@ -42,7 +42,7 @@
     <string name="facility_white_board">White Board</string>
     <string name="facility_tv">TV</string>
     <string name="facility_microphone">Microphone</string>
-    <string name="facility_network">Network</string>
+    <string name="facility_network">Wifi</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="added_to_cart">Added to cart</string>
     <!-- Product Details Activity Specific -->
@@ -228,4 +228,18 @@
 
     <!-- Edit Button -->
     <string name="edit">Edit</string>
+
+    <!-- Product Names -->
+    <string name="product_1">1 seat</string>
+    <string name="product_2">2 seats</string>
+    <string name="product_3">3 seats</string>
+    <string name="product_4">4 seats</string>
+    <string name="product_5">5 seats</string>
+    <string name="product_6">6 seats</string>
+    <string name="product_7">4 seats - 1 table</string>
+    <string name="product_8">6 seats - 1 table</string>
+    <string name="product_9">12 seats - 2 tables</string>
+    <string name="product_price_label">Price: %1$.2f</string>
+    <string name="product_quantity_label">Quantity: %1$d</string>
+    <string name="cart_remove_confirm">Are you sure you want to remove this item from your cart?</string>
 </resources>

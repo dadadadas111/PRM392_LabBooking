@@ -128,23 +128,23 @@ public class HomeFragment extends Fragment {
 
         // Product list
         productList = new ArrayList<>();
-        productList.add(new Product("One Sheet",40,5,R.drawable.seat1));
-        productList.add(new Product("Tow Sheet",50,6,R.drawable.seat2));
-        productList.add(new Product("Three Sheet",60,7,R.drawable.seat3));
-        productList.add(new Product("Four Sheet",70,8,R.drawable.seat4));
-        productList.add(new Product("Five Sheet",80,9,R.drawable.seat5));
-        productList.add(new Product("Six Sheet",90,10,R.drawable.seat6));
-        productList.add(new Product("Table 4-Sheet",100,11,R.drawable.seat7));
-        productList.add(new Product("Table 6-Sheet",110,12,R.drawable.seat8));
-        productList.add(new Product("Table 12-Sheet",120,13,R.drawable.seat9));
+        productList.add(new Product("product_1",40,5,R.drawable.seat1));
+        productList.add(new Product("product_2",50,6,R.drawable.seat2));
+        productList.add(new Product("product_3",60,7,R.drawable.seat3));
+        productList.add(new Product("product_4",70,8,R.drawable.seat4));
+        productList.add(new Product("product_5",80,9,R.drawable.seat5));
+        productList.add(new Product("product_6",90,10,R.drawable.seat6));
+        productList.add(new Product("product_7",100,11,R.drawable.seat7));
+        productList.add(new Product("product_8",110,12,R.drawable.seat8));
+        productList.add(new Product("product_9",120,13,R.drawable.seat9));
 
         adapter = new ProductAdapter(productList, (product, position) -> {
             Intent intent = new Intent(getContext(), ProductDetailsActivity.class);
-            intent.putExtra("product_name", product.getName());
+            int nameResId = this.getResources().getIdentifier(product.getName(), "string", this.requireActivity().getPackageName());
+            intent.putExtra("product_name", this.getString(nameResId));
             intent.putExtra("product_price", product.getPrice());
             intent.putExtra("product_number", product.getNumber());
             intent.putExtra("product_imageResId", product.getImageResId());
-            // You can also use Parcelable for full object, but for now pass all fields
             startActivity(intent);
         });
         recyclerView.setAdapter(adapter);

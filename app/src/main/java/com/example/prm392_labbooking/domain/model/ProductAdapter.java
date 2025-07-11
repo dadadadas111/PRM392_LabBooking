@@ -64,9 +64,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
-        holder.txtName.setText(product.getName());
-        holder.txtPrice.setText("Price: " + String.valueOf(product.getPrice()));
-        holder.txtNumber.setText("Quantity: " + product.getNumber());
+        // Localized name
+        int nameResId = holder.itemView.getContext().getResources().getIdentifier(product.getName(), "string", holder.itemView.getContext().getPackageName());
+        holder.txtName.setText(holder.itemView.getContext().getString(nameResId));
+        // Localized price and quantity
+        holder.txtPrice.setText(holder.itemView.getContext().getString(R.string.product_price_label, product.getPrice()));
+        holder.txtNumber.setText(holder.itemView.getContext().getString(R.string.product_quantity_label, product.getNumber()));
         holder.imgProduct.setImageResource(product.getImageResId());
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {

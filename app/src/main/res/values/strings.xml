@@ -42,7 +42,7 @@
     <string name="facility_white_board">Bảng trắng</string>
     <string name="facility_tv">Tivi</string>
     <string name="facility_microphone">Microphone</string>
-    <string name="facility_network">Mạng </string>
+    <string name="facility_network">Wifi</string>
     <string name="add_to_cart">Thêm vào giỏ</string>
     <string name="added_to_cart">Đã thêm vào giỏ hàng</string>
 
@@ -72,7 +72,7 @@
     <string name="load_sample_data">Tải Dữ Liệu Mẫu</string>
     <string name="cart_empty_message">Giỏ hàng của bạn đang trống!</string>
     <string name="cart_summary">Bạn có %1$d sản phẩm trong giỏ hàng!</string>
-    <string name="cart_item_expired">Đặt chỗ này đã hết hạn</string>
+    <string name="cart_item_expired">Gói này đã hết hạn</string>
 
     <!-- Billing/Checkout -->
     <string name="billing">Thanh toán</string>
@@ -99,7 +99,7 @@
 
     <!-- Notifications -->
     <string name="cart_not_empty">Bạn còn sản phẩm trong giỏ hàng!</string>
-    <string name="ok">OK</string>
+    <string name="ok">Đồng ý</string>
     <string name="cancel">Hủy</string>
 
     <!-- Map -->
@@ -224,4 +224,18 @@
     <string name="hour">giờ</string>
     <string name="min">phút</string>
     <string name="edit">Chỉnh sửa</string>
+
+    <!-- Product Names -->
+    <string name="product_1">1 chỗ ngồi</string>
+    <string name="product_2">2 chỗ ngồi</string>
+    <string name="product_3">3 chỗ ngồi</string>
+    <string name="product_4">4 chỗ ngồi</string>
+    <string name="product_5">5 chỗ ngồi</string>
+    <string name="product_6">6 chỗ ngồi</string>
+    <string name="product_7">4 chỗ ngồi - 1 bàn</string>
+    <string name="product_8">6 chỗ ngồi - 1 bàn</string>
+    <string name="product_9">12 chỗ ngồi - 2 bàn</string>
+    <string name="product_price_label">Giá: %1$.2f</string>
+    <string name="product_quantity_label">Số lượng: %1$d</string>
+    <string name="cart_remove_confirm">Bạn có chắc muốn xóa mục này khỏi giỏ hàng?</string>
 </resources>

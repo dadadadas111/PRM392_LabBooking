@@ -52,12 +52,19 @@ public class CartFragment extends Fragment {
 
         // Set up adapter with delete action
         adapter = new CartAdapter(cartList, position -> {
-            cartManager.removeFromCart(position); // Remove from CartManager and save
-            cartList.clear();
-            cartList.addAll(cartManager.getCartItems()); // Sync cartList with CartManager
-            adapter.notifyItemRemoved(position);
-            adapter.notifyItemRangeChanged(position, cartList.size()); // Update remaining items
-            updateSummary();
+            new androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle(getString(R.string.remove))
+                .setMessage(getString(R.string.cart_remove_confirm))
+                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {
+                    cartManager.removeFromCart(position); // Remove from CartManager and save
+                    cartList.clear();
+                    cartList.addAll(cartManager.getCartItems()); // Sync cartList with CartManager
+                    adapter.notifyItemRemoved(position);
+                    adapter.notifyItemRangeChanged(position, cartList.size()); // Update remaining items
+                    updateSummary();
+                })
+                .setNegativeButton(getString(R.string.cancel), null)
+                .show();
         });
 
         // Disable checkout button if cart is empty
