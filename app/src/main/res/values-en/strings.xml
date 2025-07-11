@@ -102,6 +102,13 @@
     <string name="cart_not_empty">You still have items in your cart!</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
+    <string name="cart_expiry_title">Booking Expiry Reminder</string>
+    <string name="cart_expiry_message">Your booking for %1$s will be expired at %2$s.</string>
+    <string name="cart_expiry_channel_name">Booking Reminders</string>
+    <string name="cart_expiry_channel_desc">Notifications for expiring bookings in your cart.</string>
+    <string name="expiry_24h">24 hours</string>
+    <string name="expiry_10h">10 hours</string>
+    <string name="expiry_1h">1 hour</string>
 
     <!-- Map -->
     <string name="lab_location">Lab Location</string>

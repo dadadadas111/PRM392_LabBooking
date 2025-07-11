@@ -34,8 +34,8 @@ public class LocaleUtils {
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 
-    public static void applyLocale(Activity activity) {
-        String lang = getSavedLanguage(activity);
-        setLocale(activity, lang);
+    public static void applyLocale(Context context) {
+        String lang = getSavedLanguage(context);
+        setLocale(context, lang);
     }
 }

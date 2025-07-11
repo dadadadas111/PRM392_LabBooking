@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,8 +17,6 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.domain.model.Product;
 import com.example.prm392_labbooking.domain.model.ProductAdapter;
-import com.example.prm392_labbooking.navigation.NavigationManager;
-import com.example.prm392_labbooking.services.CartManager;
 import com.example.prm392_labbooking.presentation.product.ProductDetailsActivity;
 
 import java.util.ArrayList;
@@ -115,16 +111,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        // Cart summary logic
-        TextView cartSummary = view.findViewById(R.id.home_cart_summary);
-        CartManager cartManager = new CartManager(requireContext());
-        int cartCount = cartManager.getCartItems().size();
-        if (cartCount > 0) {
-            cartSummary.setText(getString(R.string.cart_summary, cartCount));
-            cartSummary.setVisibility(View.VISIBLE);
-        } else {
-            cartSummary.setVisibility(View.GONE);
-        }
+//        // Cart summary logic
+//        TextView cartSummary = view.findViewById(R.id.home_cart_summary);
+//        CartManager cartManager = new CartManager(requireContext());
+//        int cartCount = cartManager.getCartItems().size();
+//        if (cartCount > 0) {
+//            cartSummary.setText(getString(R.string.cart_summary, cartCount));
+//            cartSummary.setVisibility(View.VISIBLE);
+//        } else {
+//            cartSummary.setVisibility(View.GONE);
+//        }
 
         // Product list
         productList = new ArrayList<>();

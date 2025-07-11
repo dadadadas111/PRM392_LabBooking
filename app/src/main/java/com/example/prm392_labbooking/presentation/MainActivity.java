@@ -1,24 +1,25 @@
 package com.example.prm392_labbooking.presentation;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.prm392_labbooking.navigation.NavigationManager;
-import com.example.prm392_labbooking.services.CartManager;
+import com.example.prm392_labbooking.presentation.cart.CartManager;
 import com.example.prm392_labbooking.services.PreloadManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.data.db.DatabaseHelper;
 import com.example.prm392_labbooking.domain.model.CartItem;
-import android.database.sqlite.SQLiteDatabase;
-import android.content.ContentValues;
 import com.example.prm392_labbooking.presentation.base.AuthRequiredActivity;
 import com.example.prm392_labbooking.utils.LocaleUtils;
 import com.example.prm392_labbooking.utils.ThemeUtils;
@@ -27,9 +28,8 @@ import java.util.List;
 
 public class MainActivity extends AuthRequiredActivity {
     private static final int PERMISSION_REQUEST_CODE = 1001;
-    private DatabaseHelper dbHelper;
-
     private CartManager cartManager;
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         LocaleUtils.applyLocale(this); // Apply locale before theme
@@ -37,25 +37,17 @@ public class MainActivity extends AuthRequiredActivity {
         PreloadManager.getInstance().initialize(this); // Preload Google Maps, Firebase, and MapView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        initLoadingOverlay();
-//
-        dbHelper = new DatabaseHelper(this);
-        initializeSampleData();
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-        cartManager = new CartManager(this);
-//        cartManager.clearCart();
-        checkCartAndNotify();
-//        // Test button for loading overlay
-//        findViewById(R.id.btnTestLoading).setOnClickListener(v -> {
-//            if (findViewById(R.id.loadingOverlay).getVisibility() == android.view.View.VISIBLE) {
-//                hideLoading();
-//            } else {
-//                showLoading();
-//            }
-//        });
+        cartManager = CartManager.getInstance(this);
+        Intent intent = getIntent();
+        if (intent == null || !intent.getBooleanExtra("open_cart", false)) {
+            List<CartItem> cartItems = cartManager.getCartItems();
+            for (int i = 0; i < cartItems.size(); i++) {
+                com.example.prm392_labbooking.notifications.CartExpiryScheduler.pushImmediateNotification(this, cartItems.get(i), i);
+            }
+        }
 
-        // Show HomeFragment by default
         if (savedInstanceState == null) {
             NavigationManager.showHome(getSupportFragmentManager());
         }
@@ -84,10 +76,13 @@ public class MainActivity extends AuthRequiredActivity {
         requestNecessaryPermissions();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
     private void requestNecessaryPermissions() {
         String[] permissions = {
                 Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.POST_NOTIFICATIONS,
+                Manifest.permission.USE_EXACT_ALARM
         };
         List<String> permissionsToRequest = new java.util.ArrayList<>();
         for (String perm : permissions) {
@@ -112,40 +107,22 @@ public class MainActivity extends AuthRequiredActivity {
         }
     }
 
-    private void checkCartAndNotify() {
-        if (!cartManager.getCartItems().isEmpty()) {
-            Toast.makeText(this, "You have items in your cart!", Toast.LENGTH_LONG).show();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (cartManager == null) {
+            cartManager = CartManager.getInstance(this);
         }
-    }
+        // Check if launched from notification to open cart fragment
+        Intent intent = getIntent();
+        if (intent != null && intent.getBooleanExtra("open_cart", false)) {
+            NavigationManager.showCart(getSupportFragmentManager());
+            // Optionally clear the flag so it doesn't repeat
+            intent.removeExtra("open_cart");
+        }
+        else {
 
-    private void initializeSampleData() {
-        CartItem item1 = new CartItem();
-        // TODO for Son: Sửa lại CartItem cho đúng logic với Đông.
-//        item1.setPackageName("Seat Package (4 seats)");
-//        item1.setDetails("With whiteboard");
-        item1.setPrice(50.0);
-
-        CartItem item2 = new CartItem();
-        // TODO for Son: Sửa lại CartItem cho đúng logic với Đông.
-//        item2.setPackageName("Table Package (6 seats)");
-//        item2.setDetails("With TV and network");
-        item2.setPrice(75.0);
-
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete("cart", null, null); // Xóa dữ liệu cũ nếu có
-        ContentValues values1 = new ContentValues();
-        // TODO for Son: Sửa lại CartItem cho đúng logic với Đông.
-//        values1.put("package_name", item1.getPackageName());
-//        values1.put("details", item1.getDetails());
-        values1.put("price", item1.getPrice());
-        db.insert("cart", null, values1);
-
-        ContentValues values2 = new ContentValues();
-        // TODO for Son: Sửa lại CartItem cho đúng logic với Đông.
-//        values2.put("package_name", item2.getPackageName());
-//        values2.put("details", item2.getDetails());
-        values2.put("price", item2.getPrice());
-        db.insert("cart", null, values2);
+        }
     }
 
     public void hideBottomNavigation() {

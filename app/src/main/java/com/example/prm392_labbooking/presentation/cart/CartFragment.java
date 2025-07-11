@@ -20,6 +20,7 @@ import com.example.prm392_labbooking.R;
 import com.example.prm392_labbooking.domain.model.CartAdapter;
 import com.example.prm392_labbooking.domain.model.CartItem;
 import com.example.prm392_labbooking.navigation.NavigationManager;
+import com.example.prm392_labbooking.notifications.CartExpiryScheduler;
 import com.example.prm392_labbooking.utils.ValidationUtils;
 import com.google.gson.Gson;
 
@@ -52,6 +53,8 @@ public class CartFragment extends Fragment {
 
         // Set up adapter with delete action
         adapter = new CartAdapter(cartList, position -> {
+            CartItem item = cartList.get(position);
+            CartExpiryScheduler.cancelExpiryAlarms(requireContext(), item, position);
             new androidx.appcompat.app.AlertDialog.Builder(requireContext())
                 .setTitle(getString(R.string.remove))
                 .setMessage(getString(R.string.cart_remove_confirm))
@@ -107,6 +110,11 @@ public class CartFragment extends Fragment {
         cartList.addAll(cartManager.getCartItems());
         adapter.notifyDataSetChanged();
         updateSummary();
+
+        // Push notification for all cart items when fragment is resumed
+//        for (int i = 0; i < cartList.size(); i++) {
+//            CartExpiryScheduler.pushImmediateNotification(requireContext(), cartList.get(i), i);
+//        }
     }
 
     private void updateSummary() {
@@ -139,5 +147,10 @@ public class CartFragment extends Fragment {
             btnCheckout.setAlpha(1.0f);
         }
         adapter.notifyDataSetChanged();
+
+        // After adding/editing cart items, schedule expiry alarms
+        for (int i = 0; i < cartList.size(); i++) {
+            CartExpiryScheduler.scheduleExpiryAlarms(requireContext(), cartList.get(i), i);
+        }
     }
 }
