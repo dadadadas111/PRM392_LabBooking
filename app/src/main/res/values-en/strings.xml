@@ -1,4 +1,5 @@
 <resources>
+    <!-- ENGLISH -->
     <!-- App Name -->
     <string name="app_name">LabConnect</string>
 
@@ -44,6 +45,10 @@
     <string name="facility_network">Network</string>
     <string name="add_to_cart">Add to cart</string>
     <string name="added_to_cart">Added to cart</string>
+    <!-- Product Details Activity Specific -->
+    <string name="choose_date">Choose date</string>
+    <string name="choose_time_slots">Choose time slots</string>
+    <string name="no_slots_selected">No slots selected</string>
 
     <!-- Cart -->
     <string name="cart">Cart</string>
@@ -141,6 +146,8 @@
     <string name="retry">Retry</string>
     <string name="close">Close</string>
     <string name="reset_password_email_sent">Password reset email sent! Please check your inbox.</string>
+    <string name="general_error_required_fields">Please fill all required fields</string>
+    <string name="none">None</string>
 
     <!-- Settings -->
     <string name="settings_title">Settings</string>
@@ -179,6 +186,9 @@
     <string name="facilities_label">Facilities:</string>
     <string name="date_label">Date:</string>
     <string name="slots_label">Slots</string>
+    <string name="remaining_time">Remaining time</string>
+    <string name="facility_name">Name</string>
+    <string name="facility_price">Price</string>
 
     <!-- Back Button -->
     <string name="back">Back</string>
@@ -211,4 +221,7 @@
 
     <!-- Map Actions Toggle -->
     <string name="toggle_map_actions">Show/hide map actions</string>
+    <string name="day">days</string>
+    <string name="hour">hours</string>
+    <string name="min">minutes</string>
 </resources>

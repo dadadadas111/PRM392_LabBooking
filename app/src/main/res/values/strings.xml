@@ -1,4 +1,5 @@
 <resources>
+    <!-- VIETNAMESE -->
     <!-- App Name -->
     <string name="app_name">LabConnect</string>
 
@@ -44,6 +45,11 @@
     <string name="facility_network">Mạng </string>
     <string name="add_to_cart">Thêm vào giỏ</string>
     <string name="added_to_cart">Đã thêm vào giỏ hàng</string>
+
+    <!-- Product Details Activity Specific -->
+    <string name="choose_date">Chọn ngày</string>
+    <string name="choose_time_slots">Chọn khung giờ</string>
+    <string name="no_slots_selected">Chưa chọn khung giờ</string>
 
     <!-- Cart -->
     <string name="cart">Giỏ hàng</string>
@@ -139,6 +145,8 @@
     <string name="retry">Thử lại</string>
     <string name="close">Đóng</string>
     <string name="reset_password_email_sent">Đã gửi email đặt lại mật khẩu! Vui lòng kiểm tra hộp thư của bạn.</string>
+    <string name="general_error_required_fields">Vui lòng điền thông tin hợp lệ</string>
+    <string name="none">Không</string>
 
     <!-- Settings -->
     <string name="settings_title">Cài đặt</string>
@@ -188,7 +196,6 @@
     <string name="browse_packages">Xem Gói</string>
     <string name="chat_support">Hỗ trợ</string>
     <string name="settings">Cài đặt</string>
-    <string name="toggle_view">Toggle view</string>
 
     <!-- Hero Section -->
     <string name="hero_title">🔥 Giảm giá đến 30% cho mọi gói đặt chỗ</string>
@@ -204,7 +211,15 @@
     <string name="hero_btn_left_3">Tìm hiểu thêm</string>
     <string name="hero_btn_right_3">Nâng cấp</string>
     <string name="see_more">Xem thêm</string>
-    <string name="location_not_found">Could not get your location</string>
-    <string name="location_permission_required">Location permission required</string>
-    <string name="toggle_map_actions">Show/hide map actions</string>
+    <string name="location_not_found">Không thể xác định vị trí</string>
+    <string name="location_permission_required">Cần quyền truy cập vị trí</string>
+    <string name="toggle_map_actions">Ẩn/Hiện Các nút hành động</string>
+
+    <!-- Facilities Table Labels -->
+    <string name="remaining_time">Thời gian còn lại</string>
+    <string name="facility_name">Tên</string>
+    <string name="facility_price">Giá</string>
+    <string name="day">ngày</string>
+    <string name="hour">giờ</string>
+    <string name="min">phút</string>
 </resources>

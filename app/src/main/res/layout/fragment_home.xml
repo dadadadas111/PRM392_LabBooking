@@ -105,7 +105,6 @@
                 android:layout_height="40dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_view_list"
-                android:contentDescription="@string/toggle_view"
                 android:tint="@color/colorPrimary" />
         </LinearLayout>
 

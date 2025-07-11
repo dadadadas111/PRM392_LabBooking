@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import com.example.prm392_labbooking.domain.model.Facility;
 import com.example.prm392_labbooking.domain.model.Product;
 import com.example.prm392_labbooking.domain.model.Slot;
 import com.example.prm392_labbooking.presentation.cart.CartManager;
+import com.example.prm392_labbooking.utils.ValidationUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,10 +34,11 @@ import java.util.stream.Collectors;
 
 public class ProductDetailsActivity extends AppCompatActivity {
 
-    private TextView txtProductName, txtPrice, txtDate, txtSelectedSlots;
+    private TextView txtProductName, txtPrice, txtDate, txtRemainingTime, txtErrorMessage;
     private CheckBox cbWhiteboard, cbTV, cbMicrophone, cbNetwork;
     private Button btnSelectSlots, btnAddToCart;
     private ImageButton btnBack;
+    private LinearLayout timeslotList;
     private int editIndex = -1;
     private Product product;
     private List<Slot> selectedSlots = new ArrayList<>();
@@ -52,7 +55,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         txtProductName = findViewById(R.id.txtProductName);
         txtPrice = findViewById(R.id.txtPrice);
         txtDate = findViewById(R.id.txtDate);
-        txtSelectedSlots = findViewById(R.id.txtSelectedSlots);
+        txtRemainingTime = findViewById(R.id.txtRemainingTime);
+        txtErrorMessage = findViewById(R.id.txtErrorMessage);
         cbWhiteboard = findViewById(R.id.cbWhiteboard);
         cbTV = findViewById(R.id.cbTV);
         cbMicrophone = findViewById(R.id.cbMicrophone);
@@ -60,6 +64,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         btnSelectSlots = findViewById(R.id.btnSelectSlots);
         btnAddToCart = findViewById(R.id.btnAddToCart);
         btnBack = findViewById(R.id.btnBack);
+        timeslotList = findViewById(R.id.timeslotList);
 
         // Get data from Intent
         Intent intent = getIntent();
@@ -81,24 +86,28 @@ public class ProductDetailsActivity extends AppCompatActivity {
         // Update price and slots display based on initial state
         updatePrice();
         updateSelectedSlotsDisplay();
+        updateRemainingTimeDisplay();
 
         // Add listeners to checkboxes
-        cbWhiteboard.setOnCheckedChangeListener((buttonView, isChecked) -> updatePrice());
-        cbTV.setOnCheckedChangeListener((buttonView, isChecked) -> updatePrice());
-        cbMicrophone.setOnCheckedChangeListener((buttonView, isChecked) -> updatePrice());
-        cbNetwork.setOnCheckedChangeListener((buttonView, isChecked) -> updatePrice());
+        setupListeners();
 
         // Handle Back button
         btnBack.setOnClickListener(v -> finish());
 
         // Handle Add to Cart button
         btnAddToCart.setOnClickListener(v -> {
+            // Validate booking time using ValidationUtils
+            if (!ValidationUtils.isValidBookingTime(selectedDate, selectedSlots)) {
+                Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             if (selectedDate == null) {
-                Toast.makeText(this, "Please select a date", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.choose_date), Toast.LENGTH_SHORT).show();
                 return;
             }
             if (selectedSlots.isEmpty()) {
-                Toast.makeText(this, "Please select at least one time slot", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.choose_time_slots), Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -122,10 +131,10 @@ public class ProductDetailsActivity extends AppCompatActivity {
             CartManager cartManager = CartManager.getInstance(this);
             if (editIndex >= 0) {
                 cartManager.updateCartItem(editIndex, cartItem);
-                Toast.makeText(this, "Updated in cart!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.added_to_cart), Toast.LENGTH_SHORT).show();
             } else {
                 cartManager.addToCart(cartItem);
-                Toast.makeText(this, "Added to cart!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getString(R.string.added_to_cart), Toast.LENGTH_SHORT).show();
             }
 
             finish();
@@ -145,6 +154,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     selectedDate = selectedCalendar.getTime();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                     txtDate.setText(sdf.format(selectedDate));
+                    reloadPriceAndSlots(); // Ensure price updates after date change
                 }, year, month, day);
 
         // Restrict past dates
@@ -167,7 +177,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Select Time Slots");
+        builder.setTitle(getString(R.string.choose_time_slots));
         builder.setMultiChoiceItems(
                 slotNames,
                 checkedItems,
@@ -178,24 +188,23 @@ public class ProductDetailsActivity extends AppCompatActivity {
                     }
                 }
         );
-        builder.setPositiveButton("OK", (dialog, which) -> {
+        builder.setPositiveButton(getString(R.string.ok), (dialog, which) -> {
             selectedSlots.clear();
             for (int i = 0; i < checkedItems.length; i++) {
                 if (checkedItems[i]) {
                     selectedSlots.add(Slot.values()[i]);
                 }
             }
-            updatePrice();
-            updateSelectedSlotsDisplay();
+            reloadPriceAndSlots(); // Ensure price updates after slot change
         });
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton(getString(R.string.cancel), null);
         builder.show();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void updatePrice() {
         double totalPrice = calculatePrice();
-        txtPrice.setText(String.format("Price: $%.2f", totalPrice));
+        txtPrice.setText(getString(R.string.total_label, totalPrice));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -217,13 +226,54 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void updateSelectedSlotsDisplay() {
+        timeslotList.removeAllViews();
         if (selectedSlots.isEmpty()) {
-            txtSelectedSlots.setText("No slots selected");
+            TextView tv = new TextView(this);
+            tv.setText(getString(R.string.no_slots_selected));
+            tv.setTextColor(getResources().getColor(R.color.colorError));
+            timeslotList.addView(tv);
         } else {
-            String slotsText = selectedSlots.stream()
-                    .map(Slot::getFormattedTime)
-                    .collect(Collectors.joining(", "));
-            txtSelectedSlots.setText(slotsText);
+            List<String> merged = ValidationUtils.getMergedSlotDisplayList(selectedSlots);
+            for (String slotLabel : merged) {
+                TextView tv = new TextView(this);
+                tv.setText(slotLabel);
+                tv.setTextColor(getResources().getColor(R.color.colorOnBackground));
+                timeslotList.addView(tv);
+            }
+        }
+    }
+
+    private void setupListeners() {
+        cbWhiteboard.setOnCheckedChangeListener((buttonView, isChecked) -> reloadPriceAndSlots());
+        cbTV.setOnCheckedChangeListener((buttonView, isChecked) -> reloadPriceAndSlots());
+        cbMicrophone.setOnCheckedChangeListener((buttonView, isChecked) -> reloadPriceAndSlots());
+        cbNetwork.setOnCheckedChangeListener((buttonView, isChecked) -> reloadPriceAndSlots());
+        btnSelectSlots.setOnClickListener(v -> showSlotsSelectionDialog());
+    }
+
+    private void reloadPriceAndSlots() {
+        updatePrice();
+        updateSelectedSlotsDisplay();
+        updateRemainingTimeDisplay();
+        updateAddToCartButtonState();
+    }
+
+    private void updateRemainingTimeDisplay() {
+        long remaining = ValidationUtils.getRemainingTimeUntilBooking(selectedDate, selectedSlots);
+        String label = ValidationUtils.getLabelRelativeRemainingTime(this, remaining);
+        String text = getString(R.string.remaining_time) + ": " + label;
+        txtRemainingTime.setText(text);
+    }
+
+    private void updateAddToCartButtonState() {
+        boolean valid = selectedDate != null && selectedSlots != null && !selectedSlots.isEmpty() && ValidationUtils.isValidBookingTime(selectedDate, selectedSlots);
+        btnAddToCart.setEnabled(valid);
+        if (!valid) {
+            txtErrorMessage.setText(getString(R.string.general_error_required_fields));
+            txtErrorMessage.setVisibility(android.view.View.VISIBLE);
+        } else {
+            txtErrorMessage.setText("");
+            txtErrorMessage.setVisibility(android.view.View.GONE);
         }
     }
 }
