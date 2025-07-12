@@ -12,8 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.prm392_labbooking.R;
@@ -23,8 +21,6 @@ import com.example.prm392_labbooking.domain.model.CartItem;
 import com.example.prm392_labbooking.domain.usecase.booking.SaveBookingUseCase;
 import com.example.prm392_labbooking.navigation.NavigationManager;
 import com.example.prm392_labbooking.presentation.MainActivity;
-import com.example.prm392_labbooking.presentation.cart.CartFragment;
-import com.example.prm392_labbooking.services.CartManager;
 import com.example.prm392_labbooking.utils.ValidationUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -35,7 +31,7 @@ import java.util.List;
 
 public class BillingFragment extends Fragment {
     private RecyclerView rvBillingItems;
-    private TextView tvTotalPrice;
+    private TextView tvSubtotalPrice, tvTax, tvTotalPrice;
     private EditText etCardholderName, etCardNumber, etExpiryDate, etCvv;
     private Button btnConfirmBooking;
     private ImageButton btnBack;
@@ -64,6 +60,8 @@ public class BillingFragment extends Fragment {
 
     private void initViews(View view) {
         rvBillingItems = view.findViewById(R.id.rv_billing_items);
+        tvSubtotalPrice = view.findViewById(R.id.tv_subtotal_price);
+        tvTax = view.findViewById(R.id.tv_tax);
         tvTotalPrice = view.findViewById(R.id.tv_total_price);
         etCardholderName = view.findViewById(R.id.et_cardholder_name);
         etCardNumber = view.findViewById(R.id.et_card_number);
@@ -100,10 +98,14 @@ public class BillingFragment extends Fragment {
 
     @SuppressLint("DefaultLocale")
     private void calculateTotalPrice() {
-        totalPrice = 0;
+        double subtotal = 0;
         for (CartItem item : cartItems) {
-            totalPrice += item.getPrice();
+            subtotal += item.getPrice();
         }
+        double tax = subtotal * 0.08;
+        totalPrice = subtotal + tax;
+        tvSubtotalPrice.setText(getString(R.string.subtotal_label, subtotal));
+        tvTax.setText(getString(R.string.tax_label, tax));
         tvTotalPrice.setText(getString(R.string.total_label, totalPrice));
     }
 
@@ -132,7 +134,7 @@ public class BillingFragment extends Fragment {
 
         boolean success = saveBookingUseCase.execute(cartItems, totalPrice);
         if (success) {
-            CartManager cartManager = new CartManager(requireContext());
+            com.example.prm392_labbooking.presentation.cart.CartManager cartManager = com.example.prm392_labbooking.presentation.cart.CartManager.getInstance(requireContext());
             cartManager.clearCart(); // Xóa giỏ hàng từ SharedPreferences
             Toast.makeText(requireContext(), getString(R.string.booking_confirmed), Toast.LENGTH_SHORT).show();
             if (getParentFragmentManager().getBackStackEntryCount() > 0) {

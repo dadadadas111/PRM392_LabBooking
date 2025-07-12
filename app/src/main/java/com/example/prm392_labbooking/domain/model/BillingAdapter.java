@@ -52,21 +52,9 @@ public class BillingAdapter extends RecyclerView.Adapter<BillingAdapter.BillingV
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String formattedDate = sdf.format(item.getDate());
         holder.tvDate.setText(formattedDate);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        StringBuilder slotBuilder = new StringBuilder();
-
-        for (Slot s : item.getSlots()) {
-            slotBuilder.append(s.getStart().format(formatter))
-                    .append(" - ")
-                    .append(s.getEnd().format(formatter))
-                    .append(", ");
-        }
-
-
-        String slots = slotBuilder.length() > 0
-                ? slotBuilder.substring(0, slotBuilder.length() - 2)
-                : "";
-        holder.tvTimeSlot.setText(slots);
+        // Use merged slot display logic from ValidationUtils
+        String mergedSlots = com.example.prm392_labbooking.utils.ValidationUtils.getMergedSlotDisplay(item.getSlots());
+        holder.tvTimeSlot.setText(mergedSlots);
         StringBuilder facilitiesBuilder = new StringBuilder();
         for (Facility f : item.getFacilities()) {
             int resId = 0;
@@ -92,7 +80,8 @@ public class BillingAdapter extends RecyclerView.Adapter<BillingAdapter.BillingV
                 ? facilitiesBuilder.substring(0, facilitiesBuilder.length() - 2)
                 : "";
         holder.tvFeatures.setText(facilities);
-        holder.tvPrice.setText(String.format("Price: $%.2f", item.getPrice()));
+        // Use string resource for price label
+        holder.tvPrice.setText(holder.itemView.getContext().getString(R.string.product_price_label, item.getPrice()));
     }
 
     @Override

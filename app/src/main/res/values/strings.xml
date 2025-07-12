@@ -1,4 +1,6 @@
 <resources>
+    <string name="subtotal_label">Tạm tính: $%1$.2f</string>
+    <string name="tax_label">Thuế (8%%): $%1$.2f</string>
     <!-- VIETNAMESE -->
     <!-- App Name -->
     <string name="app_name">LabConnect</string>

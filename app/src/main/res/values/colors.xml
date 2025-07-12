@@ -26,7 +26,7 @@
 
     <!-- Accent and warning colors -->
     <color name="colorAccentPurple">#BB86FC</color>
-    <color name="colorWarning">#FFD700</color>
+    <color name="colorWarning">#EE8B60</color>
 
     <!-- Miscellaneous colors -->
     <color name="colorDivider">#444444</color>
