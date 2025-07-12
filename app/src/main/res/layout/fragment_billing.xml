@@ -79,12 +79,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginBottom="4dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/subtotal_label"
-                        android:textSize="15sp"/>
+
                     <TextView
                         android:id="@+id/tv_subtotal_price"
                         android:layout_width="wrap_content"
@@ -97,12 +92,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginBottom="4dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/tax_label"
-                        android:textSize="15sp"/>
+
                     <TextView
                         android:id="@+id/tv_tax"
                         android:layout_width="wrap_content"
@@ -119,13 +109,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/total_label"
-                        android:textSize="16sp"
-                        android:textStyle="bold"/>
+
                     <TextView
                         android:id="@+id/tv_total_price"
                         android:layout_width="wrap_content"
