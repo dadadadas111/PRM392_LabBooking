@@ -24,8 +24,8 @@ public class CartExpiryReceiver extends BroadcastReceiver {
         long timeLeft = intent.getLongExtra("time_left", 0);
         int notificationId = intent.getIntExtra("notification_id", 0);
 
-        // Format expiry time as HH:mm (or with date if you want)
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault());
+        // Format expiry time as dd/MM/yyyy HH:mm
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm", java.util.Locale.getDefault());
         String expiryTime = sdf.format(new java.util.Date(bookingTime));
 
         createNotificationChannel(context);

@@ -73,7 +73,7 @@ public class CartExpiryScheduler {
         return (cartItemId * 1000) + (slotOrdinal * 10) + (int)(offset / (60 * 60 * 1000));
     }
 
-    private static long getSlotStartMillis(java.util.Date date, Slot slot) {
+    public static long getSlotStartMillis(java.util.Date date, Slot slot) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         cal.set(Calendar.HOUR_OF_DAY, slot.getStart().getHour());

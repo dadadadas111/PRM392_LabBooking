@@ -43,8 +43,20 @@ public class MainActivity extends AuthRequiredActivity {
         Intent intent = getIntent();
         if (intent == null || !intent.getBooleanExtra("open_cart", false)) {
             List<CartItem> cartItems = cartManager.getCartItems();
-            for (int i = 0; i < cartItems.size(); i++) {
-                com.example.prm392_labbooking.notifications.CartExpiryScheduler.pushImmediateNotification(this, cartItems.get(i), i);
+            CartItem soonestItem = null;
+            long soonestTime = Long.MAX_VALUE;
+            for (CartItem item : cartItems) {
+                List<com.example.prm392_labbooking.domain.model.Slot> slots = item.getSlots();
+                if (slots != null && !slots.isEmpty() && item.getDate() != null) {
+                    long bookingTime = com.example.prm392_labbooking.notifications.CartExpiryScheduler.getSlotStartMillis(item.getDate(), slots.get(0));
+                    if (bookingTime < soonestTime) {
+                        soonestTime = bookingTime;
+                        soonestItem = item;
+                    }
+                }
+            }
+            if (soonestItem != null) {
+                com.example.prm392_labbooking.notifications.CartExpiryScheduler.pushImmediateNotification(this, soonestItem, cartItems.indexOf(soonestItem));
             }
         }
 

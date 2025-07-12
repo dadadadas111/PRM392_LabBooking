@@ -101,9 +101,9 @@
     <string name="cart_not_empty">Bạn còn sản phẩm trong giỏ hàng!</string>
     <string name="ok">Đồng ý</string>
     <string name="cancel">Hủy</string>
-    <string name="cart_expiry_title">Nhắc nhở sắp hết hạn đặt chỗ</string>
+    <string name="cart_expiry_title">Nhắc nhở đơn hàng hết hạn</string>
     <string name="cart_expiry_message">Đặt chỗ cho %1$s sẽ hết hạn vào lúc %2$s.</string>
-    <string name="cart_expiry_channel_name">Nhắc nhở đặt chỗ</string>
+    <string name="cart_expiry_channel_name">Nhắc nhở đơn hàng</string>
     <string name="cart_expiry_channel_desc">Thông báo khi đặt chỗ trong giỏ hàng sắp hết hạn.</string>
     <string name="expiry_24h">24 giờ</string>
     <string name="expiry_10h">10 giờ</string>
