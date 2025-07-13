@@ -91,24 +91,6 @@
             app:cardElevation="2dp"
             app:cardBackgroundColor="@color/colorSurface">
             <TextView
-                android:id="@+id/btn_faq"
-                style="@style/SettingsButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:text="@string/faq"
-                android:textSize="16sp" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@color/colorSurface">
-            <TextView
                 android:id="@+id/btn_chat_support"
                 style="@style/SettingsButtonStyle"
                 android:layout_width="match_parent"
@@ -129,24 +111,6 @@
             android:paddingTop="16dp"
             android:paddingBottom="4dp"
             android:textColor="@color/colorOnBackground" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@color/colorSurface">
-            <TextView
-                android:id="@+id/btn_preferences"
-                style="@style/SettingsButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center_vertical"
-                android:paddingStart="16dp"
-                android:text="@string/preferences"
-                android:textSize="16sp" />
-        </com.google.android.material.card.MaterialCardView>
 
         <!-- Language selection -->
         <com.google.android.material.card.MaterialCardView
