@@ -59,7 +59,7 @@ public class ChatActivity extends AuthRequiredActivity {
         authService = new FirebaseAuthService();
         userId = authService.getCurrentUserId();
         supportRequestTopic = "support_chat/" + userId;
-        supportResponseTopic = "support_response/" + userId;
+        supportResponseTopic = "support_responses/" + userId;
 
         ImageButton btnBack = findViewById(R.id.btn_back);
         btnBack.setOnClickListener(v -> finish());
@@ -86,7 +86,7 @@ public class ChatActivity extends AuthRequiredActivity {
         authService = new FirebaseAuthService();
         userId = authService.getCurrentUserId();
         supportRequestTopic = "support_chat/" + userId;
-        supportResponseTopic = "support_response/" + userId;
+        supportResponseTopic = "support_responses/" + userId;
 
         // Load chat history for chatbot tab on start
         if (isChatbot) {
